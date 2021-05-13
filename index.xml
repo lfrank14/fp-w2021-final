@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Functional Programming Final Project</title>
+    <link>https://lfrank14.github.io/fp-w2021-final/</link>
+    <atom:link href="https://lfrank14.github.io/fp-w2021-final/index.xml" rel="self" type="application/rss+xml"/>
+    <description>Functional Programming Final Project
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Thu, 13 May 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Data Cleaning and Purrr or Shiny</title>
+      <dc:creator>Wanjia Guo</dc:creator>
+      <link>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-and-purrr-or-shiny</link>
+      <description>A short description of the post.</description>
+      <guid>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-and-purrr-or-shiny</guid>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Looping</title>
+      <dc:creator>Meg Siritzky</dc:creator>
+      <link>https://lfrank14.github.io/fp-w2021-final/posts/looping</link>
+      <description>A short description of the post.</description>
+      <guid>https://lfrank14.github.io/fp-w2021-final/posts/looping</guid>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Parallel Iteration</title>
+      <dc:creator>Lea Frank</dc:creator>
+      <link>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</link>
+      <description>A short description of the post.</description>
+      <guid>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</guid>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Welcome to Functional Programming Final Project</title>
+      <dc:creator>Nora Jones</dc:creator>
+      <link>https://lfrank14.github.io/fp-w2021-final/posts/welcome</link>
+      <description>Welcome to our new blog, Functional Programming Final Project. We hope you enjoy 
+reading what we have to say!</description>
+      <guid>https://lfrank14.github.io/fp-w2021-final/posts/welcome</guid>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Writing Functions</title>
+      <dc:creator>Sarah Dimakis</dc:creator>
+      <link>https://lfrank14.github.io/fp-w2021-final/posts/writing-functions</link>
+      <description>A short description of the post.</description>
+      <guid>https://lfrank14.github.io/fp-w2021-final/posts/writing-functions</guid>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

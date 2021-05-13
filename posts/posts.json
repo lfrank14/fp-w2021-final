@@ -1,0 +1,87 @@
+[
+  {
+    "path": "posts/data-cleaning-and-purrr-or-shiny/",
+    "title": "Data Cleaning and Purrr or Shiny",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Wanjia Guo",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-05-13",
+    "categories": [],
+    "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-05-13T14:21:48-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/looping/",
+    "title": "Looping",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Meg Siritzky",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-05-13",
+    "categories": [],
+    "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-05-13T14:22:09-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/parallel-iteration/",
+    "title": "Parallel Iteration",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Lea Frank",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-05-13",
+    "categories": [],
+    "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-05-13T14:22:27-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to Functional Programming Final Project",
+    "description": "Welcome to our new blog, Functional Programming Final Project. We hope you enjoy \nreading what we have to say!",
+    "author": [
+      {
+        "name": "Nora Jones",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-05-13",
+    "categories": [],
+    "contents": "\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-05-13T13:32:11-07:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/writing-functions/",
+    "title": "Writing Functions",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Sarah Dimakis",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-05-13",
+    "categories": [],
+    "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-05-13T14:22:36-07:00",
+    "input_file": {}
+  }
+]
