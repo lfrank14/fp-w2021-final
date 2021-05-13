@@ -2,6 +2,7 @@ name: "fp-w2021-final"
 title: "Functional Programming Final Project"
 description: |
   Functional Programming Final Project
+base_url: https://lfrank.github.io/fp-w2021-final/
 output_dir: "docs"
 navbar:
   right:
