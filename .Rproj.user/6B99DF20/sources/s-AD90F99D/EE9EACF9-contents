@@ -1,0 +1,5 @@
+---
+title: "Functional Programming Final Project"
+site: distill::distill_website
+listing: posts
+---

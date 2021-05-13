@@ -1,0 +1,28 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this blog",
+      "description": "Some additional details about the blog",
+      "author": [],
+      "contents": "\nThings to include: - info about the data / link to source of data\n\n\n\n",
+      "last_modified": "2021-05-13T13:51:53-07:00"
+    },
+    {
+      "path": "contributors.html",
+      "title": "Contributors",
+      "description": "Some additional details about the blog",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-05-13T13:51:54-07:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Functional Programming Final Project",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-05-13T13:51:54-07:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}
