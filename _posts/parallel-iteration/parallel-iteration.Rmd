@@ -14,10 +14,50 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(ggridges)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+## Load data
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+```{r}
+dpaths <- fs::dir_ls(here::here("data"),
+                     recurse = TRUE,
+                     regexp = "demographic.csv")
+
+demos <- map_df(dpaths, rio::import, .id = "fname") %>% 
+  mutate(year = str_extract(fname, pattern = "\\d{4}_\\d{4}")) %>% 
+  select(year, everything(), -fname)
+
+qpaths <- fs::dir_ls(here::here("data"), 
+                     recurse = TRUE, 
+                     regexp = "questionnaire.csv")
+
+quests <- map_df(qpaths, rio::import, .id = "fname") %>% 
+  mutate(year = str_extract(fname, pattern = "\\d{4}_\\d{4}")) %>% 
+  select(year, everything(), -fname)
+
+df <- left_join(demos, quests) %>% 
+  nest_by(year)
+```
+
+## Example 1
+
+For each year, generate a plot that shows how much exercise people got
+
+```{r}
+map2(df$year, df$data, ~{
+  aa <- df$year[[1]]
+  bb <- df$data[[1]]
+  
+  bb <- bb %>% 
+    pivot_longer(cols = c(PAQ677, PAQ678),
+                 names_to = "exercise_type",
+                 values_to = "num_days") %>% 
+    ggplot(aes(x = num_days, y = exercise_type, color = exercise_type)) +
+      geom_density_ridges()
+})
+```
 
 
