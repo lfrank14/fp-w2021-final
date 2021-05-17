@@ -2,38 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://lfrank14.github.io/fp-w2021-final/about.html</loc>
-    <lastmod>2021-05-13T13:50:08-07:00</lastmod>
+    <lastmod>2021-05-14T14:50:36-07:00</lastmod>
   </url>
   <url>
     <loc>https://lfrank14.github.io/fp-w2021-final/contributors.html</loc>
-    <lastmod>2021-05-13T14:25:31-07:00</lastmod>
+    <lastmod>2021-05-14T14:50:36-07:00</lastmod>
   </url>
   <url>
     <loc>https://lfrank14.github.io/fp-w2021-final/</loc>
-    <lastmod>2021-05-13T14:21:40-07:00</lastmod>
+    <lastmod>2021-05-14T14:50:36-07:00</lastmod>
   </url>
   <url>
     <loc>https://lfrank14.github.io/fp-w2021-final/LICENSE.html</loc>
-    <lastmod>2021-05-13T14:25:35-07:00</lastmod>
+    <lastmod>2021-05-17T16:47:03-07:00</lastmod>
   </url>
   <url>
-    <loc>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-and-purrr-or-shiny/</loc>
-    <lastmod>2021-05-13T14:21:48-07:00</lastmod>
+    <loc>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/</loc>
+    <lastmod>2021-05-17T16:46:55-07:00</lastmod>
   </url>
   <url>
     <loc>https://lfrank14.github.io/fp-w2021-final/posts/looping/</loc>
-    <lastmod>2021-05-13T14:22:09-07:00</lastmod>
+    <lastmod>2021-05-14T14:50:36-07:00</lastmod>
   </url>
   <url>
     <loc>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/</loc>
-    <lastmod>2021-05-13T14:22:27-07:00</lastmod>
-  </url>
-  <url>
-    <loc>https://lfrank14.github.io/fp-w2021-final/posts/welcome/</loc>
-    <lastmod>2021-05-13T13:32:11-07:00</lastmod>
+    <lastmod>2021-05-14T14:50:36-07:00</lastmod>
   </url>
   <url>
     <loc>https://lfrank14.github.io/fp-w2021-final/posts/writing-functions/</loc>
-    <lastmod>2021-05-13T14:22:36-07:00</lastmod>
+    <lastmod>2021-05-14T14:50:36-07:00</lastmod>
   </url>
 </urlset>

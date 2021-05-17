@@ -9,11 +9,11 @@
     <generator>Distill</generator>
     <lastBuildDate>Thu, 13 May 2021 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Data Cleaning and Purrr or Shiny</title>
-      <dc:creator>Wanjia Guo</dc:creator>
-      <link>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-and-purrr-or-shiny</link>
-      <description>A short description of the post.</description>
-      <guid>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-and-purrr-or-shiny</guid>
+      <title>Data cleaning with {purrr}</title>
+      <dc:creator>Lea Frank</dc:creator>
+      <link>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr</link>
+      <description>A tutorial on using {purrr} for data cleaning.</description>
+      <guid>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr</guid>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
@@ -30,15 +30,6 @@
       <link>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</link>
       <description>A short description of the post.</description>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</guid>
-      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Welcome to Functional Programming Final Project</title>
-      <dc:creator>Nora Jones</dc:creator>
-      <link>https://lfrank14.github.io/fp-w2021-final/posts/welcome</link>
-      <description>Welcome to our new blog, Functional Programming Final Project. We hope you enjoy 
-reading what we have to say!</description>
-      <guid>https://lfrank14.github.io/fp-w2021-final/posts/welcome</guid>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
