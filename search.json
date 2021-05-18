@@ -6,7 +6,7 @@
       "description": "Some additional details about the blog",
       "author": [],
       "contents": "\nThings to include: - info about the data / link to source of data\n\n\n\n",
-      "last_modified": "2021-05-17T16:47:02-07:00"
+      "last_modified": "2021-05-18T13:48:43-07:00"
     },
     {
       "path": "contributors.html",
@@ -14,20 +14,20 @@
       "description": "Some additional details about the blog",
       "author": [],
       "contents": "\nMeghan Siritzky - some bio\nWanjia Guo - some bio\nSarah Dimakis - some bio\nLea Frank - some bio\n\n\n\n",
-      "last_modified": "2021-05-17T16:47:02-07:00"
+      "last_modified": "2021-05-18T13:48:43-07:00"
     },
     {
       "path": "index.html",
       "title": "Functional Programming Final Project",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-05-17T16:47:03-07:00"
+      "last_modified": "2021-05-18T13:48:44-07:00"
     },
     {
       "path": "LICENSE.html",
       "author": [],
       "contents": "\nThe MIT License (MIT)\nCopyright (c) 2021 Lea Frank\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n",
-      "last_modified": "2021-05-17T16:47:03-07:00"
+      "last_modified": "2021-05-18T13:48:44-07:00"
     }
   ],
   "collections": ["posts/posts.json"]
