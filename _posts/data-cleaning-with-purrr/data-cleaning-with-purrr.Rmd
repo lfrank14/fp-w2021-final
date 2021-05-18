@@ -8,7 +8,6 @@ date: 05-13-2021
 output:
   distill::distill_article:
     toc: true
-    toc_float: true
     self_contained: false
 ---
 
@@ -19,25 +18,169 @@ library(tidyverse)
 library(fs)
 ```
 
+The `{purrr}` package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the `map` family of functions can be. 
+
+## About the data
+
+The data for this blog is taken from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:
+
+::: l-body
+| Variable Code    | Description                                                       |
+|------------------|-------------------------------------------------------------------|
+| `SEQN`           | Respondent ID                                                     |
+| `RIDAGEYR`       | Age in years at screening                                         |
+| `RIAGENDR`       | Gender                                                            |
+| `RIDRETH1`       | Race/Hispanic origin                                              |
+| `DMDEDUC2`       | Education level (adults 20+)                                      |
+| `DMDEDUC3`       | Education level (children/youth 6-19)                             |
+| `HHFDSEC`        | Household food security category over last 12 months (1999-2002)  |
+| `FSDHH`          | Household food security category over last 12 months (2003+)      |
+:::
+
+The NHANES releases yearly survey data, with files separated based on demographics, questionnaire, health examination, and nutrition data. The data for this blog were downloaded from the following links: [demographics](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Demographics) and [food security questionnaire (FSQ)](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Questionnaire). Documentation regarding variable coding can also be found at those links. 
+
 ## Batch Loading
 
-```{r}
-rootpath <- here::here("data")
-```
+The `purrr::map` family of functions can be incredibly powerful when loading a large number of data files.
+
+### Create a list with the file paths
+
+`here::here` is first used to define the path to the data files. 
 
 ```{r}
-dir_ls(rootpath,
-       regexp = "DEMO")
+(rootpath <- here::here("data"))
 ```
 
-### Demographics data
+The `dir_ls` function from the `fs` package creates a vector of the paths for the files listed within the `rootpath`. Importantly, this vector is named with the associated paths, which will come in handy when using `map_df` below.
 
-```{r, include=TRUE}
+```{r}
+fnames <- fs::dir_ls(rootpath)
+head(fnames)
+
+names(head(fnames))
+```
+
+The demographics and FSQ will be loaded separately since they will require different data cleaning steps. Regular expression can be used with the `fs::dir_ls` function to filter files that match a specific pattern.
+
+```{r}
+demo_paths <- dir_ls(rootpath, regexp = "DEMO")
+fsq_paths <- dir_ls(rootpath, regexp = "FSQ")
+```
+
+### Use `purrr::map` to read files
+
+The `purrr::map` family of functions allows us to iterate a function over elements of a list or vector. In this case, we want to use `rio::import` to read in the data files using the vectors of file paths. 
+
+There are two ways in which we can read in the data. The first option is to use the `purrr::map` function to read each data frame into a separate element of a list. This can be useful if you want to use `map` to iteration the same functions, like data cleaning, over each data frame.  
+
+```{r}
+demos_list <- map(demo_paths, rio::import)
+fsq_list <- map(demo_paths, rio::import)
+```
+
+Another option is to use `purrr::map_df` to read each data file into a single data frame. Importantly, this function allows you to specify the `.id`, which will create a variable to identify each iteration of the function. As I mentioned earlier, the `fs::dir_ls` function will assign names to each path. Using `map_df` on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of `rio::import`. 
+
+```{r}
+demos <- map_df(demo_paths, rio::import, .id = "file")
+demos %>% 
+  select(1:4) %>% 
+  head()
+
+fsq <- map_df(fsq_paths, rio::import, .id = "file")
+fsq %>% 
+  select(1:4) %>% 
+  head
+
+```
+
+While both options are valid, which one you choose will ultimately depend on what you intend to do with the output. I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators. For that reason, I chose to use `map_dfr` to create a single data frame. If instead I wanted to keep the data frames separated by year so I could more easily process and analyze the data, `map` would have have been the better approach. 
+
+For the sake of creating more content for the tutorial, let's take a look at how `map` can be used to iterate data cleaning steps over a list of data frames.
+
+## Data cleaning 
+
+Let's start with the list of data frames for the demographics surveys (`demos_list`). Each element of the list contains the demographics survey data for a specific year range (e.g. 1999-2000 or 2013-2014). If we want to apply the same data cleaning steps to each data frame, we can use `map` to iterate those data cleaning functions to each element of the list. 
+
+First, let's start by creating a variable in each data frame for the `year`. For this step, we can use `map2` to iterate through the file paths (`demo_paths`) and list of data frames (`demos_list`) in parallel. The year will be extracted from the file path and applied to the corresponding data frame. 
+
+This time, rather than using an existing function, we can create our own. 
+
+```{r}
+demos_list_clean <- map2(demo_paths, demos_list, ~{
+  .y %>% 
+    mutate(year = str_extract(.x, "\\d{4}-\\d{4}")) 
+                  # extracts the pattern that has: 4 digits-4 digits
+})
+
+head(demos_list_clean[[1]]["year"])
+```
+
+Next, I want to select the variables of interest and rename them to something more clear. This time, I will need to return the data frame in order for it to output.
+
+```{r}
+demos_list_clean <- map(demos_list_clean, ~{
+  .x <- .x %>% 
+    select(year, SEQN, RIDAGEYR, RIAGENDR, 
+         RIDRETH1, DMDEDUC2, DMDEDUC3)
+  names(.x) <- c("year", "id","age","gender",
+                  "race_ethnic","educ_adult","educ_child")
+  return(.x)
+})
+
+head(demos_list_clean[[1]])
+```
+Finally, I may want to convert some of the categorical variables into factors and add labels to the different levels.
+
+```{r}
+demos_list_clean <- map(demos_list_clean, ~{
+  .x %>% 
+    mutate(gender = factor(gender, labels = c("male","female")),
+           race_ethnic = factor(race_ethnic, labels = c("mexican-american",
+                                                        "other-hispanic",
+                                                        "non-hispanic-white",
+                                                        "non-hispanic-black",
+                                                        "other-race")))
+})
+
+head(demos_list_clean)
+```
+
+These steps can all be combined to produce the following code:
+
+```{r}
+demos_list_clean <- map2(demo_paths, demos_list, ~{
+  .y <- .y %>% 
+    mutate(year = str_extract(.x, "\\d{4}-\\d{4}"),
+           RIAGENDR = factor(RIAGENDR, labels = c("male","female")),
+           RIDRETH1 = factor(RIDRETH1, labels = c("mexican-american",
+                                                        "other-hispanic",
+                                                        "non-hispanic-white",
+                                                        "non-hispanic-black",
+                                                        "other-race"))) %>% 
+    select(year, SEQN, RIDAGEYR, RIAGENDR, 
+         RIDRETH1, DMDEDUC2, DMDEDUC3)
+  names(.y) <- c("year", "id","age","gender",
+                  "race_ethnic","educ_adult","educ_child")
+  return(.y)
+})
+```
+
+## My final solution
+
+As I mentioned earlier, the best route for me was to read the data files into a single data frame. The same data cleaning steps conducted above can then be applied to the single data frame.
+
+```{r}
 
 demos <- dir_ls(rootpath, 
                  regexp = "DEMO") %>% 
   map_dfr(rio::import, .id = "file") %>% 
-  mutate(year = str_extract(file, "\\d{4}-\\d{4}")) %>% 
+  mutate(year = str_extract(file, "\\d{4}-\\d{4}"),
+         RIAGENDR = factor(RIAGENDR, labels = c("male","female")),
+         RIDRETH1 = factor(RIDRETH1, labels = c("mexican-american",
+                                                "other-hispanic",
+                                                "non-hispanic-white",
+                                                "non-hispanic-black",
+                                                "other-race"))) %>% 
   select(year, SEQN, RIDAGEYR, RIAGENDR, 
          RIDRETH1, DMDEDUC2, DMDEDUC3)
 names(demos) <- c("year", "id","age","gender",
@@ -54,13 +197,16 @@ names(fsq)[2] <- "id"
   
 ```
 
+After create data frames for the demographics and FSQ data, they can then be joined by the `year` and `id`. 
+
 ```{r}
 df <- left_join(demos, fsq)
 head(df)
 ```
 
+Finally, the data frame was saved into a single `.csv` file that could then be shared with collaborators. 
+
 ```{r}
 write_csv(df, str_c(rootpath,"/nhanes_1999-2016.csv"))
-
 ```
 

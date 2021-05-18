@@ -2111,34 +2111,67 @@ document.addEventListener('DOMContentLoaded', function() {
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
+<li><a href="#about-the-data">About the data</a></li>
 <li><a href="#batch-loading">Batch Loading</a><ul>
 <li><a href="#demographics-data">Demographics data</a></li>
 </ul></li>
 </ul>
 </nav>
 </div>
+<h2 id="about-the-data">About the data</h2>
+<p>The data for this blog is taken from the <a href="https://www.cdc.gov/nchs/nhanes/index.htm"><em>National Health and Nutrition Examination Survey</em> (NHANES)</a>. Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:</p>
+<div class="l-body">
+<table>
+<thead>
+<tr class="header">
+<th>Variable Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>SEQN</code></td>
+<td>Respondent ID</td>
+</tr>
+<tr class="even">
+<td><code>RIDAGEYR</code></td>
+<td>Age in years at screening</td>
+</tr>
+<tr class="odd">
+<td><code>RIAGENDR</code></td>
+<td>Gender</td>
+</tr>
+<tr class="even">
+<td><code>RIDRETH1</code></td>
+<td>Race/Hispanic origin</td>
+</tr>
+<tr class="odd">
+<td><code>DMDEDUC2</code></td>
+<td>Education level (adults 20+)</td>
+</tr>
+<tr class="even">
+<td><code>DMDEDUC3</code></td>
+<td>Education level (children/youth 6-19)</td>
+</tr>
+<tr class="odd">
+<td><code>HHFDSEC</code></td>
+<td>Household food security category over last 12 months (1999-2002)</td>
+</tr>
+<tr class="even">
+<td><code>FSDHH</code></td>
+<td>Household food security category over last 12 months (2003+)</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="batch-loading">Batch Loading</h2>
+<p>The <code>dir_ls</code> function from the <code>fs</code> package creates</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>rootpath</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span><span class='op'>)</span>
+<span class='va'>fnames</span> <span class='op'>&lt;-</span> <span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span><span class='op'>)</span>
 </code></pre>
 </div>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>,
-       regexp <span class='op'>=</span> <span class='st'>"DEMO"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2005-2006.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2007-2008.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2009-2010.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2011-2012.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2013-2014.XPT
-/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2015-2016.XPT</code></pre>
 </div>
 <h3 id="demographics-data">Demographics data</h3>
 <div class="layout-chunk" data-layout="l-body">
@@ -2190,7 +2223,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </code></pre>
 </div>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
