@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(fs)
+library(knitr)
 ```
 
 The `{purrr}` package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the `map` family of functions can be. 
@@ -51,12 +52,16 @@ The `purrr::map` family of functions can be incredibly powerful when loading a l
 (rootpath <- here::here("data"))
 ```
 
-The `dir_ls` function from the `fs` package creates a vector of the paths for the files listed within the `rootpath`. Importantly, this vector is named with the associated paths, which will come in handy when using `map_df` below.
+The `dir_ls` function from the `fs` package creates a vector of the paths for the files listed within the `rootpath`.
 
 ```{r}
 fnames <- fs::dir_ls(rootpath)
 head(fnames)
+```
 
+Importantly, this vector is named with the associated paths, which will come in handy when using `map_df` below.
+ 
+```{r}
 names(head(fnames))
 ```
 
@@ -80,16 +85,12 @@ fsq_list <- map(demo_paths, rio::import)
 
 Another option is to use `purrr::map_df` to read each data file into a single data frame. Importantly, this function allows you to specify the `.id`, which will create a variable to identify each iteration of the function. As I mentioned earlier, the `fs::dir_ls` function will assign names to each path. Using `map_df` on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of `rio::import`. 
 
-```{r}
+```{r, layout="l-body-outset"}
 demos <- map_df(demo_paths, rio::import, .id = "file")
-demos %>% 
-  select(1:4) %>% 
-  head()
-
+kable(head(demos[,1:4]))
+  
 fsq <- map_df(fsq_paths, rio::import, .id = "file")
-fsq %>% 
-  select(1:4) %>% 
-  head
+kable(head(fsq[,1:4]))
 
 ```
 
@@ -105,19 +106,19 @@ First, let's start by creating a variable in each data frame for the `year`. For
 
 This time, rather than using an existing function, we can create our own. 
 
-```{r}
+```{r, }
 demos_list_clean <- map2(demo_paths, demos_list, ~{
   .y %>% 
     mutate(year = str_extract(.x, "\\d{4}-\\d{4}")) 
                   # extracts the pattern that has: 4 digits-4 digits
 })
 
-head(demos_list_clean[[1]]["year"])
+kable(head(demos_list_clean[[1]]["year"]))
 ```
 
 Next, I want to select the variables of interest and rename them to something more clear. This time, I will need to return the data frame in order for it to output.
 
-```{r}
+```{r, layout="l-body-outset"}
 demos_list_clean <- map(demos_list_clean, ~{
   .x <- .x %>% 
     select(year, SEQN, RIDAGEYR, RIAGENDR, 
@@ -127,11 +128,12 @@ demos_list_clean <- map(demos_list_clean, ~{
   return(.x)
 })
 
-head(demos_list_clean[[1]])
+kable(head(demos_list_clean[[1]]))
 ```
+
 Finally, I may want to convert some of the categorical variables into factors and add labels to the different levels.
 
-```{r}
+```{r, layout="l-body-outset"}
 demos_list_clean <- map(demos_list_clean, ~{
   .x %>% 
     mutate(gender = factor(gender, labels = c("male","female")),
@@ -142,7 +144,7 @@ demos_list_clean <- map(demos_list_clean, ~{
                                                         "other-race")))
 })
 
-head(demos_list_clean)
+kable(head(demos_list_clean[[1]]))
 ```
 
 These steps can all be combined to produce the following code:
@@ -163,6 +165,8 @@ demos_list_clean <- map2(demo_paths, demos_list, ~{
                   "race_ethnic","educ_adult","educ_child")
   return(.y)
 })
+
+str(demos_list_clean[1:3])
 ```
 
 ## My final solution
@@ -197,11 +201,11 @@ names(fsq)[2] <- "id"
   
 ```
 
-After create data frames for the demographics and FSQ data, they can then be joined by the `year` and `id`. 
+After creating data frames for the demographics and FSQ data, they were then joined by the `year` and `id`. 
 
-```{r}
+```{r, layout="l-body-outset"}
 df <- left_join(demos, fsq)
-head(df)
+kable(head(df))
 ```
 
 Finally, the data frame was saved into a single `.csv` file that could then be shared with collaborators. 
