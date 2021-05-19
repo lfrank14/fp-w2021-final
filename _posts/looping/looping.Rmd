@@ -14,11 +14,133 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(repurrrsive)
+library(rio)
+library(here)
+library(glue)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+The question we're trying to answer is what is the change in the relationship between age and percentage of the population experiencing food insecurity over time.
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+First we'll import our data using the _here_ package.
 
+```{r import data}
+fi <- import(here("data", "nhanes_1999-2016.csv"))
+```
+
+Next, we're going to convert the food insecurity variable to a factor, rename the levels, and remove NAs.
+
+```{r}
+fi_factor <- fi %>% 
+  mutate(security = as_factor(hh_food_secure)) %>% 
+  mutate(security = case_when(
+    security == "1" ~ "full food security",
+    security == "2" ~ "marginal food security",
+    security == "3" ~ "low food security",
+    security == "4" ~ "very low food security")) %>% 
+  filter(security != is.na(security))
+```
+
+We want to get the percentage of the population that falls in each food security group at each time point, so we're going to first count the number of people in each group in each year and the population in each year, and then create a new column called _percent_insecurity_ that has the percentage of people in the population that report that level of food security.
+
+```{r}
+fi_factor <- fi_factor %>% 
+  add_count(year, name = "pop") %>% 
+  add_count(year, security, name = "ct") %>% 
+  dplyr::select(year, security, age, pop, ct) %>% 
+  mutate(pop = as.numeric(pop),
+         ct = as.numeric(ct),
+         percent_insecurity = ct/pop)
+```
+
+Now we use the _group_by_ and _nest_ functions to create a nested data frame that groups our data by year and  level of food insecurity. 
+
+```{r}
+fi_grouped <- fi_factor %>% 
+  group_by(year, security) %>% 
+  nest()
+```
+
+We're want to look at the linear relationship between age and percent of food insecurity over time. To do this, we fit a linear regression model predicting food insecurity from age using _map_. We can then extract the intercepts and slopes of each model using _map_dbl_. I'm going to want to use our _percent_insecurity_ variable later, so to move it from a nested list to the main data frame, I _unnest_ the _data_ list and then save that column.
+
+```{r}
+fi_grouped_lm <- fi_grouped %>% 
+  mutate(m1 = map(data, ~lm(percent_insecurity ~ age, data = .x)),
+         coefs = map(m1, coefficients),
+         intercept = map_dbl(coefs, 1),
+         slope = map_dbl(coefs, 2)) %>% 
+  unnest(data) %>% 
+  dplyr::select(year, security, intercept, slope, percent_insecurity)
+```
+
+Now we want to look at the change in slope of how age predicts food insecurity across time. So I'm creating a line graph where the x axis is year and the y-axis is slope, and I'm visualizing to see the change in slope over time. I'm using the _pmap_ and _list_ functions to create a new list in our nested data frame with a plot for each level of food security.
+
+```{r}
+fi_grouped_plots <- fi_grouped_lm %>%
+  group_by(security) %>%
+  nest() %>%
+  mutate(plot = pmap(list(security, data), ~{
+    ggplot(..2, aes(year, slope)) +
+      geom_point() +
+      geom_line() +
+      labs(title = glue("Slope of relation between age and {.x} by year"),
+           x = "Year",
+           y = "Slope")
+    })
+    )
+```
+
+Here's an example of one of the plots.
+
+```{r}
+fi_grouped_plots$plot[[2]]
+```
+
+Now I'm going to export a plot for each level of food security using _walk2_.
+
+```{r}
+fs::dir_create(here::here("plots", "slope_plots"))
+food_security_groups <- str_replace_all(tolower(fi_grouped_plots$security), " ", "-")
+paths <- here::here("plots", "slope_plots", glue("age_{food_security_groups}.png"))
+
+walk2(paths, fi_grouped_plots$plot, ggsave,
+      width = 9.5, 
+      height = 6.5,
+      dpi = 500)
+```
+
+Now I want to look at the change in percent of different levels of food security across time. So, again, I'm using the the _pmap_ and _list_ functions to create a new list in our nested data frame with bar graphs where the x axis is year and the y-axis is percent of food security.
+
+```{r}
+fi_grouped_plots_2 <- fi_grouped_lm %>%
+  group_by(security) %>%
+  nest() %>%
+  mutate(plot = pmap(list(security, data), ~{
+    ggplot(..2, aes(year, percent_insecurity)) +
+      geom_point() +
+      labs(title = glue("Percent of {.x} in the population by year"),
+           x = "Year",
+           y = "Percent")
+    })
+    )
+```
+
+Here's an example of one of the plots.
+
+```{r}
+fi_grouped_plots_2$plot[[2]]
+```
+
+Again, I'm going to export a plot for each level of food security using _walk2_.
+
+```{r}
+fs::dir_create(here::here("plots", "percent_plots"))
+paths_2 <- here::here("plots", "percent_plots", glue("percent_{food_security_groups}.png"))
+
+walk2(paths_2, fi_grouped_plots_2$plot, ggsave,
+      width = 9.5, 
+      height = 6.5,
+      dpi = 500)
+```
 
