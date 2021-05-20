@@ -54,41 +54,41 @@ div.sourceCode
 @media screen {
 code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ad0000; } /* Alert */
-code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
-code span.bn { color: #ad0000; } /* BaseN */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #545454; font-weight: bold; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #a1024a; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
-code span.ch { color: #20794d; } /* Char */
-code span.cn { color: #8f5902; } /* Constant */
-code span.co { color: #5e5e5e; } /* Comment */
-code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-code span.dt { color: #ad0000; } /* DataType */
-code span.dv { color: #ad0000; } /* DecVal */
-code span.er { color: #ad0000; } /* Error */
+code span.cf { color: #007faa; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #008000; } /* Char */
+code span.cn { color: #d91e18; } /* Constant */
+code span.co { color: #545454; } /* Comment */
+code span.cv { color: #545454; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #aa5d00; } /* DataType */
+code span.dv { color: #a1024a; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
-code span.fl { color: #ad0000; } /* Float */
-code span.fu { color: #4758ab; } /* Function */
+code span.fl { color: #a1024a; } /* Float */
+code span.fu { color: #4254a7; } /* Function */
 code span.im { } /* Import */
-code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
-code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
-code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
-code span.ss { color: #20794d; } /* SpecialString */
-code span.st { color: #20794d; } /* String */
-code span.va { color: #111111; } /* Variable */
-code span.vs { color: #20794d; } /* VerbatimString */
-code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+code span.in { color: #545454; font-weight: bold; } /* Information */
+code span.kw { color: #007faa; font-weight: bold; } /* Keyword */
+code span.op { color: #696969; } /* Operator */
+code span.ot { color: #007faa; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #008000; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #008000; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #008000; } /* VerbatimString */
+code span.wa { color: #545454; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Writing Functions</title>
   
-  <meta property="description" itemprop="description" content="A short description of the post."/>
+  <meta property="description" itemprop="description" content="This is a tutorial for how to write a function in R."/>
   
   
   <!--  https://schema.org/Article -->
@@ -99,24 +99,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Writing Functions"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="A short description of the post."/>
+  <meta property="og:description" content="This is a tutorial for how to write a function in R."/>
   <meta property="og:locale" content="en_US"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Writing Functions"/>
-  <meta property="twitter:description" content="A short description of the post."/>
+  <meta property="twitter:description" content="This is a tutorial for how to write a function in R."/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Writing Functions"]},{"type":"character","attributes":{},"value":["A short description of the post.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Sarah Dimakis"]},{"type":"character","attributes":{},"value":["https://example.com/norajones"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Writing Functions"]},{"type":"character","attributes":{},"value":["This is a tutorial for how to write a function in R.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Sarah Dimakis"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"NULL"}
+  {"type":"character","attributes":{},"value":["writing-functions_files/anchor-4.2.2/anchor.min.js","writing-functions_files/bowser-1.9.3/bowser.min.js","writing-functions_files/distill-2.2.21/template.v2.js","writing-functions_files/jquery-1.11.3/jquery.min.js","writing-functions_files/kePrint-0.0.1/kePrint.js","writing-functions_files/lightable-0.0.1/lightable.css","writing-functions_files/popper-2.6.0/popper.min.js","writing-functions_files/tippy-6.2.7/tippy-bundle.umd.min.js","writing-functions_files/tippy-6.2.7/tippy-light-border.css","writing-functions_files/tippy-6.2.7/tippy.css","writing-functions_files/tippy-6.2.7/tippy.umd.min.js","writing-functions_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -308,11 +308,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-decoration: underline;
   }
   
-  d-article details {
-    grid-column: text;
-    margin-bottom: 0.8em;
-  }
-  
   @media(min-width: 768px) {
   
   d-article pre,
@@ -467,17 +462,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
   div.hanging-indent{
     margin-left: 1em; text-indent: -1em;
-  }
-  
-  /* Citation hover box */
-  
-  .tippy-box[data-theme~=light-border] {
-    background-color: rgba(250, 250, 250, 0.95);
-  }
-  
-  .tippy-content > p {
-    margin-bottom: 0;
-    padding: 2px;
   }
   
   
@@ -1145,7 +1129,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       var layout = $(this).attr('data-layout');
   
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      var elements = $(this).children().not('div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1260,20 +1244,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
-  
-      // hoverable references
-      $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
-        window.tippy(this, {
-          allowHTML: true,
-          content: refHtml,
-          maxWidth: 500,
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start'
-        });
-      });
   
       // clear polling timer
       clearInterval(tid);
@@ -1434,11 +1404,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
   
   <!--/radix_placeholder_distill-->
+  <script src="writing-functions_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="writing-functions_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="writing-functions_files/jquery-1.11.3/jquery.min.js"></script>
-  <script src="writing-functions_files/popper-2.6.0/popper.min.js"></script>
-  <link href="writing-functions_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="writing-functions_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="writing-functions_files/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="writing-functions_files/anchor-4.2.2/anchor.min.js"></script>
   <script src="writing-functions_files/bowser-1.9.3/bowser.min.js"></script>
   <script src="writing-functions_files/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1454,7 +1422,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Writing Functions","description":"A short description of the post.","authors":[{"author":"Sarah Dimakis","authorURL":"https://example.com/norajones","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000+00:00","citationText":"Dimakis, 2021"}
+{"title":"Writing Functions","description":"This is a tutorial for how to write a function in R.","authors":[{"author":"Sarah Dimakis","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000-07:00","citationText":"Dimakis, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1467,19 +1435,993 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Writing Functions</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>This is a tutorial for how to write a function in R.</p></p>
 </div>
 
 <div class="d-byline">
-  Sarah Dimakis <a href="https://example.com/norajones" class="uri">https://example.com/norajones</a> 
+  Sarah Dimakis  
   
 <br/>05-13-2021
 </div>
 
 <div class="d-article">
-<p>Distill is a publication format for scientific and technical writing, native to the web.</p>
-<p>Learn more about using Distill at <a href="https://rstudio.github.io/distill" class="uri">https://rstudio.github.io/distill</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#load-libraries-and-read-in-data">Load libraries and read in data</a></li>
+<li><a href="#functions-in-r">Functions in R</a></li>
+<li><a href="#warnings">Warnings</a></li>
+<li><a href="#example-function-1">Example function 1</a></li>
+<li><a href="#example-function-2">Example function 2</a></li>
+<li><a href="#tables">Tables</a></li>
+</ul>
+</nav>
+</div>
+<h1 id="load-libraries-and-read-in-data">Load libraries and read in data</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/leeper/rio'>rio</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span>, <span class='st'>"nhanes_1999-2016.csv"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>food_security <span class='op'>=</span> <span class='fu'>case_when</span><span class='op'>(</span><span class='va'>hh_food_secure</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"Fully food secure"</span>,
+            <span class='va'>hh_food_secure</span> <span class='op'>==</span> <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"Marginally food secure"</span>,
+            <span class='va'>hh_food_secure</span> <span class='op'>==</span> <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"Food insecure without hunger"</span>,
+            <span class='va'>hh_food_secure</span> <span class='op'>==</span> <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"Food insecure with hunger"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h1 id="functions-in-r">Functions in R</h1>
+<p>Let’s first create a function called <code>my_pet()</code> that will print out a statement about your pet. For best practice, you should try to name your function something descriptive. It should also not be named another function that is popular like <code>mean</code> because it will overwrite the default <code>mean</code> function for your script.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>my_pet</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pronoun</span>, <span class='va'>animal</span>, <span class='va'>verb</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>str_to_title</span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span>, <span class='st'>" is a "</span>, <span class='va'>animal</span>, <span class='st'>" who likes to "</span>, <span class='va'>verb</span>, <span class='st'>"."</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>The <strong>arguments</strong> of the function (which are called <code>formals</code>) are what the user supplies the function to get their desired output. You can see the formals of a function in R by using the <code>formals()</code> function. Now, in order to use the function, you can supply it with your desired arguments.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='st'>"dog"</span>, <span class='st'>"play outside"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;She is a dog who likes to play outside.&quot;</code></pre>
+<div class="sourceCode">
+<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"he"</span>, <span class='st'>"cat"</span>, <span class='st'>"sleep"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;He is a cat who likes to sleep.&quot;</code></pre>
+<div class="sourceCode">
+<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='st'>"lizard"</span>, <span class='st'>"eat"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;She is a lizard who likes to eat.&quot;</code></pre>
+</div>
+<p>If you aren’t sure what the <code>formals()</code> of a function are, you can access them with the <code>formals()</code> function.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/r/base/formals.html'>formals</a></span><span class='op'>(</span><span class='va'>my_pet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>$pronoun
+
+
+$animal
+
+
+$verb</code></pre>
+</div>
+<p>The <strong>body</strong> of the function is where the function takes in the <code>formals</code> and creates the output. You can see the body of a function in R by using the <code>body()</code> function.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/r/base/body.html'>body</a></span><span class='op'>(</span><span class='va'>my_pet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>{
+    paste0(str_to_title(pronoun), &quot; is a &quot;, animal, &quot; who likes to &quot;, 
+        verb, &quot;.&quot;)
+}</code></pre>
+</div>
+<h1 id="warnings">Warnings</h1>
+<p>If someone else (or your future self) is going to use your function, it is helpful to embed warnings (via <code>warning()</code>) or errors (via <code>stop()</code>) into your code to explain why the code will not work (or if it will not work as expected). In this example, I am also demonstrating the structure of an if else statement. I am saying that if each argument is a character, then I can proceed. Otherwise, I should produce a warning.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>my_pet</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pronoun</span>, <span class='va'>animal</span>, <span class='va'>verb</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>animal</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>verb</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>str_to_title</span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span>, <span class='st'>" is a "</span>, <span class='va'>animal</span>, <span class='st'>" who likes to "</span>, <span class='va'>verb</span>, <span class='st'>"."</span><span class='op'>)</span><span class='op'>}</span>
+  <span class='kw'>else</span><span class='op'>{</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span><span class='op'>(</span><span class='st'>"You need to input the pronoun, animal, and verb as a character variable. Returning Null."</span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='op'>}</span>
+<span class='op'>}</span>
+
+<span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='st'>"dog"</span>, <span class='st'>"play outside"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;She is a dog who likes to play outside.&quot;</code></pre>
+<div class="sourceCode">
+<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='fl'>3</span>, <span class='st'>"play outside"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>NULL</code></pre>
+</div>
+<h1 id="example-function-1">Example function 1</h1>
+<p>What makes a particularly good function is code that you write a lot. Additionally, you want to make a function that is simple and only does one thing. For this first function, I am going to create a function that will create a “total” column that calculates the total observations across a grouping variable.</p>
+<p>Before I create a function, I first like to try to make it work in a single case.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+<span class='va'>a</span>
+</code></pre>
+</div>
+<pre><code>        year gender    n
+1  1999-2000 female 5082
+2  1999-2000   male 4883
+3  2001-2002 female 5708
+4  2001-2002   male 5331
+5  2003-2004 female 5152
+6  2003-2004   male 4970
+7  2005-2006 female 5268
+8  2005-2006   male 5080
+9  2007-2008 female 5053
+10 2007-2008   male 5096
+11 2009-2010 female 5312
+12 2009-2010   male 5225
+13 2011-2012 female 4900
+14 2011-2012   male 4856
+15 2013-2014 female 5172
+16 2013-2014   male 5003
+17 2015-2016 female 5079
+18 2015-2016   male 4892</code></pre>
+<div class="sourceCode">
+<pre><code><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span><span class='op'>)</span>
+<span class='va'>b</span>
+</code></pre>
+</div>
+<pre><code>       year     n
+1 1999-2000  9965
+2 2001-2002 11039
+3 2003-2004 10122
+4 2005-2006 10348
+5 2007-2008 10149
+6 2009-2010 10537
+7 2011-2012  9756
+8 2013-2014 10175
+9 2015-2016  9971</code></pre>
+<div class="sourceCode">
+<pre><code><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>rename</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>"total"</span> <span class='op'>=</span> <span class='st'>"n"</span><span class='op'>)</span>
+<span class='va'>b</span>
+</code></pre>
+</div>
+<pre><code>       year total
+1 1999-2000  9965
+2 2001-2002 11039
+3 2003-2004 10122
+4 2005-2006 10348
+5 2007-2008 10149
+6 2009-2010 10537
+7 2011-2012  9756
+8 2013-2014 10175
+9 2015-2016  9971</code></pre>
+<div class="sourceCode">
+<pre><code><span class='fu'>left_join</span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year gender    n total
+1  1999-2000 female 5082  9965
+2  1999-2000   male 4883  9965
+3  2001-2002 female 5708 11039
+4  2001-2002   male 5331 11039
+5  2003-2004 female 5152 10122
+6  2003-2004   male 4970 10122
+7  2005-2006 female 5268 10348
+8  2005-2006   male 5080 10348
+9  2007-2008 female 5053 10149
+10 2007-2008   male 5096 10149
+11 2009-2010 female 5312 10537
+12 2009-2010   male 5225 10537
+13 2011-2012 female 4900  9756
+14 2011-2012   male 4856  9756
+15 2013-2014 female 5172 10175
+16 2013-2014   male 5003 10175
+17 2015-2016 female 5079  9971
+18 2015-2016   male 4892  9971</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>total_grouping</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>var</span><span class='op'>)</span> 
+  <span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>grouping</span><span class='op'>)</span>
+  
+  <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v1</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v2</span><span class='op'>)</span>
+  <span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v1</span><span class='op'>)</span>
+  <span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>rename</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>"total"</span> <span class='op'>=</span> <span class='st'>"n"</span><span class='op'>)</span>
+  <span class='va'>c</span> <span class='op'>&lt;-</span> <span class='fu'>left_join</span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>c</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year gender    n total
+1  1999-2000 female 5082  9965
+2  1999-2000   male 4883  9965
+3  2001-2002 female 5708 11039
+4  2001-2002   male 5331 11039
+5  2003-2004 female 5152 10122
+6  2003-2004   male 4970 10122
+7  2005-2006 female 5268 10348
+8  2005-2006   male 5080 10348
+9  2007-2008 female 5053 10149
+10 2007-2008   male 5096 10149
+11 2009-2010 female 5312 10537
+12 2009-2010   male 5225 10537
+13 2011-2012 female 4900  9756
+14 2011-2012   male 4856  9756
+15 2013-2014 female 5172 10175
+16 2013-2014   male 5003 10175
+17 2015-2016 female 5079  9971
+18 2015-2016   male 4892  9971</code></pre>
+</div>
+<p>Now I can do it with other variables!</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year        race_ethnic    n total
+1  1999-2000   mexican-american 3393  9965
+2  1999-2000 non-hispanic-black 2228  9965
+3  1999-2000 non-hispanic-white 3367  9965
+4  1999-2000     other-hispanic  589  9965
+5  1999-2000         other-race  388  9965
+6  2001-2002   mexican-american 2776 11039
+7  2001-2002 non-hispanic-black 2681 11039
+8  2001-2002 non-hispanic-white 4606 11039
+9  2001-2002     other-hispanic  517 11039
+10 2001-2002         other-race  459 11039</code></pre>
+<div class="sourceCode">
+<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year                food_security    n total
+1  1999-2000    Food insecure with hunger  499  9965
+2  1999-2000 Food insecure without hunger 1209  9965
+3  1999-2000            Fully food secure 7102  9965
+4  1999-2000       Marginally food secure  889  9965
+6  2001-2002    Food insecure with hunger  627 11039
+7  2001-2002 Food insecure without hunger 1289 11039
+8  2001-2002            Fully food secure 7503 11039
+9  2001-2002       Marginally food secure  938 11039
+11 2003-2004    Food insecure with hunger  641 10122
+12 2003-2004 Food insecure without hunger 1232 10122</code></pre>
+</div>
+<h1 id="example-function-2">Example function 2</h1>
+<p>You can use a previous function you have defined earlier in a script in a new function! Here, I am extending the previous function to make a column that will calculate the percentage of the count in a given year.</p>
+<p>Let’s first try an example.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>percent <span class='op'>=</span> <span class='va'>n</span><span class='op'>/</span><span class='va'>total</span> <span class='op'>*</span> <span class='fl'>100</span>,
+         percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>percent</span>, <span class='fl'>2</span><span class='op'>)</span>,
+         percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>percent</span>, <span class='st'>"%"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year gender    n total percent
+1  1999-2000 female 5082  9965     51%
+2  1999-2000   male 4883  9965     49%
+3  2001-2002 female 5708 11039  51.71%
+4  2001-2002   male 5331 11039  48.29%
+5  2003-2004 female 5152 10122   50.9%
+6  2003-2004   male 4970 10122   49.1%
+7  2005-2006 female 5268 10348  50.91%
+8  2005-2006   male 5080 10348  49.09%
+9  2007-2008 female 5053 10149  49.79%
+10 2007-2008   male 5096 10149  50.21%
+11 2009-2010 female 5312 10537  50.41%
+12 2009-2010   male 5225 10537  49.59%
+13 2011-2012 female 4900  9756  50.23%
+14 2011-2012   male 4856  9756  49.77%
+15 2013-2014 female 5172 10175  50.83%
+16 2013-2014   male 5003 10175  49.17%
+17 2015-2016 female 5079  9971  50.94%
+18 2015-2016   male 4892  9971  49.06%</code></pre>
+</div>
+Okay, now we’re ready to generalize.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>percent_grouping</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>var</span><span class='op'>)</span> 
+  <span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>grouping</span><span class='op'>)</span>
+  
+  <span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v1</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v2</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>percent <span class='op'>=</span> <span class='va'>n</span><span class='op'>/</span><span class='va'>total</span> <span class='op'>*</span> <span class='fl'>100</span>,
+         percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>percent</span>, <span class='fl'>2</span><span class='op'>)</span>,
+         percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>percent</span>, <span class='st'>"%"</span><span class='op'>)</span><span class='op'>)</span> 
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year gender    n total
+1  1999-2000 female 5082  9965
+2  1999-2000   male 4883  9965
+3  2001-2002 female 5708 11039
+4  2001-2002   male 5331 11039
+5  2003-2004 female 5152 10122
+6  2003-2004   male 4970 10122
+7  2005-2006 female 5268 10348
+8  2005-2006   male 5080 10348
+9  2007-2008 female 5053 10149
+10 2007-2008   male 5096 10149
+11 2009-2010 female 5312 10537
+12 2009-2010   male 5225 10537
+13 2011-2012 female 4900  9756
+14 2011-2012   male 4856  9756
+15 2013-2014 female 5172 10175
+16 2013-2014   male 5003 10175
+17 2015-2016 female 5079  9971
+18 2015-2016   male 4892  9971</code></pre>
+<div class="sourceCode">
+<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year        race_ethnic    n total
+1  1999-2000   mexican-american 3393  9965
+2  1999-2000 non-hispanic-black 2228  9965
+3  1999-2000 non-hispanic-white 3367  9965
+4  1999-2000     other-hispanic  589  9965
+5  1999-2000         other-race  388  9965
+6  2001-2002   mexican-american 2776 11039
+7  2001-2002 non-hispanic-black 2681 11039
+8  2001-2002 non-hispanic-white 4606 11039
+9  2001-2002     other-hispanic  517 11039
+10 2001-2002         other-race  459 11039</code></pre>
+<div class="sourceCode">
+<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        year                food_security    n total
+1  1999-2000    Food insecure with hunger  499  9965
+2  1999-2000 Food insecure without hunger 1209  9965
+3  1999-2000            Fully food secure 7102  9965
+4  1999-2000       Marginally food secure  889  9965
+6  2001-2002    Food insecure with hunger  627 11039
+7  2001-2002 Food insecure without hunger 1289 11039
+8  2001-2002            Fully food secure 7503 11039
+9  2001-2002       Marginally food secure  938 11039
+11 2003-2004    Food insecure with hunger  641 10122
+12 2003-2004 Food insecure without hunger 1232 10122</code></pre>
+</div>
+<h1 id="tables">Tables</h1>
+<p>Now, let’s make a table with our output.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>temp_table</span> <span class='op'>&lt;-</span> <span class='fu'>percent_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>gender</span>, <span class='va'>percent</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>pivot_wider</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>gender</span>,
+              values_from <span class='op'>=</span> <span class='va'>percent</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>
+<span class='va'>table</span> <span class='op'>&lt;-</span> <span class='va'>temp_table</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>,<span class='op'>]</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>table</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>temp_table</span><span class='op'>[</span><span class='fl'>1</span>,<span class='op'>]</span> 
+<span class='va'>table</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='st'>"striped"</span>, full_width <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/row_spec.html'>row_spec</a></span><span class='op'>(</span><span class='fl'>0</span>, angle <span class='op'>=</span> <span class='op'>-</span><span class='fl'>45</span><span class='op'>)</span>
+</code></pre>
+</div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+1999-2000
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2001-2002
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2003-2004
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2005-2006
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2007-2008
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2009-2010
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2011-2012
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2013-2014
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2015-2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+51%
+</td>
+<td style="text-align:left;">
+51.71%
+</td>
+<td style="text-align:left;">
+50.9%
+</td>
+<td style="text-align:left;">
+50.91%
+</td>
+<td style="text-align:left;">
+49.79%
+</td>
+<td style="text-align:left;">
+50.41%
+</td>
+<td style="text-align:left;">
+50.23%
+</td>
+<td style="text-align:left;">
+50.83%
+</td>
+<td style="text-align:left;">
+50.94%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+49%
+</td>
+<td style="text-align:left;">
+48.29%
+</td>
+<td style="text-align:left;">
+49.1%
+</td>
+<td style="text-align:left;">
+49.09%
+</td>
+<td style="text-align:left;">
+50.21%
+</td>
+<td style="text-align:left;">
+49.59%
+</td>
+<td style="text-align:left;">
+49.77%
+</td>
+<td style="text-align:left;">
+49.17%
+</td>
+<td style="text-align:left;">
+49.06%
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>I can generalize this with a function and I’ll make tables for other variables!</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='va'>my_table</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>var</span><span class='op'>)</span> 
+  <span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>grouping</span><span class='op'>)</span>
+  <span class='va'>temp_table</span> <span class='op'>&lt;-</span> <span class='fu'>percent_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v1</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v2</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>select</span><span class='op'>(</span><span class='op'>!</span><span class='op'>!</span><span class='va'>v1</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v2</span>, <span class='va'>percent</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>pivot_wider</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='op'>!</span><span class='op'>!</span><span class='va'>v2</span>,
+                values_from <span class='op'>=</span> <span class='va'>percent</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>
+  <span class='va'>table</span> <span class='op'>&lt;-</span> <span class='va'>temp_table</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>temp_table</span><span class='op'>)</span>,<span class='op'>]</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>table</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>temp_table</span><span class='op'>[</span><span class='fl'>1</span>,<span class='op'>]</span> 
+  <span class='va'>table</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='st'>"striped"</span>, full_width <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/row_spec.html'>row_spec</a></span><span class='op'>(</span><span class='fl'>0</span>, angle <span class='op'>=</span> <span class='op'>-</span><span class='fl'>45</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+</code></pre>
+</div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+1999-2000
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2001-2002
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2003-2004
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2005-2006
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2007-2008
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2009-2010
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2011-2012
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2013-2014
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2015-2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+51%
+</td>
+<td style="text-align:left;">
+51.71%
+</td>
+<td style="text-align:left;">
+50.9%
+</td>
+<td style="text-align:left;">
+50.91%
+</td>
+<td style="text-align:left;">
+49.79%
+</td>
+<td style="text-align:left;">
+50.41%
+</td>
+<td style="text-align:left;">
+50.23%
+</td>
+<td style="text-align:left;">
+50.83%
+</td>
+<td style="text-align:left;">
+50.94%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+49%
+</td>
+<td style="text-align:left;">
+48.29%
+</td>
+<td style="text-align:left;">
+49.1%
+</td>
+<td style="text-align:left;">
+49.09%
+</td>
+<td style="text-align:left;">
+50.21%
+</td>
+<td style="text-align:left;">
+49.59%
+</td>
+<td style="text-align:left;">
+49.77%
+</td>
+<td style="text-align:left;">
+49.17%
+</td>
+<td style="text-align:left;">
+49.06%
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode">
+<pre><code><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span>
+</code></pre>
+</div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+1999-2000
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2001-2002
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2003-2004
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2005-2006
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2007-2008
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2009-2010
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2011-2012
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2013-2014
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2015-2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+mexican-american
+</td>
+<td style="text-align:left;">
+34.05%
+</td>
+<td style="text-align:left;">
+25.15%
+</td>
+<td style="text-align:left;">
+24.89%
+</td>
+<td style="text-align:left;">
+27.51%
+</td>
+<td style="text-align:left;">
+21.25%
+</td>
+<td style="text-align:left;">
+22.63%
+</td>
+<td style="text-align:left;">
+13.89%
+</td>
+<td style="text-align:left;">
+17%
+</td>
+<td style="text-align:left;">
+19.27%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+non-hispanic-black
+</td>
+<td style="text-align:left;">
+22.36%
+</td>
+<td style="text-align:left;">
+24.29%
+</td>
+<td style="text-align:left;">
+26.31%
+</td>
+<td style="text-align:left;">
+26.19%
+</td>
+<td style="text-align:left;">
+21.79%
+</td>
+<td style="text-align:left;">
+18.57%
+</td>
+<td style="text-align:left;">
+27.5%
+</td>
+<td style="text-align:left;">
+22.28%
+</td>
+<td style="text-align:left;">
+21.35%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+non-hispanic-white
+</td>
+<td style="text-align:left;">
+33.79%
+</td>
+<td style="text-align:left;">
+41.72%
+</td>
+<td style="text-align:left;">
+40.83%
+</td>
+<td style="text-align:left;">
+37.96%
+</td>
+<td style="text-align:left;">
+40.55%
+</td>
+<td style="text-align:left;">
+41.95%
+</td>
+<td style="text-align:left;">
+30.47%
+</td>
+<td style="text-align:left;">
+36.11%
+</td>
+<td style="text-align:left;">
+30.75%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+other-hispanic
+</td>
+<td style="text-align:left;">
+5.91%
+</td>
+<td style="text-align:left;">
+4.68%
+</td>
+<td style="text-align:left;">
+3.37%
+</td>
+<td style="text-align:left;">
+3.37%
+</td>
+<td style="text-align:left;">
+11.83%
+</td>
+<td style="text-align:left;">
+10.75%
+</td>
+<td style="text-align:left;">
+11.03%
+</td>
+<td style="text-align:left;">
+9.43%
+</td>
+<td style="text-align:left;">
+13.12%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+other-race
+</td>
+<td style="text-align:left;">
+3.89%
+</td>
+<td style="text-align:left;">
+4.16%
+</td>
+<td style="text-align:left;">
+4.6%
+</td>
+<td style="text-align:left;">
+4.97%
+</td>
+<td style="text-align:left;">
+4.58%
+</td>
+<td style="text-align:left;">
+6.1%
+</td>
+<td style="text-align:left;">
+17.11%
+</td>
+<td style="text-align:left;">
+15.17%
+</td>
+<td style="text-align:left;">
+15.51%
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode">
+<pre><code><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span>
+</code></pre>
+</div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+1999-2000
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2001-2002
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2003-2004
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2005-2006
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2007-2008
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2009-2010
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2011-2012
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2013-2014
+</th>
+<th style="text-align:left;-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);">
+2015-2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Food insecure with hunger
+</td>
+<td style="text-align:left;">
+5.01%
+</td>
+<td style="text-align:left;">
+5.68%
+</td>
+<td style="text-align:left;">
+6.33%
+</td>
+<td style="text-align:left;">
+5.83%
+</td>
+<td style="text-align:left;">
+6.25%
+</td>
+<td style="text-align:left;">
+7.99%
+</td>
+<td style="text-align:left;">
+7.98%
+</td>
+<td style="text-align:left;">
+7.3%
+</td>
+<td style="text-align:left;">
+9%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Food insecure without hunger
+</td>
+<td style="text-align:left;">
+12.13%
+</td>
+<td style="text-align:left;">
+11.68%
+</td>
+<td style="text-align:left;">
+12.17%
+</td>
+<td style="text-align:left;">
+13.02%
+</td>
+<td style="text-align:left;">
+13.34%
+</td>
+<td style="text-align:left;">
+14.87%
+</td>
+<td style="text-align:left;">
+15.05%
+</td>
+<td style="text-align:left;">
+14.47%
+</td>
+<td style="text-align:left;">
+16.53%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fully food secure
+</td>
+<td style="text-align:left;">
+71.27%
+</td>
+<td style="text-align:left;">
+67.97%
+</td>
+<td style="text-align:left;">
+68.39%
+</td>
+<td style="text-align:left;">
+69.8%
+</td>
+<td style="text-align:left;">
+68.25%
+</td>
+<td style="text-align:left;">
+63.18%
+</td>
+<td style="text-align:left;">
+62.41%
+</td>
+<td style="text-align:left;">
+65.41%
+</td>
+<td style="text-align:left;">
+56.67%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marginally food secure
+</td>
+<td style="text-align:left;">
+8.92%
+</td>
+<td style="text-align:left;">
+8.5%
+</td>
+<td style="text-align:left;">
+8.58%
+</td>
+<td style="text-align:left;">
+10.1%
+</td>
+<td style="text-align:left;">
+11.31%
+</td>
+<td style="text-align:left;">
+12.82%
+</td>
+<td style="text-align:left;">
+14.05%
+</td>
+<td style="text-align:left;">
+11.63%
+</td>
+<td style="text-align:left;">
+14.37%
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

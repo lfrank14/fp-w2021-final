@@ -1,7 +1,7 @@
 ---
 title: "Writing Functions"
 description: |
-  A short description of the post.
+  This is a tutorial for how to write a function in R.
 author:
   - name: Sarah Dimakis
 date: 05-13-2021
@@ -17,8 +17,207 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+# Load libraries and read in data
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+```{r}
 
+library(rio)
+library(tidyverse)
+library(kableExtra)
+data <- import(here::here("data", "nhanes_1999-2016.csv")) %>% 
+  mutate(food_security = case_when(hh_food_secure == 1 ~ "Fully food secure",
+            hh_food_secure == 2 ~ "Marginally food secure",
+            hh_food_secure == 3 ~ "Food insecure without hunger",
+            hh_food_secure == 4 ~ "Food insecure with hunger"))
+
+```
+
+# Functions in R
+
+Let's first create a function called `my_pet()` that will print out a statement about your pet. For best practice, you should try to name your function something descriptive. It should also not be named another function that is popular like `mean` because it will overwrite the default `mean` function for your script.
+
+```{r}
+my_pet <- function(pronoun, animal, verb){
+  paste0(str_to_title(pronoun), " is a ", animal, " who likes to ", verb, ".")
+}
+
+```
+
+The **arguments** of the function (which are called `formals`) are what the user supplies the function to get their desired output. You can see the formals of a function in R by using the `formals()` function. Now, in order to use the function, you can supply it with your desired arguments.
+
+
+
+```{r}
+my_pet("she", "dog", "play outside")
+my_pet("he", "cat", "sleep")
+my_pet("she", "lizard", "eat")
+
+```
+
+If you aren't sure what the `formals()` of a function are, you can access them with the `formals()` function.
+
+```{r}
+formals(my_pet)
+```
+
+The **body** of the function is where the function takes in the `formals` and creates the output. You can see the body of a function in R by using the `body()` function.
+
+```{r}
+body(my_pet)
+```
+
+
+# Warnings
+
+If someone else (or your future self) is going to use your function, it is helpful to embed warnings (via `warning()`) or errors (via `stop()`) into your code to explain why the code will not work (or if it will not work as expected). In this example, I am also demonstrating the structure of an if else statement. I am saying that if each argument is a character, then I can proceed. Otherwise, I should produce a warning. 
+
+
+```{r}
+my_pet <- function(pronoun, animal, verb){
+  if(is.character(pronoun) & is.character(animal) & is.character(verb)){
+  paste0(str_to_title(pronoun), " is a ", animal, " who likes to ", verb, ".")}
+  else{
+    warning("You need to input the pronoun, animal, and verb as a character variable. Returning Null.")
+    return()
+  }
+}
+
+my_pet("she", "dog", "play outside")
+my_pet("she", 3, "play outside")
+
+
+```
+
+
+# Example function 1
+
+What makes a particularly good function is code that you write a lot. Additionally, you want to make a function that is simple and only does one thing. For this first function, I am going to create a function that will create a "total" column that calculates the total observations across a grouping variable.
+
+Before I create a function, I first like to try to make it work in a single case.
+
+```{r}
+a <- count(data, year, gender)
+a
+
+b <- count(data, year)
+b
+
+b <- rename(b, "total" = "n")
+b
+
+left_join(a,b)
+```
+
+```{r}
+total_grouping <- function(data, var, grouping){
+  v1 <- enquo(var) 
+  v2 <- enquo(grouping)
+  
+  a <- count(data, !!v1, !!v2)
+  b <- count(data, !!v1)
+  b <- rename(b, "total" = "n")
+  c <- left_join(a,b)
+  na.omit(c)
+}
+```
+
+```{r}
+total_grouping(data, year, gender)
+```
+
+Now I can do it with other variables!
+
+```{r}
+total_grouping(data, year, race_ethnic) %>% 
+  head(10)
+
+total_grouping(data, year, food_security) %>% 
+  head(10)
+```
+
+# Example function 2
+
+You can use a previous function you have defined earlier in a script in a new function! Here, I am extending the previous function to make a column that will calculate the percentage of the count in a given year. 
+
+Let's first try an example.
+
+```{r}
+total_grouping(data, year, gender) %>% 
+  mutate(percent = n/total * 100,
+         percent = round(percent, 2),
+         percent = paste0(percent, "%"))
+
+```
+
+Okay, now we're ready to generalize.
+```{r}
+percent_grouping <- function(data, var, grouping){
+  v1 <- enquo(var) 
+  v2 <- enquo(grouping)
+  
+  total_grouping(data, !!v1, !!v2) %>% 
+  mutate(percent = n/total * 100,
+         percent = round(percent, 2),
+         percent = paste0(percent, "%")) 
+}
+
+
+```
+
+```{r}
+total_grouping(data, year, gender)
+
+total_grouping(data, year, race_ethnic) %>% 
+  head(10)
+
+total_grouping(data, year, food_security) %>% 
+  head(10)
+
+```
+
+# Tables
+
+Now, let's make a table with our output.
+
+```{r}
+temp_table <- percent_grouping(data, year, gender) %>% 
+  select(year, gender, percent) %>% 
+  pivot_wider(names_from = gender,
+              values_from = percent) %>% t(.)
+table <- temp_table[2:3,]
+colnames(table) <- temp_table[1,] 
+table %>% kbl() %>% 
+  kable_styling(bootstrap_options = "striped", full_width = F) %>% 
+  row_spec(0, angle = -45)
+
+
+```
+
+
+I can generalize this with a function and I'll make tables for other variables! 
+
+```{r}
+my_table <- function(data, var, grouping){
+  v1 <- enquo(var) 
+  v2 <- enquo(grouping)
+  temp_table <- percent_grouping(data, !!v1, !!v2) %>% 
+    select(!!v1, !!v2, percent) %>% 
+    pivot_wider(names_from = !!v2,
+                values_from = percent) %>% t(.)
+  table <- temp_table[2:nrow(temp_table),]
+  colnames(table) <- temp_table[1,] 
+  table %>% kbl() %>% 
+    kable_styling(bootstrap_options = "striped", full_width = F) %>% 
+    row_spec(0, angle = -45)
+}
+
+```
+
+```{r}
+my_table(data, year, gender)
+
+my_table(data, year, race_ethnic)
+
+my_table(data, year, food_security)
+```
 
