@@ -1,10 +1,10 @@
 ---
 title: "Parallel Iteration"
 description: |
-  A short description of the post.
+  Using `nest` with `map2_*` or `pmap_*` in `{purrr}`.
 author:
   - name: Wanjia Guo
-date: 05-13-2021
+date: 05-20-2021
 output:
   distill::distill_article:
     toc: true
@@ -12,53 +12,211 @@ output:
     self_contained: false
 ---
 
+In this post, we will dive deeper into the `{purrr}` package. 
+We will explore `purrr::nest %>% mutate()`, which is an alternative to the 
+`split()` function in the base-R. Moreover, we will see how the combination of 
+`purrr::nest %>% mutate()` with `map2_*` or `pmap_*` can be a powerful tool in
+functional programming. 
+
+The data we will use is taken from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For the current blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest for the current post:
+
+::: l-body
+| Variable Code    | Type    | Description                                              |
+|------------------|---------|-----------------------------------------------------------|
+| `year`           | *String* | The year that data was collected                         |
+| `id`             | *Integer* | Respondent ID                                           |
+| `age`            | *Integer* | Age in years at screening                               |
+| `gender`         | *Category* | Gender: male or female                                 |
+| `race_ethnic`    | *Category* | Race/Hispanic origin: mexican-american, non-hispanic-black, non-hispanic-white, other-hispanic, other-race                                         |
+| `hh_food_secure` | *Integer* | Household food security category over last 12 months    |
+| `age_group`      | *Binary* | Age group: adult(20+) or child(6-19)                     |
+| `educ`           | *Integer* | Education level for adults 20+ and children/youth 6-19  |
+:::
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
 
 library(tidyverse)
-library(ggridges)
+theme_set(theme_minimal(15))
+
+df<- read_csv(here::here('data','nhanes_1999-2016.csv')) %>% 
+  filter(!is.na(hh_food_secure)) %>% 
+  mutate(age_group = ifelse((is.na(educ_adult) & !is.na(educ_child)),
+                            'child',
+                            ifelse((!is.na(educ_adult) & is.na(educ_child)),
+                                   'adult',
+                                   NA))) %>% 
+  filter(!is.na(age_group)) %>% 
+  mutate(educ = ifelse(age_group == 'adult',
+                       educ_adult,
+                       educ_child)) %>% 
+  select(-c(educ_adult, educ_child)) %>% 
+  mutate(gender = as.factor(gender),
+         race_ethnic = as.factor(race_ethnic),
+         age_group = as.factor(age_group))
+
+str(df)
 ```
 
-## Load data
+Let's take a look at the dataframe.
 
 ```{r}
-dpaths <- fs::dir_ls(here::here("data"),
-                     recurse = TRUE,
-                     regexp = "demographic.csv")
 
-demos <- map_df(dpaths, rio::import, .id = "fname") %>% 
-  mutate(year = str_extract(fname, pattern = "\\d{4}_\\d{4}")) %>% 
-  select(year, everything(), -fname)
+head(df)
 
-qpaths <- fs::dir_ls(here::here("data"), 
-                     recurse = TRUE, 
-                     regexp = "questionnaire.csv")
-
-quests <- map_df(qpaths, rio::import, .id = "fname") %>% 
-  mutate(year = str_extract(fname, pattern = "\\d{4}_\\d{4}")) %>% 
-  select(year, everything(), -fname)
-
-df <- left_join(demos, quests) %>% 
-  nest_by(year)
 ```
 
-## Example 1
-
-For each year, generate a plot that shows how much exercise people got
+We are interested in how food secure changes over time, separated by gender
+and age group (child and adult). For the first step, we want to split the dataframe 
+into lists with `split` as the following. However, the three 
+grouping variables (gender, age group, and year) are merged together into one column.
+This is less desirable because we will need each of these variables for later.
 
 ```{r}
-map2(df$year, df$data, ~{
-  aa <- df$year[[1]]
-  bb <- df$data[[1]]
+
+split_df = split(df, list(df$gender, df$age_group, df$year))
+
+head(split_df$`female.adult.1999-2000`)
+
+```
+
+Equivalently, we can also use `nest` from the `{purrr}` package as the following:
+
+```{r}
+
+nest_df = df %>% group_by(year, age_group, gender) %>% nest()
+
+head(nest_df)
+
+```
+
+These two approaches ends with very similar results,
+only except gener, age_group, and year are maintaned as its orignal structure 
+with `nest` but not `split`. 
+
+Moreover, with `nest`, we can manipulate the dataframe within each row 
+ while save the output as another column. We will calculate within each gender,
+ age group and year, how food security changes with age. (If you find the 
+ `map` function confusing, I encourage you take a look at 
+ <a href = "https://lfrank14.github.io/fp-w2021-final/posts/looping/" target="_blank">this post</a>.)
+
+```{r}
+
+model_df = nest_df %>% mutate(n = map_dbl(data, nrow),
+                   m1 = map(data, ~lm(hh_food_secure ~ age, data = .x)),
+                   coefs = map(m1, coef),
+                   intercept = map_dbl(coefs, 1),
+                   slope = map_dbl(coefs, 2))
+
+head(model_df)
+```
+
+Let's take a look at how the slope change with time:
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6}
+model_df %>% ggplot(aes(x=year, y=slope, color=age_group, group = age_group)) + 
+  geom_line(size = 1.5) + 
+  facet_wrap(~gender, nrow = 2) +
+  theme(legend.position = 'bottom') + 
+  labs(y = 'Slope: Age and Food Security',
+       x = 'Year',
+       color = 'Age Group')
+```
+
+From the figure, we can see that for adults, the slope is consistently negative 
+across all time. In other words, as people age, the food security score decreased.
+However, for children, the food security increased dramatically recently,
+especially since 2010s. What if we want to dig deeper and see how age influence
+children's food security within each year for different gender?
+
+Let's start with only one row of data:
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6}
+child_model_df = model_df %>% filter(age_group == 'child')
+
+plotting <- function(df, gender, year = NULL){
   
-  bb <- bb %>% 
-    pivot_longer(cols = c(PAQ677, PAQ678),
-                 names_to = "exercise_type",
-                 values_to = "num_days") %>% 
-    ggplot(aes(x = num_days, y = exercise_type, color = exercise_type)) +
-      geom_density_ridges()
-})
+  p = df %>% 
+    group_by(age, race_ethnic) %>% 
+    summarise(m = mean(hh_food_secure),
+              sd = sd(hh_food_secure)) %>% 
+    ggplot(aes(x=age,
+               y=m,
+               color = race_ethnic))+
+    geom_line(alpha = 0.7, size = 1.5) +
+    theme(legend.position = 'bottom')+
+    labs(x = 'Age',
+         y = 'Food Secure Score',
+         color = 'Race and Ethnic') + 
+    guides(color=guide_legend(nrow=2, byrow=TRUE))
+  
+  if(missing(year)){
+    p = p + labs(title = gender)
+  }else{
+    p = p + labs(title = paste(year, gender, sep = ": "))}
+
+  p
+  
+  }
+
+# make sure the funtion works for one row of data.
+plotting(child_model_df$data[[1]], 
+         child_model_df$gender[[1]], 
+         child_model_df$year[[1]])
 ```
+
+With `pmap_*`, we can easily use the above code to produce figures for each row.
+When using `pmap_*`, the first input is a list of column names that we need 
+from the dataframe and the second input is the plotting function we used in the 
+last part. The `..1`, `..2`, and `..3` are corresponding to data, gender,
+and year. Then, Voila, you have a figure for data from each row!
+
+```{r, warning=FALSE, layout="l-body-outset", fig.width=12, fig.height=8}
+
+child_model_plot_df <- child_model_df %>% 
+  mutate(nest_plot = pmap(list(data, gender, year),
+                          ~{plotting(..1, ..2, ..3)})
+                          )
+
+ggpubr::ggarrange(child_model_plot_df$nest_plot[[1]],
+                  child_model_plot_df$nest_plot[[2]],
+                  child_model_plot_df$nest_plot[[17]],
+                  child_model_plot_df$nest_plot[[18]],
+                  ncol = 2, nrow = 2,
+                  common.legend = TRUE,
+                  legend = 'bottom')
+
+```
+
+Another cool thing about `nest`, is that we can easily reverse this process
+with `unnest` after we finished our grouped analysis. 
+
+```{r}
+adult_df = model_df %>% 
+  filter(age_group == 'adult') %>%
+  select(year, gender, age_group, data) %>% unnest(data)
+head(adult_df)
+```
+
+Lastly, once we learned about `pmap_*`, `map2_*` is very similar. Instead 
+of being able to use as many variables you need with `pmap`, `map2` is specialized
+for only 2 inputs. Let's see an example below. Since we have found that the 
+relationship between age and food secure are pretty consistent over the years,
+let's make a plot that ignore the age factor with `map2`.
+
+```{r fig.height=4, fig.width=12, warning=FALSE, layout="l-body-outset"}
+adult_plot_df = adult_df %>% 
+  group_by(gender) %>% 
+  nest() %>% 
+  mutate(nest_plot = map2(data, gender,
+                          ~plotting(.x, .y)))
+
+ggpubr::ggarrange(adult_plot_df$nest_plot[[1]],
+                  adult_plot_df$nest_plot[[2]],
+                  ncol = 2,
+                  common.legend = TRUE,
+                  legend = 'bottom')
+
+```
+
 
 
