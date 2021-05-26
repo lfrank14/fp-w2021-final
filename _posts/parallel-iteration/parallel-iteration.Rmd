@@ -90,7 +90,7 @@ head(nest_df)
 ```
 
 These two approaches ends with very similar results,
-only except gener, age_group, and year are maintaned as its orignal structure 
+only except gender, age_group, and year are maintained as its orignal structure 
 with `nest` but not `split`. 
 
 Moreover, with `nest`, we can manipulate the dataframe within each row 
