@@ -11,12 +11,21 @@ output:
     self_contained: false
 ---
 
+```{r xaringanExtra-clipboard, echo=FALSE}
+xaringanExtra::use_clipboard()
+
+#May need installation via 
+# install.packages("devtools")
+# devtools::install_github("gadenbuie/xaringanExtra")
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(fs)
 library(knitr)
+library(xaringanExtra)
 ```
 
 The `{purrr}` package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the `map` family of functions can be. 
