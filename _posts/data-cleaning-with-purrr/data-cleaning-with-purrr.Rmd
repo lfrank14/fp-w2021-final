@@ -63,6 +63,7 @@ Importantly, this vector is named with the associated paths, which will come in 
  
 ```{r}
 names(head(fnames))
+#Can you say a little more about what names() did here? What is the difference between previous output and the output here?
 ```
 
 The demographics and FSQ will be loaded separately since they will require different data cleaning steps. Regular expression can be used with the `fs::dir_ls` function to filter files that match a specific pattern.
@@ -214,3 +215,6 @@ Finally, the data frame was saved into a single `.csv` file that could then be s
 write_csv(df, str_c(rootpath,"/nhanes_1999-2016.csv"))
 ```
 
+### Comment by Shijing: 
+
+The structure of the page is very clear with distinguished titles and subtitles. The display of output along with code is helpful for learning because it provides learner what is expected after running a chunk of code. The method of using `purrr::map_df` to read each data file into a single data frame is something new I learned. It is really handy. I would also suggest to add comment as description/explanation along with codes, particularly for the parts that are more complicated (e.g., the data cleaning section). 

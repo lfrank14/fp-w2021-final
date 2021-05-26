@@ -30,6 +30,7 @@ data <- import(here::here("data", "nhanes_1999-2016.csv")) %>%
             hh_food_secure == 3 ~ "Food insecure without hunger",
             hh_food_secure == 4 ~ "Food insecure with hunger"))
 
+# What is the whole data about? Maybe introduce the dataset a little bit?
 ```
 
 # Functions in R
@@ -221,3 +222,6 @@ my_table(data, year, race_ethnic)
 my_table(data, year, food_security)
 ```
 
+### Comment by Shijing 
+
+The tutorial is clear and beginner friendly. The table of content on the side is helpful to navigate throughout the page. The examples provided here are straightforward. However, to make sure the tutorial even more beginner friendly, I would suggest add brief descriptions to some lines of code to explain the function used that line. For example, for some who is not familiar with `enquo()`, you can add a comment to explain what that line was doing. 

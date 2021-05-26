@@ -27,6 +27,7 @@ First we'll import our data using the _here_ package.
 
 ```{r import data}
 fi <- import(here("data", "nhanes_1999-2016.csv"))
+# What is the whole data about? 
 ```
 
 Next, we're going to convert the food insecurity variable to a factor, rename the levels, and remove NAs.
@@ -144,3 +145,6 @@ walk2(paths_2, fi_grouped_plots_2$plot, ggsave,
       dpi = 500)
 ```
 
+### Comment by Shijing
+
+The explanation of each step is really clear. One potential improvement could be displaying a part of output after the code of each section, especially for the section you used `nest()` and `unnest()`. I think people would like to know how nested and unnested outputs look like, particularly for beginner. 
