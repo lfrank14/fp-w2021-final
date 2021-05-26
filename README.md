@@ -8,3 +8,9 @@ This is an exceptionally well put together draft. As I was traversing your code,
 2. Your interlacing of code with text and supporting information/figures is strong. I learned a ton that reinforced my knowledge from reading your content
 3. I think that the open-source nature of starting with real-world, accessible data that you clean and then run through the assignment components is so impressive!
 
+## Areas of learning
+1. Throughout my R learning adventure, I had always thought that creating categorical variables as factors and then naming took a fct_rename() or something like that. Lea's post on Data Cleaning had two different examples that showed off some of the elegance of factor()
+2. Another point of learning was using the common.legend argument in ggarrange() for Wanjia's post. I was working on something similar for EDLD652's final project and never quite got it there. This code inspired a few thoughts that I could go back and change; thanks!
+
+## Areas for Improvement
+1. The primary area for improvement is aesthetics (and only stylistic for some tastes, hah). I made in-line edits on Meg's Looping post and Sarah's Writing Functions post. These were entirely to do with the visualizations. I didn't catch any grammatical or logical errors in your coding/write up. Again, this is such an excellent project in "draft" stage that I was really grasping at straws to find something to suggest as an area for improvement!
