@@ -23,6 +23,12 @@ library(glue)
 
 The question we're trying to answer is what is the change in the relationship between age and percentage of the population experiencing food insecurity over time.
 
+```{r}
+# R: I think here I could use a bit more of an introduction if possible that integrates the concept of looping, when it's helpful, and how it'll help you achieve
+# your goal for this specific problem. Splitting the post up into sections with headers could also help orient readers
+```
+
+
 First we'll import our data using the _here_ package.
 
 ```{r import data}
@@ -62,11 +68,11 @@ fi_grouped <- fi_factor %>%
   nest()
 ```
 
-We're want to look at the linear relationship between age and percent of food insecurity over time. To do this, we fit a linear regression model predicting food insecurity from age using _map_. We can then extract the intercepts and slopes of each model using _map_dbl_. I'm going to want to use our _percent_insecurity_ variable later, so to move it from a nested list to the main data frame, I _unnest_ the _data_ list and then save that column.
+We want to look at the linear relationship between age and percent of food insecurity over time. To do this, we fit a linear regression model predicting food insecurity from age using _map_. We can then extract the intercepts and slopes of each model using _map_dbl_. I'm going to want to use our _percent_insecurity_ variable later, so to move it from a nested list to the main data frame, I _unnest_ the _data_ list and then save that column.
 
 ```{r}
 fi_grouped_lm <- fi_grouped %>% 
-  mutate(m1 = map(data, ~lm(percent_insecurity ~ age, data = .x)),
+  mutate(m1 = map(data, ~lm(percent_insecurity ~ age, data = .x)), # might want to explain how this is performing looping and what that means
          coefs = map(m1, coefficients),
          intercept = map_dbl(coefs, 1),
          slope = map_dbl(coefs, 2)) %>% 
@@ -80,7 +86,7 @@ Now we want to look at the change in slope of how age predicts food insecurity a
 fi_grouped_plots <- fi_grouped_lm %>%
   group_by(security) %>%
   nest() %>%
-  mutate(plot = pmap(list(security, data), ~{
+  mutate(plot = pmap(list(security, data), ~{ # Again, readers may be wondering why use this function, what it is actually doing, and how to apply it elsewhere
     ggplot(..2, aes(year, slope)) +
       geom_point() +
       geom_line() +
@@ -94,7 +100,8 @@ fi_grouped_plots <- fi_grouped_lm %>%
 Here's an example of one of the plots.
 
 ```{r}
-fi_grouped_plots$plot[[2]]
+fi_grouped_plots$plot[[2]] # I like that you are showing how this can be applied with plots, and other posts showed up the skills can be used to create tables.
+# Those are both powerful examples of how these skills can be used practically.
 ```
 
 Now I'm going to export a plot for each level of food security using _walk2_.
