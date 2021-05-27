@@ -97,6 +97,34 @@ Here's an example of one of the plots.
 fi_grouped_plots$plot[[2]]
 ```
 
+We can make adjustments for specific plots (e.g., re-orienting axis labels), but beware that this may not be a universal solution!
+
+```{r updated_plots}
+
+# Bonus function! Author attribution: https://stackoverflow.com/questions/10762287/how-can-i-format-axis-labels-with-exponents-with-ggplot2-and-scales 
+scientific_10 <- function(x) {
+  parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
+}
+
+
+fi_grouped_plots <- fi_grouped_lm %>%
+  group_by(security) %>%
+  nest() %>%
+  mutate(plot = pmap(list(security, data), ~{
+    ggplot(..2, aes(year, slope)) +
+      geom_point() +
+      geom_line() +
+      labs(title = glue("Slope of relation between age and {.x} by year"),
+           x = "Year",
+           y = "Slope") +
+      theme(axis.text.x = element_text(angle = 90)) +
+      scale_y_continuous(labels = scientific_10)
+    })
+    )
+
+fi_grouped_plots$plot[[2]]
+```
+
 Now I'm going to export a plot for each level of food security using _walk2_.
 
 ```{r}
