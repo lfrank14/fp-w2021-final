@@ -10,3 +10,24 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Things to include:
 - info about the data / link to source of data
+
+Appologies, could only go over the website and give general reviews within the hour 
+
+Strengths
+
+Very helpful and detailed walk through!  Nice!! I’m definitely gonna reference this 
+
+Helpful organization and flow of info for each of the tutorials! Appreciate the citations and variables/origins of the data used and the citation for the tutorials, a good reminder for me to be better about managing citations!
+  
+Always nice seeing/getting accustomed to regular expressions for the data cleaning tutorial! I have no idea what it means 
+
+Effective use of referencing the other tutorials with in a tutorial! 
+
+
+Improvement
+Assuming the target audience is a coding weakling, such as myself, including brief comments after the first instance of a built in function (for those that aren’t explicitly stated in the text) could increase interpretability.
+
+Not necessary and just adds more coding but coloring functions mentioned in the text blue could help with focusing attention. 
+
+What I learned
+Better understanding of function creation, looping, data cleaning ,and parallel iteration 
