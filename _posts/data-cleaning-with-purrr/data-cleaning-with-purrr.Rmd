@@ -174,7 +174,7 @@ str(demos_list_clean[1:3])
 As I mentioned earlier, the best route for me was to read the data files into a single data frame. The same data cleaning steps conducted above can then be applied to the single data frame.
 
 ```{r}
-
+# R: In this chunk, it could be helpful to annotate the code step by step to bring it all together
 demos <- dir_ls(rootpath, 
                  regexp = "DEMO") %>% 
   map_dfr(rio::import, .id = "file") %>% 

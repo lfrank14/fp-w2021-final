@@ -33,6 +33,15 @@ The data we will use is taken from the [*National Health and Nutrition Examinati
 | `educ`           | *Integer* | Education level for adults 20+ and children/youth 6-19  |
 :::
 
+```{r}
+# R: This table is so nice-looking and very helpful!! Great intro to data
+
+# I'm a little confused as to the order that readers should ideally be reading these posts in. Should this be first, last, or all they all disconnected and this doesn't matter? Are they meant to
+# strictly all stand alone? That could be helpful to include in the About section. I'm not sure if you should read top to bottom or least-recent to most-recent, but it seems only some of these
+# posts have info on the data sets. I read least-recent to most-, but now I'm realizing maybe I should've read in the opposite order?
+```
+
+
 ```{r setup, include=FALSE}
 
 library(tidyverse)
@@ -54,7 +63,7 @@ df<- read_csv(here::here('data','nhanes_1999-2016.csv')) %>%
          race_ethnic = as.factor(race_ethnic),
          age_group = as.factor(age_group))
 
-str(df)
+# str(df) # not sure if this needs to be included
 ```
 
 Let's take a look at the dataframe.
@@ -73,7 +82,7 @@ This is less desirable because we will need each of these variables for later.
 
 ```{r}
 
-split_df = split(df, list(df$gender, df$age_group, df$year))
+split_df <- split(df, list(df$gender, df$age_group, df$year))
 
 head(split_df$`female.adult.1999-2000`)
 
@@ -83,7 +92,10 @@ Equivalently, we can also use `nest` from the `{purrr}` package as the following
 
 ```{r}
 
-nest_df = df %>% group_by(year, age_group, gender) %>% nest()
+nest_df <- df %>% 
+  group_by(year, age_group, gender) %>% 
+  nest() # R: throughout the code, I've made some very minor edits for readability (e.g., using the assignment operator `<-` instead of `=` in some places and
+# entering a new line with each use of a pipe).
 
 head(nest_df)
 
@@ -101,7 +113,8 @@ Moreover, with `nest`, we can manipulate the dataframe within each row
 
 ```{r}
 
-model_df = nest_df %>% mutate(n = map_dbl(data, nrow),
+model_df <- nest_df %>% 
+  mutate(n = map_dbl(data, nrow),
                    m1 = map(data, ~lm(hh_food_secure ~ age, data = .x)),
                    coefs = map(m1, coef),
                    intercept = map_dbl(coefs, 1),
@@ -113,7 +126,8 @@ head(model_df)
 Let's take a look at how the slope change with time:
 
 ```{r, layout="l-body-outset", fig.width=10, fig.height=6}
-model_df %>% ggplot(aes(x=year, y=slope, color=age_group, group = age_group)) + 
+model_df %>% 
+  ggplot(aes(x=year, y=slope, color=age_group, group = age_group)) + 
   geom_line(size = 1.5) + 
   facet_wrap(~gender, nrow = 2) +
   theme(legend.position = 'bottom') + 
@@ -131,11 +145,12 @@ children's food security within each year for different gender?
 Let's start with only one row of data:
 
 ```{r, layout="l-body-outset", fig.width=10, fig.height=6}
-child_model_df = model_df %>% filter(age_group == 'child')
+child_model_df <- model_df %>% 
+  filter(age_group == 'child')
 
 plotting <- function(df, gender, year = NULL){
   
-  p = df %>% 
+  p <- df %>% 
     group_by(age, race_ethnic) %>% 
     summarise(m = mean(hh_food_secure),
               sd = sd(hh_food_secure)) %>% 
@@ -150,9 +165,9 @@ plotting <- function(df, gender, year = NULL){
     guides(color=guide_legend(nrow=2, byrow=TRUE))
   
   if(missing(year)){
-    p = p + labs(title = gender)
+    p <- p + labs(title = gender)
   }else{
-    p = p + labs(title = paste(year, gender, sep = ": "))}
+    p <- p + labs(title = paste(year, gender, sep = ": "))}
 
   p
   
@@ -168,7 +183,7 @@ With `pmap_*`, we can easily use the above code to produce figures for each row.
 When using `pmap_*`, the first input is a list of column names that we need 
 from the dataframe and the second input is the plotting function we used in the 
 last part. The `..1`, `..2`, and `..3` are corresponding to data, gender,
-and year. Then, Voila, you have a figure for data from each row!
+and year. Then, voila, you have a figure for data from each row!
 
 ```{r, warning=FALSE, layout="l-body-outset", fig.width=12, fig.height=8}
 
@@ -191,9 +206,11 @@ Another cool thing about `nest`, is that we can easily reverse this process
 with `unnest` after we finished our grouped analysis. 
 
 ```{r}
-adult_df = model_df %>% 
+adult_df <- model_df %>% 
   filter(age_group == 'adult') %>%
-  select(year, gender, age_group, data) %>% unnest(data)
+  select(year, gender, age_group, data) %>% 
+  unnest(data)
+
 head(adult_df)
 ```
 
@@ -204,7 +221,7 @@ relationship between age and food secure are pretty consistent over the years,
 let's make a plot that ignore the age factor with `map2`.
 
 ```{r fig.height=4, fig.width=12, warning=FALSE, layout="l-body-outset"}
-adult_plot_df = adult_df %>% 
+adult_plot_df <- adult_df %>% 
   group_by(gender) %>% 
   nest() %>% 
   mutate(nest_plot = map2(data, gender,

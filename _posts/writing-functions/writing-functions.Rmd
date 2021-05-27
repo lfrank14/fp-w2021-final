@@ -30,6 +30,14 @@ data <- import(here::here("data", "nhanes_1999-2016.csv")) %>%
             hh_food_secure == 3 ~ "Food insecure without hunger",
             hh_food_secure == 4 ~ "Food insecure with hunger"))
 
+# R: I'm assuming that based on the posting order, this is the first post readers would encounter.
+# It might be helpful to have an "About the Data" section here.
+
+# R: I know this tutorial is specifically about writing functions, but I wonder if it
+# could be helpful to include just a couple of brief sentences of introduction to what a
+# function is and how it is used and maybe explain it in the context of a well-known base R
+# function, such as `mean()`. That may be too basic for your target audience, though.
+
 ```
 
 # Functions in R
@@ -41,6 +49,7 @@ my_pet <- function(pronoun, animal, verb){
   paste0(str_to_title(pronoun), " is a ", animal, " who likes to ", verb, ".")
 }
 
+# R: I really like this example function! It feels very intuitive.
 ```
 
 The **arguments** of the function (which are called `formals`) are what the user supplies the function to get their desired output. You can see the formals of a function in R by using the `formals()` function. Now, in order to use the function, you can supply it with your desired arguments.
@@ -110,7 +119,7 @@ left_join(a,b)
 
 ```{r}
 total_grouping <- function(data, var, grouping){
-  v1 <- enquo(var) 
+  v1 <- enquo(var) # I think some users may need an explanation of `enquo()`
   v2 <- enquo(grouping)
   
   a <- count(data, !!v1, !!v2)
@@ -219,5 +228,6 @@ my_table(data, year, gender)
 my_table(data, year, race_ethnic)
 
 my_table(data, year, food_security)
+
 ```
 
