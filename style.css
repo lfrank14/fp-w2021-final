@@ -1,0 +1,79 @@
+
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      40px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      14px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #7A9D96;
+  --header-color:    #DCAE1D;
+  --body-color:      #3C3C3C;
+  --aside-color:     #3C3C3C;
+  --fig-cap-color:   #3C3C3C;
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Roboto Condensed";
+  --mono-font:       monospace;
+  --body-font:       "Roboto";
+  --navbar-font:     "Roboto Condensed";  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+.d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   15px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+.d-appendix {
+  --heading-size:    20px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        18px;
+  --hover-color:      white;
+  --bkgd-color:       #7A9D96;
+}
+
+.distill-site-footer {
+  --text-color:       white;
+  --text-size:        15px;
+  --hover-color:      rgba(255, 255, 255, 0.8);
+  --bkgd-color:       #6B7A8F;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+

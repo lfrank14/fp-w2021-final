@@ -1,18 +1,18 @@
 ---
 title: "Contributors"
 description: |
-  Some additional details about the blog
+ Meet the team
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Meghan Siritzky - some bio
+**Meghan Siritzky** - some bio
 
-Wanjia Guo - some bio
+**Wanjia Guo** - some bio
 
-Sarah Dimakis - some bio
+**Sarah Dimakis** is a PhD student studying social psychology at the University of Oregon. She studies how people form moral character judgments of others and how those judgments change (or fail to change) over time.
 
-Lea Frank - some bio
+[**Lea Frank**](https://github.com/lfrank14) is a doctoral candidate studying cognitive neuroscience at the University of Oregon. Her research focuses on how past experiences are used to help make new decisions and generate new knowledge, and how these functions are supported in the brain. 
 

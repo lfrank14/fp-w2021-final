@@ -1,15 +1,30 @@
 name: "fp-w2021-final"
-title: "Functional Programming Final Project"
+title: "Functional Programming in R"
 description: |
-  Functional Programming Final Project
+  Final project for functional programming in R
 base_url: https://lfrank14.github.io/fp-w2021-final/
 output_dir: "."
+theme: style.css
 navbar:
+  left:
+    - icon: fab fa-github
+      href: https://github.com/lfrank14/fp-w2021-final
   right:
     - text: "Home"
       href: index.html
+      menu:
+        - text: "Data cleaning with {purrr}"
+          href: posts/data-cleaning-with-purrr/index.html
+        - text: "Looping"
+          href: posts/looping/index.html
+        - text: "Parallel iteration"
+          href: posts/parallel-iteration/index.html
+        - text: "Writing functions"
+          href: posts/writing-functions/index.html
     - text: "About"
       href: about.html
     - text: "Contributors"
       href: contributors.html
-output: distill::distill_article
+output: 
+  distill::distill_article:
+    css: style.css
