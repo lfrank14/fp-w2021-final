@@ -1,14 +1,14 @@
 ---
 title: "Data cleaning with {purrr}"
 description: |
-  A tutorial on using {purrr} for data cleaning.
+  A tutorial for using {purrr} for data cleaning.
 author:
   - name: Lea Frank
-date: 05-13-2021
 output:
   distill::distill_article:
     toc: true
     self_contained: false
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -20,25 +20,6 @@ library(knitr)
 ```
 
 The `{purrr}` package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the `map` family of functions can be. 
-
-## About the data
-
-The data for this blog is taken from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:
-
-::: l-body
-| Variable Code    | Description                                                       |
-|------------------|-------------------------------------------------------------------|
-| `SEQN`           | Respondent ID                                                     |
-| `RIDAGEYR`       | Age in years at screening                                         |
-| `RIAGENDR`       | Gender                                                            |
-| `RIDRETH1`       | Race/Hispanic origin                                              |
-| `DMDEDUC2`       | Education level (adults 20+)                                      |
-| `DMDEDUC3`       | Education level (children/youth 6-19)                             |
-| `HHFDSEC`        | Household food security category over last 12 months (1999-2002)  |
-| `FSDHH`          | Household food security category over last 12 months (2003+)      |
-:::
-
-The NHANES releases yearly survey data, with files separated based on demographics, questionnaire, health examination, and nutrition data. The data for this blog were downloaded from the following links: [demographics](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Demographics) and [food security questionnaire (FSQ)](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Questionnaire). Documentation regarding variable coding can also be found at those links. 
 
 ## Batch Loading
 
