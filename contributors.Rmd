@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 **Meghan Siritzky** - some bio
 
-**Wanjia Guo** - some bio
+[**Wanjia Guo**](https://wanjiag.github.io/) is a third year graduate student in Dr. Brice Kuhl's Lab at the University of Oregon. She is currently interested in how the hippocampus helps us to distinguish between similar events.
 
 **Sarah Dimakis** is a PhD student studying social psychology at the University of Oregon. She studies how people form moral character judgments of others and how those judgments change (or fail to change) over time.
 

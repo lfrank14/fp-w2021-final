@@ -1,5 +1,6 @@
 ---
-title: "Tutorials for Functional Programming in R"
+title: "Welcome to our blog!"
 site: distill::distill_website
-listing: posts
 ---
+
+This blog is the final project for *Functional Programming for Educational Data Science* (Spring 2021). It incorporates the functional programming concepts and practices learned throughout the term and summarizes them in a series of tutorials. Information regarding the course can be found [here](https://fp-2021.netlify.app/).

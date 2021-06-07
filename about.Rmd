@@ -6,10 +6,6 @@ title: "About this blog"
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-This blog is the final project for *Functional Programming for Educational Data Science* (Spring 2021). It incorporates the functional programming concepts and practices learned throughout the term and summarizes them in a series of tutorials. Information regarding the course can be found [here](https://fp-2021.netlify.app/).
-
-## About the data
-
 The data for this blog is taken from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:
 
 ::: l-body

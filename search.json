@@ -2,7 +2,7 @@
   "articles": [
     {
       "path": "about.html",
-      "title": "About this blog",
+      "title": "About the data",
       "author": [],
       "contents": "\nThis blog is the final project for Functional Programming for Educational Data Science (Spring 2021). It incorporates the functional programming concepts and practices learned throughout the term and summarizes them in a series of tutorials. Information regarding the course can be found here.\nAbout the data\nThe data for this blog is taken from the National Health and Nutrition Examination Survey (NHANES). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:\n\nVariable Code\nDescription\nSEQN\nRespondent ID\nRIDAGEYR\nAge in years at screening\nRIAGENDR\nGender\nRIDRETH1\nRace/Hispanic origin\nDMDEDUC2\nEducation level (adults 20+)\nDMDEDUC3\nEducation level (children/youth 6-19)\nHHFDSEC\nHousehold food security category over last 12 months (1999-2002)\nFSDHH\nHousehold food security category over last 12 months (2003+)\n\nThe NHANES releases yearly survey data, with files separated based on demographics, questionnaire, health examination, and nutrition data. The data for this blog were downloaded from the following links: demographics and food security questionnaire (FSQ). Documentation regarding variable coding can also be found at those links.\n\n\n\n",
       "last_modified": "2021-06-07T15:55:49-07:00"
@@ -17,7 +17,7 @@
     },
     {
       "path": "index.html",
-      "title": "Tutorials for Functional Programming in R",
+      "title": "Welcome to our blog!",
       "author": [],
       "contents": "\n\n\n\n",
       "last_modified": "2021-06-07T15:55:51-07:00"

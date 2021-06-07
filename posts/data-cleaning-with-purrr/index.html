@@ -54,35 +54,30 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ad0000; } /* Alert */
-code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
-code span.bn { color: #ad0000; } /* BaseN */
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
-code span.ch { color: #20794d; } /* Char */
-code span.cn { color: #8f5902; } /* Constant */
-code span.co { color: #5e5e5e; } /* Comment */
-code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-code span.dt { color: #ad0000; } /* DataType */
-code span.dv { color: #ad0000; } /* DecVal */
-code span.er { color: #ad0000; } /* Error */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
-code span.fl { color: #ad0000; } /* Float */
-code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
-code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
-code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
-code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
-code span.ss { color: #20794d; } /* SpecialString */
-code span.st { color: #20794d; } /* String */
-code span.va { color: #111111; } /* Variable */
-code span.vs { color: #20794d; } /* VerbatimString */
-code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
@@ -476,265 +471,6 @@ d-title {
 <link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
 <link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
 <script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
-<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-<script type="application/javascript">
-
-function getMeta(metaName) {
-  var metas = document.getElementsByTagName('meta');
-  for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute('name') === metaName) {
-      return metas[i].getAttribute('content');
-    }
-  }
-  return '';
-}
-
-function offsetURL(url) {
-  var offset = getMeta('distill:offset');
-  return offset ? offset + '/' + url : url;
-}
-
-function createFuseIndex() {
-
-  // create fuse index
-  var options = {
-    keys: [
-      { name: 'title', weight: 20 },
-      { name: 'categories', weight: 15 },
-      { name: 'description', weight: 10 },
-      { name: 'contents', weight: 5 },
-    ],
-    ignoreLocation: true,
-    threshold: 0
-  };
-  var fuse = new window.Fuse([], options);
-
-  // fetch the main search.json
-  return fetch(offsetURL('search.json'))
-    .then(function(response) {
-      if (response.status == 200) {
-        return response.json().then(function(json) {
-          // index main articles
-          json.articles.forEach(function(article) {
-            fuse.add(article);
-          });
-          // download collections and index their articles
-          return Promise.all(json.collections.map(function(collection) {
-            return fetch(offsetURL(collection)).then(function(response) {
-              if (response.status === 200) {
-                return response.json().then(function(articles) {
-                  articles.forEach(function(article) {
-                    fuse.add(article);
-                  });
-                })
-              } else {
-                return Promise.reject(
-                  new Error('Unexpected status from search index request: ' +
-                            response.status)
-                );
-              }
-            });
-          })).then(function() {
-            return fuse;
-          });
-        });
-
-      } else {
-        return Promise.reject(
-          new Error('Unexpected status from search index request: ' +
-                      response.status)
-        );
-      }
-    });
-}
-
-window.document.addEventListener("DOMContentLoaded", function (event) {
-
-  // get search element (bail if we don't have one)
-  var searchEl = window.document.getElementById('distill-search');
-  if (!searchEl)
-    return;
-
-  createFuseIndex()
-    .then(function(fuse) {
-
-      // make search box visible
-      searchEl.classList.remove('hidden');
-
-      // initialize autocomplete
-      var options = {
-        autoselect: true,
-        hint: false,
-        minLength: 2,
-      };
-      window.autocomplete(searchEl, options, [{
-        source: function(query, callback) {
-          const searchOptions = {
-            isCaseSensitive: false,
-            shouldSort: true,
-            minMatchCharLength: 2,
-            limit: 10,
-          };
-          var results = fuse.search(query, searchOptions);
-          callback(results
-            .map(function(result) { return result.item; })
-          );
-        },
-        templates: {
-          suggestion: function(suggestion) {
-            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-              : '';
-            var html = `
-              <div class="search-item">
-                <h3>${suggestion.title}</h3>
-                <div class="search-item-description">
-                  ${suggestion.description || ''}
-                </div>
-                <div class="search-item-preview">
-                  ${img}
-                </div>
-              </div>
-            `;
-            return html;
-          }
-        }
-      }]).on('autocomplete:selected', function(event, suggestion) {
-        window.location.href = offsetURL(suggestion.path);
-      });
-      // remove inline display style on autocompleter (we want to
-      // manage responsive display via css)
-      $('.algolia-autocomplete').css("display", "");
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-
-});
-
-</script>
-
-<style type="text/css">
-
-.nav-search {
-  font-size: x-small;
-}
-
-/* Algolioa Autocomplete */
-
-.algolia-autocomplete {
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: sub;
-  background-color: white;
-  color: black;
-  padding: 6px;
-  padding-top: 8px;
-  padding-bottom: 0;
-  border-radius: 6px;
-  border: 1px #0F2E3D solid;
-  width: 180px;
-}
-
-
-@media screen and (max-width: 768px) {
-  .distill-site-nav .algolia-autocomplete {
-    display: none;
-    visibility: hidden;
-  }
-  .distill-site-nav.responsive .algolia-autocomplete {
-    display: inline-block;
-    visibility: visible;
-  }
-  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-    margin-left: 0;
-    width: 400px;
-    max-height: 400px;
-  }
-}
-
-.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-  width: 90%;
-  outline: none;
-  border: none;
-}
-
-.algolia-autocomplete .aa-hint {
-  color: #999;
-}
-.algolia-autocomplete .aa-dropdown-menu {
-  width: 550px;
-  max-height: 70vh;
-  overflow-x: visible;
-  overflow-y: scroll;
-  padding: 5px;
-  margin-top: 3px;
-  margin-left: -150px;
-  background-color: #fff;
-  border-radius: 5px;
-  border: 1px solid #999;
-  border-top: none;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-  cursor: pointer;
-  padding: 5px 4px;
-  border-bottom: 1px solid #eee;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-  border-bottom: none;
-  margin-bottom: 2px;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-  overflow: hidden;
-  font-size: 0.8em;
-  line-height: 1.4em;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-  font-size: 1rem;
-  margin-block-start: 0;
-  margin-block-end: 5px;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-  display: inline-block;
-  overflow: hidden;
-  height: 2.8em;
-  width: 80%;
-  margin-right: 4%;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-  display: inline-block;
-  width: 15%;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-  height: 3em;
-  width: auto;
-  display: none;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-  display: initial;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background-color: #eee;
-}
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-  font-weight: bold;
-  font-style: normal;
-}
-
-</style>
-
-
 <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2152,7 +1888,7 @@ html {
   --fig-cap-size:    13px;
   /*-- Main font colors --*/
   --title-color:     #7A9D96;
-  --header-color:    #DCAE1D;
+  --header-color:    #9d7a8f;
   --body-color:      #3C3C3C;
   --aside-color:     #3C3C3C;
   --fig-cap-color:   #3C3C3C;
@@ -2402,7 +2138,7 @@ html {
   --fig-cap-size:    13px;
   /*-- Main font colors --*/
   --title-color:     #7A9D96;
-  --header-color:    #DCAE1D;
+  --header-color:    #9d7a8f;
   --body-color:      #3C3C3C;
   --aside-color:     #3C3C3C;
   --fig-cap-color:   #3C3C3C;
@@ -2480,24 +2216,21 @@ html {
 <a href="https://github.com/lfrank14/fp-w2021-final">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../tutorials.html">Tutorials</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
-Home
+About
  
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="../../posts/data-cleaning-with-purrr/index.html">Data cleaning with {purrr}</a>
-<a href="../../posts/looping/index.html">Looping</a>
-<a href="../../posts/parallel-iteration/index.html">Parallel iteration</a>
-<a href="../../posts/writing-functions/index.html">Writing functions</a>
+<a href="../../about.html">About the data</a>
+<a href="../../contributors.html">About the authors</a>
 </div>
 </div>
-<a href="../../about.html">About</a>
-<a href="../../contributors.html">Contributors</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2541,19 +2274,13 @@ Home
 <h4 id="create-a-list-with-the-file-paths">Create a list with the file paths</h4>
 <p>The <code>here::here</code> function is first used to define the path to the data files.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>rootpath</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(rootpath <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data&quot;</code></pre>
 </div>
 <p>The <code>dir_ls</code> function from the <code>fs</code> package creates a vector of the paths for the files listed within the <code>rootpath</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fnames</span> <span class='op'>&lt;-</span> <span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fnames</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fnames <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">dir_ls</span>(rootpath)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fnames)</span></code></pre></div>
 <pre><code>/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT
@@ -2563,10 +2290,7 @@ Home
 </div>
 <p>Importantly, this vector is named with the associated paths. That is, each element of the vector is attributed a name that is also a character string of the file path. I know this sounds like redundant information, but it actually comes in handy when using <code>map_df</code> as shown below.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fnames</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">head</span>(fnames))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT&quot;
 [2] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT&quot;
 [3] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT&quot;
@@ -2594,7 +2318,6 @@ Home
 <span class='va'>demos_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
 <span class='va'>fsq_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
 </code></pre>
-</div>
 </div>
 <p>Another option is to use <code>purrr::map_df</code> to read each data file into a single data frame. Importantly, this function allows you to specify the <code>.id</code>, which will create a variable to identify each iteration of the function. As I mentioned earlier, the <code>fs::dir_ls</code> function will assign names to each path. Using <code>map_df</code> on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of <code>rio::import</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
@@ -2955,6 +2678,28 @@ Home
 <h2 id="my-final-solution">My final solution</h2>
 <p>As I mentioned earlier, another possible route was to read the data files into a single data frame. Since the output was intended to be shared with collaborators on this blog, I decided this was the optimal solution. The same data cleaning steps conducted above can then be applied to the single data frame.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>demos <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">regexp =</span> <span class="st">&quot;DEMO&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(file, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">RIAGENDR =</span> <span class="fu">factor</span>(RIAGENDR, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>)),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">RIDRETH1 =</span> <span class="fu">factor</span>(RIDRETH1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;mexican-american&quot;</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;other-hispanic&quot;</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;non-hispanic-white&quot;</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;non-hispanic-black&quot;</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;other-race&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, SEQN, RIDAGEYR, RIAGENDR, </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>         RIDRETH1, DMDEDUC2, DMDEDUC3)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(demos) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;id&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;race_ethnic&quot;</span>,<span class="st">&quot;educ_adult&quot;</span>,<span class="st">&quot;educ_child&quot;</span>) </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>fsq <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">regexp =</span> <span class="st">&quot;FSQ&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(file, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>),</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                                 HHFDSEC, FSDHH)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, SEQN, hh_food_secure)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fsq)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;id&quot;</span></span></code></pre></div>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, 
                  regexp <span class='op'>=</span> <span class='st'>"DEMO"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'># listing demographics files</span>
@@ -2994,14 +2739,10 @@ Home
 <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>fsq</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"id"</span> 
 </code></pre>
 </div>
-</div>
 <p>After creating data frames for the demographics and FSQ data, they were then joined by the <code>year</code> and <code>id</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>left_join</span><span class='op'>(</span><span class='va'>demos</span>, <span class='va'>fsq</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(demos, fsq)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -3081,13 +2822,24 @@ Home
 </div>
 <p>Finally, the data frame was saved into a single <code>.csv</code> file that could then be shared with collaborators.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>write_csv</span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'>str_c</span><span class='op'>(</span><span class='va'>rootpath</span>,<span class='st'>"/nhanes_1999-2016.csv"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="fu">str_c</span>(rootpath,<span class="st">&quot;/nhanes_1999-2016.csv&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=Data%20cleaning%20with%20%7Bpurrr%7D&amp;url=https%3A%2F%2Flfrank14.github.io%2Ffp-w2021-final%2Fposts%2Fdata-cleaning-with-purrr%2F">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Flfrank14.github.io%2Ffp-w2021-final%2Fposts%2Fdata-cleaning-with-purrr%2F&amp;title=Data%20cleaning%20with%20%7Bpurrr%7D">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </span>
+  </p>
+</div>
 <!--/radix_placeholder_article_footer-->
 </div>
 

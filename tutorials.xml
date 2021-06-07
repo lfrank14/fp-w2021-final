@@ -3,7 +3,7 @@
   <channel>
     <title>Functional Programming in R</title>
     <link>https://lfrank14.github.io/fp-w2021-final/</link>
-    <atom:link href="https://lfrank14.github.io/fp-w2021-final/index.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://lfrank14.github.io/fp-w2021-final/tutorials.xml" rel="self" type="application/rss+xml"/>
     <description>Final project for functional programming in R
 </description>
     <generator>Distill</generator>

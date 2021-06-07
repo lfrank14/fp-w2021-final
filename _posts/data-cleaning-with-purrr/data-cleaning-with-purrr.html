@@ -54,35 +54,30 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ad0000; } /* Alert */
-code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
-code span.bn { color: #ad0000; } /* BaseN */
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
-code span.ch { color: #20794d; } /* Char */
-code span.cn { color: #8f5902; } /* Constant */
-code span.co { color: #5e5e5e; } /* Comment */
-code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-code span.dt { color: #ad0000; } /* DataType */
-code span.dv { color: #ad0000; } /* DecVal */
-code span.er { color: #ad0000; } /* Error */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
-code span.fl { color: #ad0000; } /* Float */
-code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
-code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
-code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
-code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
-code span.ss { color: #20794d; } /* SpecialString */
-code span.st { color: #20794d; } /* String */
-code span.va { color: #111111; } /* Variable */
-code span.vs { color: #20794d; } /* VerbatimString */
-code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
@@ -1503,19 +1498,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h4 id="create-a-list-with-the-file-paths">Create a list with the file paths</h4>
 <p>The <code>here::here</code> function is first used to define the path to the data files.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>rootpath</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(rootpath <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data&quot;</code></pre>
 </div>
 <p>The <code>dir_ls</code> function from the <code>fs</code> package creates a vector of the paths for the files listed within the <code>rootpath</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fnames</span> <span class='op'>&lt;-</span> <span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fnames</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fnames <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">dir_ls</span>(rootpath)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fnames)</span></code></pre></div>
 <pre><code>/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT
@@ -1525,10 +1514,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>Importantly, this vector is named with the associated paths. That is, each element of the vector is attributed a name that is also a character string of the file path. I know this sounds like redundant information, but it actually comes in handy when using <code>map_df</code> as shown below.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fnames</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">head</span>(fnames))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT&quot;
 [2] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT&quot;
 [3] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT&quot;
@@ -1556,7 +1542,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='va'>demos_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
 <span class='va'>fsq_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
 </code></pre>
-</div>
 </div>
 <p>Another option is to use <code>purrr::map_df</code> to read each data file into a single data frame. Importantly, this function allows you to specify the <code>.id</code>, which will create a variable to identify each iteration of the function. As I mentioned earlier, the <code>fs::dir_ls</code> function will assign names to each path. Using <code>map_df</code> on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of <code>rio::import</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
@@ -1956,14 +1941,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>fsq</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"id"</span> 
 </code></pre>
 </div>
-</div>
 <p>After creating data frames for the demographics and FSQ data, they were then joined by the <code>year</code> and <code>id</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>left_join</span><span class='op'>(</span><span class='va'>demos</span>, <span class='va'>fsq</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(demos, fsq)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -2043,9 +2024,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>Finally, the data frame was saved into a single <code>.csv</code> file that could then be shared with collaborators.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>write_csv</span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'>str_c</span><span class='op'>(</span><span class='va'>rootpath</span>,<span class='st'>"/nhanes_1999-2016.csv"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="fu">str_c</span>(rootpath,<span class="st">&quot;/nhanes_1999-2016.csv&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
