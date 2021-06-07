@@ -17,6 +17,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r xaringanExtra-clipboard, echo=FALSE}
+xaringanExtra::use_clipboard()
+
+#May need installation via 
+# install.packages("devtools")
+# devtools::install_github("gadenbuie/xaringanExtra")
+```
+
 # Load libraries and read in data
 
 ```{r}
@@ -24,6 +32,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(rio)
 library(tidyverse)
 library(kableExtra)
+library(xaringanExtra)
 data <- import(here::here("data", "nhanes_1999-2016.csv")) %>% 
   mutate(food_security = case_when(hh_food_secure == 1 ~ "Fully food secure",
             hh_food_secure == 2 ~ "Marginally food secure",

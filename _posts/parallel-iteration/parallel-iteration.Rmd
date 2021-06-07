@@ -33,9 +33,19 @@ The data we will use is taken from the [*National Health and Nutrition Examinati
 | `educ`           | *Integer* | Education level for adults 20+ and children/youth 6-19  |
 :::
 
+
+```{r xaringanExtra-clipboard, echo=FALSE}
+xaringanExtra::use_clipboard()
+
+#May need installation via 
+# install.packages("devtools")
+# devtools::install_github("gadenbuie/xaringanExtra")
+```
+
 ```{r setup, include=FALSE}
 
 library(tidyverse)
+library(xaringanExtra)
 theme_set(theme_minimal(15))
 
 df<- read_csv(here::here('data','nhanes_1999-2016.csv')) %>% 

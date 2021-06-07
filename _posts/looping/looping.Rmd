@@ -13,12 +13,22 @@ output:
 ---
 
 
+```{r xaringanExtra-clipboard, echo=FALSE}
+xaringanExtra::use_clipboard()
+
+#May need installation via 
+# install.packages("devtools")
+# devtools::install_github("gadenbuie/xaringanExtra")
+```
+
+
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(repurrrsive)
 library(rio)
 library(here)
 library(glue)
+library(xaringanExtra)
 ```
 
 The question we're trying to answer is what is the change in the relationship between age and percentage of the population experiencing food insecurity over time.
