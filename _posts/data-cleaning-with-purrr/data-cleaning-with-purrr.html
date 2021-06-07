@@ -20,19 +20,19 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -52,110 +52,105 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ad0000; } /* Alert */
-code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
-code span.bn { color: #ad0000; } /* BaseN */
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
-code span.ch { color: #20794d; } /* Char */
-code span.cn { color: #8f5902; } /* Constant */
-code span.co { color: #5e5e5e; } /* Comment */
-code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-code span.dt { color: #ad0000; } /* DataType */
-code span.dv { color: #ad0000; } /* DecVal */
-code span.er { color: #ad0000; } /* Error */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
-code span.fl { color: #ad0000; } /* Float */
-code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
-code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
-code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
-code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
-code span.ss { color: #20794d; } /* SpecialString */
-code span.st { color: #20794d; } /* String */
-code span.va { color: #111111; } /* Variable */
-code span.vs { color: #20794d; } /* VerbatimString */
-code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Data cleaning with {purrr}</title>
-  
+
   <meta property="description" itemprop="description" content="A tutorial for using {purrr} for data cleaning."/>
-  
-  
+
+
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-06-03"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-06-03"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-06-07"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-06-07"/>
   <meta name="article:author" content="Lea Frank"/>
-  
+
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Data cleaning with {purrr}"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="A tutorial for using {purrr} for data cleaning."/>
   <meta property="og:locale" content="en_US"/>
-  
+
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Data cleaning with {purrr}"/>
   <meta property="twitter:description" content="A tutorial for using {purrr} for data cleaning."/>
-  
+
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
-  
+
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","date"]}},"value":[{"type":"character","attributes":{},"value":["Data cleaning with {purrr}"]},{"type":"character","attributes":{},"value":["A tutorial for using {purrr} for data cleaning.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Lea Frank"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained","css"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["style.css"]}]}]},{"type":"character","attributes":{},"value":["06-03-2021"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","date"]}},"value":[{"type":"character","attributes":{},"value":["Data cleaning with {purrr}"]},{"type":"character","attributes":{},"value":["A tutorial for using {purrr} for data cleaning.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Lea Frank"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained","css","highlight","highlight_downlit"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["style.css"]},{"type":"character","attributes":{},"value":["haddock"]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["06-07-2021"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data-cleaning-with-purrr_files/anchor-4.2.2/anchor.min.js","data-cleaning-with-purrr_files/bowser-1.9.3/bowser.min.js","data-cleaning-with-purrr_files/distill-2.2.21/template.v2.js","data-cleaning-with-purrr_files/jquery-1.11.3/jquery.min.js","data-cleaning-with-purrr_files/popper-2.6.0/popper.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-bundle.umd.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-light-border.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.umd.min.js","data-cleaning-with-purrr_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data-cleaning-with-purrr_files/anchor-4.2.2/anchor.min.js","data-cleaning-with-purrr_files/bowser-1.9.3/bowser.min.js","data-cleaning-with-purrr_files/distill-2.2.21/template.v2.js","data-cleaning-with-purrr_files/header-attrs-2.8/header-attrs.js","data-cleaning-with-purrr_files/jquery-1.11.3/jquery.min.js","data-cleaning-with-purrr_files/popper-2.6.0/popper.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-bundle.umd.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-light-border.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.umd.min.js","data-cleaning-with-purrr_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
-  
+
   <style type="text/css">
-  
+
   body {
     background-color: white;
   }
-  
+
   .pandoc-table {
     width: 100%;
   }
-  
+
   .pandoc-table>caption {
     margin-bottom: 10px;
   }
-  
+
   .pandoc-table th:not([align]) {
     text-align: left;
   }
-  
+
   .pagedtable-footer {
     font-size: 15px;
   }
-  
+
   d-byline .byline {
     grid-template-columns: 2fr 2fr;
   }
-  
+
   d-byline .byline h3 {
     margin-block-start: 1.5em;
   }
-  
+
   d-byline .byline .authors-affiliations h3 {
     margin-block-start: 0.5em;
   }
-  
+
   .authors-affiliations .orcid-id {
     width: 16px;
     height:16px;
@@ -164,12 +159,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     vertical-align: middle;
     padding-bottom: 2px;
   }
-  
+
   d-title .dt-tags {
     margin-top: 1em;
     grid-column: text;
   }
-  
+
   .dt-tags .dt-tag {
     text-decoration: none;
     display: inline-block;
@@ -183,24 +178,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-transform: uppercase;
     font-weight: 500;
   }
-  
+
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
   }
-  
+
   .html-widget {
     margin-bottom: 2.0em;
   }
-  
+
   .l-screen-inset {
     padding-right: 16px;
   }
-  
+
   .l-screen .caption {
     margin-left: 10px;
   }
-  
+
   .shaded {
     background: rgb(247, 247, 247);
     padding-top: 20px;
@@ -208,75 +203,75 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
+
   .shaded .html-widget {
     margin-bottom: 0;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
+
   .shaded .shaded-content {
     background: white;
   }
-  
+
   .text-output {
     margin-top: 0;
     line-height: 1.5em;
   }
-  
+
   .hidden {
     display: none !important;
   }
-  
+
   d-article {
     padding-top: 2.5rem;
     padding-bottom: 30px;
   }
-  
+
   d-appendix {
     padding-top: 30px;
   }
-  
+
   d-article>p>img {
     width: 100%;
   }
-  
+
   d-article h2 {
     margin: 1rem 0 1.5rem 0;
   }
-  
+
   d-article h3 {
     margin-top: 1.5rem;
   }
-  
+
   d-article iframe {
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 2.0em;
     width: 100%;
   }
-  
+
   /* Tweak code blocks */
-  
+
   d-article div.sourceCode code,
   d-article pre code {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   }
-  
+
   d-article pre,
   d-article div.sourceCode,
   d-article div.sourceCode pre {
     overflow: auto;
   }
-  
+
   d-article div.sourceCode {
     background-color: white;
   }
-  
+
   d-article div.sourceCode pre {
     padding-left: 10px;
     font-size: 12px;
     border-left: 2px solid rgba(0,0,0,0.1);
   }
-  
+
   d-article pre {
     font-size: 12px;
     color: black;
@@ -288,50 +283,50 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     word-break: normal;
     word-wrap: normal;
     line-height: 1.5;
-  
+
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
-  
+
     -webkit-hyphens: none;
     -moz-hyphens: none;
     -ms-hyphens: none;
     hyphens: none;
   }
-  
+
   d-article pre a {
     border-bottom: none;
   }
-  
+
   d-article pre a:hover {
     border-bottom: none;
     text-decoration: underline;
   }
-  
+
   d-article details {
     grid-column: text;
     margin-bottom: 0.8em;
   }
-  
+
   @media(min-width: 768px) {
-  
+
   d-article pre,
   d-article div.sourceCode,
   d-article div.sourceCode pre {
     overflow: visible !important;
   }
-  
+
   d-article div.sourceCode pre {
     padding-left: 18px;
     font-size: 14px;
   }
-  
+
   d-article pre {
     font-size: 14px;
   }
-  
+
   }
-  
+
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -339,9 +334,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 18px;
     box-sizing: border-box;
   }
-  
+
   /* CSS for d-contents */
-  
+
   .d-contents {
     grid-column: text;
     color: rgba(0,0,0,0.8);
@@ -353,7 +348,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding-left: 0.25em;
     justify-self: start;
   }
-  
+
   @media(min-width: 1000px) {
     .d-contents.d-contents-float {
       height: 0;
@@ -364,82 +359,82 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       padding-left: 2em;
     }
   }
-  
+
   .d-contents nav h3 {
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 1em;
   }
-  
+
   .d-contents li {
     list-style-type: none
   }
-  
+
   .d-contents nav > ul {
     padding-left: 0;
   }
-  
+
   .d-contents ul {
     padding-left: 1em
   }
-  
+
   .d-contents nav ul li {
     margin-top: 0.6em;
     margin-bottom: 0.2em;
   }
-  
+
   .d-contents nav a {
     font-size: 13px;
     border-bottom: none;
     text-decoration: none
     color: rgba(0, 0, 0, 0.8);
   }
-  
+
   .d-contents nav a:hover {
     text-decoration: underline solid rgba(0, 0, 0, 0.6)
   }
-  
+
   .d-contents nav > ul > li > a {
     font-weight: 600;
   }
-  
+
   .d-contents nav > ul > li > ul {
     font-weight: inherit;
   }
-  
+
   .d-contents nav > ul > li > ul > li {
     margin-top: 0.2em;
   }
-  
-  
+
+
   .d-contents nav ul {
     margin-top: 0;
     margin-bottom: 0.25em;
   }
-  
+
   .d-article-with-toc h2:nth-child(2) {
     margin-top: 0;
   }
-  
-  
+
+
   /* Figure */
-  
+
   .figure {
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
   }
-  
+
   .figure img {
     width: 100%;
   }
-  
+
   .figure .caption {
     color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
     line-height: 1.5em;
   }
-  
+
   .figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -447,42 +442,42 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 18px;
     box-sizing: border-box;
   }
-  
+
   .figure .caption a {
     color: rgba(0, 0, 0, 0.6);
   }
-  
+
   .figure .caption b,
   .figure .caption strong, {
     font-weight: 600;
     color: rgba(0, 0, 0, 1.0);
   }
-  
+
   /* Citations */
-  
+
   d-article .citation {
     color: inherit;
     cursor: inherit;
   }
-  
+
   div.hanging-indent{
     margin-left: 1em; text-indent: -1em;
   }
-  
+
   /* Citation hover box */
-  
+
   .tippy-box[data-theme~=light-border] {
     background-color: rgba(250, 250, 250, 0.95);
   }
-  
+
   .tippy-content > p {
     margin-bottom: 0;
     padding: 2px;
   }
-  
-  
+
+
   /* Tweak 1000px media break to show more text */
-  
+
   @media(min-width: 1000px) {
     .base-grid,
     distill-header,
@@ -498,11 +493,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
       grid-column-gap: 16px;
     }
-  
+
     .grid {
       grid-column-gap: 16px;
     }
-  
+
     d-article {
       font-size: 1.06rem;
       line-height: 1.7em;
@@ -511,7 +506,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       font-size: 13px;
     }
   }
-  
+
   @media(min-width: 1180px) {
     .base-grid,
     distill-header,
@@ -527,16 +522,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
       grid-column-gap: 32px;
     }
-  
+
     .grid {
       grid-column-gap: 32px;
     }
   }
-  
-  
+
+
   /* Get the citation styles for the appendix (not auto-injected on render since
      we do our own rendering of the citation appendix) */
-  
+
   d-appendix .citation-appendix,
   .d-appendix .citation-appendix {
     font-size: 11px;
@@ -553,9 +548,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     white-space: pre-wrap;
     word-wrap: break-word;
   }
-  
+
   /* Include appendix styles here so they can be overridden */
-  
+
   d-appendix {
     contain: layout style;
     font-size: 0.8em;
@@ -567,7 +562,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding-top: 60px;
     padding-bottom: 48px;
   }
-  
+
   d-appendix h3 {
     grid-column: page-start / text-start;
     font-size: 15px;
@@ -576,59 +571,59 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-bottom: 0;
     color: rgba(0,0,0,0.65);
   }
-  
+
   d-appendix h3 + * {
     margin-top: 1em;
   }
-  
+
   d-appendix ol {
     padding: 0 0 0 15px;
   }
-  
+
   @media (min-width: 768px) {
     d-appendix ol {
       padding: 0 0 0 30px;
       margin-left: -30px;
     }
   }
-  
+
   d-appendix li {
     margin-bottom: 1em;
   }
-  
+
   d-appendix a {
     color: rgba(0, 0, 0, 0.6);
   }
-  
+
   d-appendix > * {
     grid-column: text;
   }
-  
+
   d-appendix > d-footnote-list,
   d-appendix > d-citation-list,
   d-appendix > distill-appendix {
     grid-column: screen;
   }
-  
+
   /* Include footnote styles here so they can be overridden */
-  
+
   d-footnote-list {
     contain: layout style;
   }
-  
+
   d-footnote-list > * {
     grid-column: text;
   }
-  
+
   d-footnote-list a.footnote-backlink {
     color: rgba(0,0,0,0.3);
     padding-left: 0.5em;
   }
-  
-  
-  
+
+
+
   /* Anchor.js */
-  
+
   .anchorjs-link {
     /*transition: all .25s linear; */
     text-decoration: none;
@@ -639,86 +634,86 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-decoration: none;
     border-bottom: none;
   }
-  
+
   /* Social footer */
-  
+
   .social_footer {
     margin-top: 30px;
     margin-bottom: 0;
     color: rgba(0,0,0,0.67);
   }
-  
+
   .disqus-comments {
     margin-right: 30px;
   }
-  
+
   .disqus-comment-count {
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     cursor: pointer;
   }
-  
+
   #disqus_thread {
     margin-top: 30px;
   }
-  
+
   .article-sharing a {
     border-bottom: none;
     margin-right: 8px;
   }
-  
+
   .article-sharing a:hover {
     border-bottom: none;
   }
-  
+
   .sidebar-section.subscribe {
     font-size: 12px;
     line-height: 1.6em;
   }
-  
+
   .subscribe p {
     margin-bottom: 0.5em;
   }
-  
-  
+
+
   .article-footer .subscribe {
     font-size: 15px;
     margin-top: 45px;
   }
-  
-  
+
+
   .sidebar-section.custom {
     font-size: 12px;
     line-height: 1.6em;
   }
-  
+
   .custom p {
     margin-bottom: 0.5em;
   }
-  
+
   /* Styles for listing layout (hide title) */
   .layout-listing d-title, .layout-listing .d-title {
     display: none;
   }
-  
+
   /* Styles for posts lists (not auto-injected) */
-  
-  
+
+
   .posts-with-sidebar {
     padding-left: 45px;
     padding-right: 45px;
   }
-  
+
   .posts-list .description h2,
   .posts-list .description p {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
   }
-  
+
   .posts-list .description h2 {
     font-weight: 700;
     border-bottom: none;
     padding-bottom: 0;
   }
-  
+
   .posts-list h2.post-tag {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding-bottom: 12px;
@@ -727,7 +722,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-top: 60px;
     margin-bottom: 24px;
   }
-  
+
   .posts-list .post-preview {
     text-decoration: none;
     overflow: hidden;
@@ -735,29 +730,29 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 24px 0;
   }
-  
+
   .post-preview-last {
     border-bottom: none !important;
   }
-  
+
   .posts-list .posts-list-caption {
     grid-column: screen;
     font-weight: 400;
   }
-  
+
   .posts-list .post-preview h2 {
     margin: 0 0 6px 0;
     line-height: 1.2em;
     font-style: normal;
     font-size: 24px;
   }
-  
+
   .posts-list .post-preview p {
     margin: 0 0 12px 0;
     line-height: 1.4em;
     font-size: 16px;
   }
-  
+
   .posts-list .post-preview .thumbnail {
     box-sizing: border-box;
     margin-bottom: 24px;
@@ -768,32 +763,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     width: 100%;
     display: block;
   }
-  
+
   .posts-list .metadata {
     font-size: 12px;
     line-height: 1.4em;
     margin-bottom: 18px;
   }
-  
+
   .posts-list .metadata > * {
     display: inline-block;
   }
-  
+
   .posts-list .metadata .publishedDate {
     margin-right: 2em;
   }
-  
+
   .posts-list .metadata .dt-authors {
     display: block;
     margin-top: 0.3em;
     margin-right: 2em;
   }
-  
+
   .posts-list .dt-tags {
     display: block;
     line-height: 1em;
   }
-  
+
   .posts-list .dt-tags .dt-tag {
     display: inline-block;
     color: rgba(0,0,0,0.6);
@@ -806,24 +801,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-transform: uppercase;
     font-weight: 500;
   }
-  
+
   .posts-list img {
     opacity: 1;
   }
-  
+
   .posts-list img[data-src] {
     opacity: 0;
   }
-  
+
   .posts-more {
     clear: both;
   }
-  
-  
+
+
   .posts-sidebar {
     font-size: 16px;
   }
-  
+
   .posts-sidebar h3 {
     font-size: 16px;
     margin-top: 0;
@@ -831,39 +826,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     font-weight: 400;
     text-transform: uppercase;
   }
-  
+
   .sidebar-section {
     margin-bottom: 30px;
   }
-  
+
   .categories ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
-  
+
   .categories li {
     color: rgba(0, 0, 0, 0.8);
     margin-bottom: 0;
   }
-  
+
   .categories li>a {
     border-bottom: none;
   }
-  
+
   .categories li>a:hover {
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   }
-  
+
   .categories .active {
     font-weight: 600;
   }
-  
+
   .categories .category-count {
     color: rgba(0, 0, 0, 0.4);
   }
-  
-  
+
+
   @media(min-width: 768px) {
     .posts-list .post-preview h2 {
       font-size: 26px;
@@ -899,55 +894,55 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       padding-bottom: 24px;
     }
   }
-  
-  
+
+
   /* Improve display for browsers without grid (IE/Edge <= 15) */
-  
+
   .downlevel {
     line-height: 1.6em;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
     margin: 0;
   }
-  
+
   .downlevel .d-title {
     padding-top: 6rem;
     padding-bottom: 1.5rem;
   }
-  
+
   .downlevel .d-title h1 {
     font-size: 50px;
     font-weight: 700;
     line-height: 1.1em;
     margin: 0 0 0.5rem;
   }
-  
+
   .downlevel .d-title p {
     font-weight: 300;
     font-size: 1.2rem;
     line-height: 1.55em;
     margin-top: 0;
   }
-  
+
   .downlevel .d-byline {
     padding-top: 0.8em;
     padding-bottom: 0.8em;
     font-size: 0.8rem;
     line-height: 1.8em;
   }
-  
+
   .downlevel .section-separator {
     border: none;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
-  
+
   .downlevel .d-article {
     font-size: 1.06rem;
     line-height: 1.7em;
     padding-top: 1rem;
     padding-bottom: 2rem;
   }
-  
-  
+
+
   .downlevel .d-appendix {
     padding-left: 0;
     padding-right: 0;
@@ -959,11 +954,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding-top: 40px;
     padding-bottom: 48px;
   }
-  
+
   .downlevel .footnotes ol {
     padding-left: 13px;
   }
-  
+
   .downlevel .base-grid,
   .downlevel .distill-header,
   .downlevel .d-title,
@@ -980,7 +975,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding-left: 40px;
     padding-right: 40px;
   }
-  
+
   @media(min-width: 768px) {
     .downlevel .base-grid,
     .downlevel .distill-header,
@@ -1000,14 +995,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     max-width: 900px;
   }
   }
-  
+
   .downlevel pre code {
     display: block;
     border-left: 2px solid rgba(0, 0, 0, .1);
     padding: 0 0 0 20px;
     font-size: 14px;
   }
-  
+
   .downlevel code, .downlevel pre {
     color: black;
     background: none;
@@ -1018,27 +1013,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     word-break: normal;
     word-wrap: normal;
     line-height: 1.5;
-  
+
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
-  
+
     -webkit-hyphens: none;
     -moz-hyphens: none;
     -ms-hyphens: none;
     hyphens: none;
   }
-  
+
   .downlevel .posts-list .post-preview {
     color: inherit;
   }
-  
-  
-  
+
+
+
   </style>
-  
+
   <script type="application/javascript">
-  
+
   function is_downlevel_browser() {
     if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
                                    window.navigator.userAgent)) {
@@ -1047,20 +1042,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       return window.load_distill_framework === undefined;
     }
   }
-  
+
   // show body when load is complete
   function on_load_complete() {
-  
+
     // add anchors
     if (window.anchors) {
       window.anchors.options.placement = 'left';
       window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
     }
-  
-  
+
+
     // set body to visible
     document.body.style.visibility = 'visible';
-  
+
     // force redraw for leaflet widgets
     if (window.HTMLWidgets) {
       var maps = window.HTMLWidgets.findAll(".leaflet");
@@ -1073,39 +1068,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
         });
       });
     }
-  
+
     // trigger 'shown' so htmlwidgets resize
     $('d-article').trigger('shown');
   }
-  
+
   function init_distill() {
-  
+
     init_common();
-  
+
     // create front matter
     var front_matter = $('<d-front-matter></d-front-matter>');
     $('#distill-front-matter').wrap(front_matter);
-  
+
     // create d-title
     $('.d-title').changeElementType('d-title');
-  
+
     // create d-byline
     var byline = $('<d-byline></d-byline>');
     $('.d-byline').replaceWith(byline);
-  
+
     // create d-article
     var article = $('<d-article></d-article>');
     $('.d-article').wrap(article).children().unwrap();
-  
+
     // move posts container into article
     $('.posts-container').appendTo($('d-article'));
-  
+
     // create d-appendix
     $('.d-appendix').changeElementType('d-appendix');
-  
+
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
-  
+
     // replace footnotes with <d-footnote>
     $('.footnote-ref').each(function(i, val) {
       appendix = true;
@@ -1121,10 +1116,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     });
     // remove footnotes
     $('.footnotes').remove();
-  
+
     // move refs into #references-listing
     $('#references-listing').replaceWith($('#refs'));
-  
+
     $('h1.appendix, h2.appendix').each(function(i, val) {
       $(this).changeElementType('h3');
     });
@@ -1134,16 +1129,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       appendix = true;
       $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
     });
-  
+
     // show d-appendix if we have appendix content
     $("d-appendix").css('display', appendix ? 'grid' : 'none');
-  
+
     // localize layout chunks to just output
     $('.layout-chunk').each(function(i, val) {
-  
+
       // capture layout
       var layout = $(this).attr('data-layout');
-  
+
       // apply layout to markdown level block elements
       var elements = $(this).children().not('details, div.sourceCode, pre, script');
       elements.each(function(i, el) {
@@ -1156,40 +1151,40 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           $(this).wrap(layout_div);
         }
       });
-  
-  
+
+
       // unwrap the layout-chunk div
       $(this).children().unwrap();
     });
-  
+
     // remove code block used to force  highlighting css
     $('.distill-force-highlighting-css').parent().remove();
-  
+
     // remove empty line numbers inserted by pandoc when using a
     // custom syntax highlighting theme
     $('code.sourceCode a:empty').remove();
-  
+
     // load distill framework
     load_distill_framework();
-  
+
     // wait for window.distillRunlevel == 4 to do post processing
     function distill_post_process() {
-  
+
       if (!window.distillRunlevel || window.distillRunlevel < 4)
         return;
-  
+
       // hide author/affiliations entirely if we have no authors
       var front_matter = JSON.parse($("#distill-front-matter").html());
       var have_authors = front_matter.authors && front_matter.authors.length > 0;
       if (!have_authors)
         $('d-byline').addClass('hidden');
-  
+
       // article with toc class
       $('.d-contents').parent().addClass('d-article-with-toc');
-  
+
       // strip links that point to #
       $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
-  
+
       // add orcid ids
       $('.authors-affiliations').find('.author').each(function(i, el) {
         var orcid_id = front_matter.authors[i].orcidID;
@@ -1204,12 +1199,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           $(this).append(a);
         }
       });
-  
+
       // hide elements of author/affiliations grid that have no value
       function hide_byline_column(caption) {
         $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
       }
-  
+
       // affiliations
       var have_affiliations = false;
       for (var i = 0; i<front_matter.authors.length; ++i) {
@@ -1221,11 +1216,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       }
       if (!have_affiliations)
         $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
-  
+
       // published date
       if (!front_matter.publishedDate)
         hide_byline_column("Published");
-  
+
       // document object identifier
       var doi = $('d-byline').find('h3:contains("DOI")');
       var doi_p = doi.next().empty();
@@ -1245,22 +1240,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
            .html(front_matter.doi)
            .appendTo(doi_p);
       }
-  
+
        // change plural form of authors/affiliations
       if (front_matter.authors.length === 1) {
         var grid = $('.authors-affiliations');
         grid.children('h3:contains("Authors")').text('Author');
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
-  
+
       // remove d-appendix and d-footnote-list local styles
       $('d-appendix > style:first-child').remove();
       $('d-footnote-list > style:first-child').remove();
-  
+
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
-  
+
       // hoverable references
       $('span.citation[data-cites]').each(function() {
         var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
@@ -1274,39 +1269,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
-  
+
       // clear polling timer
       clearInterval(tid);
-  
+
       // show body now that everything is ready
       on_load_complete();
     }
-  
+
     var tid = setInterval(distill_post_process, 50);
     distill_post_process();
-  
+
   }
-  
+
   function init_downlevel() {
-  
+
     init_common();
-  
+
      // insert hr after d-title
     $('.d-title').after($('<hr class="section-separator"/>'));
-  
+
     // check if we have authors
     var front_matter = JSON.parse($("#distill-front-matter").html());
     var have_authors = front_matter.authors && front_matter.authors.length > 0;
-  
+
     // manage byline/border
     if (!have_authors)
       $('.d-byline').remove();
     $('.d-byline').after($('<hr class="section-separator"/>'));
     $('.d-byline a').remove();
-  
+
     // remove toc
     $('.d-contents').remove();
-  
+
     // move appendix elements
     $('h1.appendix, h2.appendix').each(function(i, val) {
       $(this).changeElementType('h3');
@@ -1314,62 +1309,62 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     $('h3.appendix').each(function(i, val) {
       $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
     });
-  
-  
+
+
     // inject headers into references and footnotes
     var refs_header = $('<h3></h3>');
     refs_header.text('References');
     $('#refs').prepend(refs_header);
-  
+
     var footnotes_header = $('<h3></h3');
     footnotes_header.text('Footnotes');
     $('.footnotes').children('hr').first().replaceWith(footnotes_header);
-  
+
     // move appendix-bottom entries to the bottom
     $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
     $('.appendix-bottom').remove();
-  
+
     // remove appendix if it's empty
     if ($('.d-appendix').children().length === 0)
       $('.d-appendix').remove();
-  
+
     // prepend separator above appendix
     $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
-  
+
     // trim code
     $('pre>code').each(function(i, val) {
       $(this).html($.trim($(this).html()));
     });
-  
+
     // move posts-container right before article
     $('.posts-container').insertBefore($('.d-article'));
-  
+
     $('body').addClass('downlevel');
-  
+
     on_load_complete();
   }
-  
-  
+
+
   function init_common() {
-  
+
     // jquery plugin to change element types
     (function($) {
       $.fn.changeElementType = function(newType) {
         var attrs = {};
-  
+
         $.each(this[0].attributes, function(idx, attr) {
           attrs[attr.nodeName] = attr.nodeValue;
         });
-  
+
         this.replaceWith(function() {
           return $("<" + newType + "/>", attrs).append($(this).contents());
         });
       };
     })(jQuery);
-  
+
     // prevent underline for linked images
     $('a > img').parent().css({'border-bottom' : 'none'});
-  
+
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
@@ -1381,35 +1376,35 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           var fig = $(this);
           fig.css('width', fig.attr('width') + 'px');
         });
-  
+
       }
     });
-  
+
     // auto-append index.html to post-preview links in file: protocol
     // and in rstudio ide preview
     $('.post-preview').each(function(i, val) {
       if (window.location.protocol === "file:")
         $(this).attr('href', $(this).attr('href') + "index.html");
     });
-  
+
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
         $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
       });
     }
-  
+
     // add class to pandoc style tables
     $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
     $('.kable-table').children('table').addClass('pandoc-table');
-  
+
     // add figcaption style to table captions
     $('caption').parent('table').addClass("figcaption");
-  
+
     // initialize posts list
     if (window.init_posts_list)
       window.init_posts_list();
-  
+
     // implmement disqus comment link
     $('.disqus-comment-count').click(function() {
       window.headroom_prevent_pin = true;
@@ -1423,17 +1418,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       }
     });
   }
-  
+
   document.addEventListener('DOMContentLoaded', function() {
     if (is_downlevel_browser())
       init_downlevel();
     else
       window.addEventListener('WebComponentsReady', init_distill);
   });
-  
+
   </script>
-  
+
   <!--/radix_placeholder_distill-->
+  <script src="data-cleaning-with-purrr_files/header-attrs-2.8/header-attrs.js"></script>
   <script src="data-cleaning-with-purrr_files/jquery-1.11.3/jquery.min.js"></script>
   <script src="data-cleaning-with-purrr_files/popper-2.6.0/popper.min.js"></script>
   <link href="data-cleaning-with-purrr_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1455,7 +1451,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Data cleaning with {purrr}","description":"A tutorial for using {purrr} for data cleaning.","authors":[{"author":"Lea Frank","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-06-03T00:00:00.000+00:00","citationText":"Frank, 2021"}
+{"title":"Data cleaning with {purrr}","description":"A tutorial for using {purrr} for data cleaning.","authors":[{"author":"Lea Frank","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-06-07T00:00:00.000+00:00","citationText":"Frank, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1474,7 +1470,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-byline">
   Lea Frank  
   
-<br/>06-03-2021
+<br/>06-07-2021
 </div>
 
 <div class="d-article">
@@ -1482,7 +1478,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#batch-loading">Batch Loading</a><ul>
+<li><a href="#batch-loading">Batch Loading</a>
+<ul>
 <li><a href="#create-a-list-with-the-file-paths">Create a list with the file paths</a></li>
 <li><a href="#use-purrrmap-to-read-files">Use <code>purrr::map</code> to read files</a></li>
 </ul></li>
@@ -1497,19 +1494,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h3 id="create-a-list-with-the-file-paths">Create a list with the file paths</h3>
 <p><code>here::here</code> is first used to define the path to the data files.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>rootpath</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(rootpath <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data&quot;</code></pre>
 </div>
 <p>The <code>dir_ls</code> function from the <code>fs</code> package creates a vector of the paths for the files listed within the <code>rootpath</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fnames</span> <span class='op'>&lt;-</span> <span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fnames</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fnames <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">dir_ls</span>(rootpath)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fnames)</span></code></pre></div>
 <pre><code>/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT
@@ -1519,10 +1510,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>Importantly, this vector is named with the associated paths, which will come in handy when using <code>map_df</code> below.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fnames</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">head</span>(fnames))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT&quot;
 [2] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT&quot;
 [3] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT&quot;
@@ -1532,29 +1520,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>The demographics and FSQ will be loaded separately since they will require different data cleaning steps. Regular expression can be used with the <code>fs::dir_ls</code> function to filter files that match a specific pattern.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demo_paths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, regexp <span class='op'>=</span> <span class='st'>"DEMO"</span><span class='op'>)</span>
-<span class='va'>fsq_paths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, regexp <span class='op'>=</span> <span class='st'>"FSQ"</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>demo_paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, <span class="at">regexp =</span> <span class="st">&quot;DEMO&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fsq_paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, <span class="at">regexp =</span> <span class="st">&quot;FSQ&quot;</span>)</span></code></pre></div>
 </div>
 <h3 id="use-purrrmap-to-read-files">Use <code>purrr::map</code> to read files</h3>
 <p>The <code>purrr::map</code> family of functions allows us to iterate a function over elements of a list or vector. In this case, we want to use <code>rio::import</code> to read in the data files using the vectors of file paths.</p>
 <p>There are two ways in which we can read in the data. The first option is to use the <code>purrr::map</code> function to read each data frame into a separate element of a list. This can be useful if you want to use <code>map</code> to iteration the same functions, like data cleaning, over each data frame.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
-<span class='va'>fsq_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>demos_list <span class="ot">&lt;-</span> <span class="fu">map</span>(demo_paths, rio<span class="sc">::</span>import)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fsq_list <span class="ot">&lt;-</span> <span class="fu">map</span>(demo_paths, rio<span class="sc">::</span>import)</span></code></pre></div>
 </div>
 <p>Another option is to use <code>purrr::map_df</code> to read each data file into a single data frame. Importantly, this function allows you to specify the <code>.id</code>, which will create a variable to identify each iteration of the function. As I mentioned earlier, the <code>fs::dir_ls</code> function will assign names to each path. Using <code>map_df</code> on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of <code>rio::import</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos</span> <span class='op'>&lt;-</span> <span class='fu'>map_df</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>demos <span class="ot">&lt;-</span> <span class="fu">map_df</span>(demo_paths, rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1603,11 +1582,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tr>
 </tbody>
 </table>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fsq</span> <span class='op'>&lt;-</span> <span class='fu'>map_df</span><span class='op'>(</span><span class='va'>fsq_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fsq</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fsq <span class="ot">&lt;-</span> <span class="fu">map_df</span>(fsq_paths, rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(fsq[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1664,16 +1640,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>First, let’s start by creating a variable in each data frame for the <code>year</code>. For this step, we can use <code>map2</code> to iterate through the file paths (<code>demo_paths</code>) and list of data frames (<code>demos_list</code>) in parallel. The year will be extracted from the file path and applied to the corresponding data frame.</p>
 <p>This time, rather than using an existing function, we can create our own.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map2</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='va'>demos_list</span>, <span class='op'>~</span><span class='op'>{</span>
-  <span class='va'>.y</span> <span class='op'>%&gt;%</span> 
-    <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>.x</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span><span class='op'>)</span> 
-                  <span class='co'># extracts the pattern that has: 4 digits-4 digits</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos_list_clean</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>[</span><span class='st'>"year"</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map2</span>(demo_paths, demos_list, <span class="sc">~</span>{</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  .y <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(.x, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>)) </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># extracts the pattern that has: 4 digits-4 digits</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos_list_clean[[<span class="dv">1</span>]][<span class="st">&quot;year&quot;</span>]))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1704,19 +1677,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>Next, I want to select the variables of interest and rename them to something more clear. This time, I will need to return the data frame in order for it to output.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demos_list_clean</span>, <span class='op'>~</span><span class='op'>{</span>
-  <span class='va'>.x</span> <span class='op'>&lt;-</span> <span class='va'>.x</span> <span class='op'>%&gt;%</span> 
-    <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>RIDAGEYR</span>, <span class='va'>RIAGENDR</span>, 
-         <span class='va'>RIDRETH1</span>, <span class='va'>DMDEDUC2</span>, <span class='va'>DMDEDUC3</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"year"</span>, <span class='st'>"id"</span>,<span class='st'>"age"</span>,<span class='st'>"gender"</span>,
-                  <span class='st'>"race_ethnic"</span>,<span class='st'>"educ_adult"</span>,<span class='st'>"educ_child"</span><span class='op'>)</span>
-  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos_list_clean</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map</span>(demos_list_clean, <span class="sc">~</span>{</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  .x <span class="ot">&lt;-</span> .x <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, SEQN, RIDAGEYR, RIAGENDR, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         RIDRETH1, DMDEDUC2, DMDEDUC3)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(.x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;id&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;race_ethnic&quot;</span>,<span class="st">&quot;educ_adult&quot;</span>,<span class="st">&quot;educ_child&quot;</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(.x)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos_list_clean[[<span class="dv">1</span>]]))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1789,20 +1759,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>Finally, I may want to convert some of the categorical variables into factors and add labels to the different levels.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demos_list_clean</span>, <span class='op'>~</span><span class='op'>{</span>
-  <span class='va'>.x</span> <span class='op'>%&gt;%</span> 
-    <span class='fu'>mutate</span><span class='op'>(</span>gender <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gender</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"male"</span>,<span class='st'>"female"</span><span class='op'>)</span><span class='op'>)</span>,
-           race_ethnic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>race_ethnic</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mexican-american"</span>,
-                                                        <span class='st'>"other-hispanic"</span>,
-                                                        <span class='st'>"non-hispanic-white"</span>,
-                                                        <span class='st'>"non-hispanic-black"</span>,
-                                                        <span class='st'>"other-race"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos_list_clean</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map</span>(demos_list_clean, <span class="sc">~</span>{</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  .x <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>)),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">race_ethnic =</span> <span class="fu">factor</span>(race_ethnic, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;mexican-american&quot;</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-hispanic&quot;</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-white&quot;</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-black&quot;</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-race&quot;</span>)))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos_list_clean[[<span class="dv">1</span>]]))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1875,26 +1842,23 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>These steps can all be combined to produce the following code:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map2</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='va'>demos_list</span>, <span class='op'>~</span><span class='op'>{</span>
-  <span class='va'>.y</span> <span class='op'>&lt;-</span> <span class='va'>.y</span> <span class='op'>%&gt;%</span> 
-    <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>.x</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span>,
-           RIAGENDR <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIAGENDR</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"male"</span>,<span class='st'>"female"</span><span class='op'>)</span><span class='op'>)</span>,
-           RIDRETH1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIDRETH1</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mexican-american"</span>,
-                                                        <span class='st'>"other-hispanic"</span>,
-                                                        <span class='st'>"non-hispanic-white"</span>,
-                                                        <span class='st'>"non-hispanic-black"</span>,
-                                                        <span class='st'>"other-race"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-    <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>RIDAGEYR</span>, <span class='va'>RIAGENDR</span>, 
-         <span class='va'>RIDRETH1</span>, <span class='va'>DMDEDUC2</span>, <span class='va'>DMDEDUC3</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>.y</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"year"</span>, <span class='st'>"id"</span>,<span class='st'>"age"</span>,<span class='st'>"gender"</span>,
-                  <span class='st'>"race_ethnic"</span>,<span class='st'>"educ_adult"</span>,<span class='st'>"educ_child"</span><span class='op'>)</span>
-  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>.y</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>demos_list_clean</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map2</span>(demo_paths, demos_list, <span class="sc">~</span>{</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  .y <span class="ot">&lt;-</span> .y <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(.x, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">RIAGENDR =</span> <span class="fu">factor</span>(RIAGENDR, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>)),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">RIDRETH1 =</span> <span class="fu">factor</span>(RIDRETH1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;mexican-american&quot;</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-hispanic&quot;</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-white&quot;</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-black&quot;</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-race&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, SEQN, RIDAGEYR, RIAGENDR, </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>         RIDRETH1, DMDEDUC2, DMDEDUC3)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(.y) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;id&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;race_ethnic&quot;</span>,<span class="st">&quot;educ_adult&quot;</span>,<span class="st">&quot;educ_child&quot;</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(.y)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(demos_list_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <pre><code>List of 3
  $ /Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT:&#39;data.frame&#39;:   9965 obs. of  7 variables:
   ..$ year       : chr [1:9965] &quot;1999-2000&quot; &quot;1999-2000&quot; &quot;1999-2000&quot; &quot;1999-2000&quot; ...
@@ -1936,40 +1900,34 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="my-final-solution">My final solution</h2>
 <p>As I mentioned earlier, the best route for me was to read the data files into a single data frame. The same data cleaning steps conducted above can then be applied to the single data frame.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, 
-                 regexp <span class='op'>=</span> <span class='st'>"DEMO"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>map_dfr</span><span class='op'>(</span><span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>file</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span>,
-         RIAGENDR <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIAGENDR</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"male"</span>,<span class='st'>"female"</span><span class='op'>)</span><span class='op'>)</span>,
-         RIDRETH1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIDRETH1</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mexican-american"</span>,
-                                                <span class='st'>"other-hispanic"</span>,
-                                                <span class='st'>"non-hispanic-white"</span>,
-                                                <span class='st'>"non-hispanic-black"</span>,
-                                                <span class='st'>"other-race"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>RIDAGEYR</span>, <span class='va'>RIAGENDR</span>, 
-         <span class='va'>RIDRETH1</span>, <span class='va'>DMDEDUC2</span>, <span class='va'>DMDEDUC3</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>demos</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"year"</span>, <span class='st'>"id"</span>,<span class='st'>"age"</span>,<span class='st'>"gender"</span>,
-                  <span class='st'>"race_ethnic"</span>,<span class='st'>"educ_adult"</span>,<span class='st'>"educ_child"</span><span class='op'>)</span> 
-
-<span class='va'>fsq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, 
-                 regexp <span class='op'>=</span> <span class='st'>"FSQ"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>map_dfr</span><span class='op'>(</span><span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>file</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span>,
-         hh_food_secure <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='st'>"1999-2000"</span> <span class='op'>|</span> <span class='va'>year</span> <span class='op'>==</span> <span class='st'>"2001-2002"</span>, 
-                                 <span class='va'>HHFDSEC</span>, <span class='va'>FSDHH</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>hh_food_secure</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>fsq</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"id"</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>demos <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">regexp =</span> <span class="st">&quot;DEMO&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(file, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">RIAGENDR =</span> <span class="fu">factor</span>(RIAGENDR, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>)),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">RIDRETH1 =</span> <span class="fu">factor</span>(RIDRETH1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;mexican-american&quot;</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;other-hispanic&quot;</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;non-hispanic-white&quot;</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;non-hispanic-black&quot;</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;other-race&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, SEQN, RIDAGEYR, RIAGENDR, </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>         RIDRETH1, DMDEDUC2, DMDEDUC3)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(demos) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;id&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;race_ethnic&quot;</span>,<span class="st">&quot;educ_adult&quot;</span>,<span class="st">&quot;educ_child&quot;</span>) </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>fsq <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">regexp =</span> <span class="st">&quot;FSQ&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(file, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>),</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">hh_food_secure =</span> <span class="fu">ifelse</span>(year <span class="sc">==</span> <span class="st">&quot;1999-2000&quot;</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="st">&quot;2001-2002&quot;</span>, </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                                 HHFDSEC, FSDHH)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, SEQN, hh_food_secure)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fsq)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;id&quot;</span></span></code></pre></div>
 </div>
 <p>After creating data frames for the demographics and FSQ data, they were then joined by the <code>year</code> and <code>id</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>left_join</span><span class='op'>(</span><span class='va'>demos</span>, <span class='va'>fsq</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(demos, fsq)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -2049,12 +2007,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>Finally, the data frame was saved into a single <code>.csv</code> file that could then be shared with collaborators.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>write_csv</span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'>str_c</span><span class='op'>(</span><span class='va'>rootpath</span>,<span class='st'>"/nhanes_1999-2016.csv"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="fu">str_c</span>(rootpath,<span class="st">&quot;/nhanes_1999-2016.csv&quot;</span>))</span></code></pre></div>
 </div>
-</div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

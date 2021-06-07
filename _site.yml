@@ -6,25 +6,27 @@ base_url: https://lfrank14.github.io/fp-w2021-final/
 output_dir: "."
 theme: style.css
 navbar:
+  search: false
   left:
     - icon: fab fa-github
       href: https://github.com/lfrank14/fp-w2021-final
   right:
     - text: "Home"
       href: index.html
-      menu:
-        - text: "Data cleaning with {purrr}"
-          href: posts/data-cleaning-with-purrr/index.html
-        - text: "Looping"
-          href: posts/looping/index.html
-        - text: "Parallel iteration"
-          href: posts/parallel-iteration/index.html
-        - text: "Writing functions"
-          href: posts/writing-functions/index.html
+    - text: "Tutorials"
+      href: tutorials.html
     - text: "About"
-      href: about.html
-    - text: "Contributors"
-      href: contributors.html
+      menu: 
+        - text: "About the data"
+          href: about.html
+        - text: "About the authors"
+          href: contributors.html
+collections: 
+  posts:
+    share: [twitter, linkedin]
+    citations: false
 output: 
   distill::distill_article:
+    toc: true
+    toc_float: true
     css: style.css

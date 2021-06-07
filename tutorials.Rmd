@@ -1,0 +1,6 @@
+---
+title: "Tutorials for Functional Programming in R"
+site: distill::distill_website
+listing: posts
+---
+
