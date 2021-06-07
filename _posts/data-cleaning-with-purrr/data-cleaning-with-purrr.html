@@ -88,30 +88,30 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Data cleaning with {purrr}</title>
   
-  <meta property="description" itemprop="description" content="A tutorial on using {purrr} for data cleaning."/>
+  <meta property="description" itemprop="description" content="A tutorial for using {purrr} for data cleaning."/>
   
   
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-05-13"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-05-13"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-06-03"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-06-03"/>
   <meta name="article:author" content="Lea Frank"/>
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Data cleaning with {purrr}"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="A tutorial on using {purrr} for data cleaning."/>
+  <meta property="og:description" content="A tutorial for using {purrr} for data cleaning."/>
   <meta property="og:locale" content="en_US"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Data cleaning with {purrr}"/>
-  <meta property="twitter:description" content="A tutorial on using {purrr} for data cleaning."/>
+  <meta property="twitter:description" content="A tutorial for using {purrr} for data cleaning."/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Data cleaning with {purrr}"]},{"type":"character","attributes":{},"value":["A tutorial on using {purrr} for data cleaning.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Lea Frank"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","date"]}},"value":[{"type":"character","attributes":{},"value":["Data cleaning with {purrr}"]},{"type":"character","attributes":{},"value":["A tutorial for using {purrr} for data cleaning.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Lea Frank"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained","css"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["style.css"]}]}]},{"type":"character","attributes":{},"value":["06-03-2021"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1446,6 +1446,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
+  <link rel="stylesheet" href="style.css" type="text/css"/>
 
 </head>
 
@@ -1454,7 +1455,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Data cleaning with {purrr}","description":"A tutorial on using {purrr} for data cleaning.","authors":[{"author":"Lea Frank","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000+00:00","citationText":"Frank, 2021"}
+{"title":"Data cleaning with {purrr}","description":"A tutorial for using {purrr} for data cleaning.","authors":[{"author":"Lea Frank","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-06-03T00:00:00.000+00:00","citationText":"Frank, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1467,13 +1468,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Data cleaning with {purrr}</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A tutorial on using {purrr} for data cleaning.</p></p>
+<p><p>A tutorial for using {purrr} for data cleaning.</p></p>
 </div>
 
 <div class="d-byline">
   Lea Frank  
   
-<br/>05-13-2021
+<br/>06-03-2021
 </div>
 
 <div class="d-article">
@@ -1481,7 +1482,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#about-the-data">About the data</a></li>
 <li><a href="#batch-loading">Batch Loading</a><ul>
 <li><a href="#create-a-list-with-the-file-paths">Create a list with the file paths</a></li>
 <li><a href="#use-purrrmap-to-read-files">Use <code>purrr::map</code> to read files</a></li>
@@ -1492,60 +1492,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </nav>
 </div>
 <p>The <code>{purrr}</code> package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the <code>map</code> family of functions can be.</p>
-<h2 id="about-the-data">About the data</h2>
-<p>The data for this blog is taken from the <a href="https://www.cdc.gov/nchs/nhanes/index.htm"><em>National Health and Nutrition Examination Survey</em> (NHANES)</a>. Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:</p>
-<div class="l-body">
-<table>
-<thead>
-<tr class="header">
-<th>Variable Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>SEQN</code></td>
-<td>Respondent ID</td>
-</tr>
-<tr class="even">
-<td><code>RIDAGEYR</code></td>
-<td>Age in years at screening</td>
-</tr>
-<tr class="odd">
-<td><code>RIAGENDR</code></td>
-<td>Gender</td>
-</tr>
-<tr class="even">
-<td><code>RIDRETH1</code></td>
-<td>Race/Hispanic origin</td>
-</tr>
-<tr class="odd">
-<td><code>DMDEDUC2</code></td>
-<td>Education level (adults 20+)</td>
-</tr>
-<tr class="even">
-<td><code>DMDEDUC3</code></td>
-<td>Education level (children/youth 6-19)</td>
-</tr>
-<tr class="odd">
-<td><code>HHFDSEC</code></td>
-<td>Household food security category over last 12 months (1999-2002)</td>
-</tr>
-<tr class="even">
-<td><code>FSDHH</code></td>
-<td>Household food security category over last 12 months (2003+)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The NHANES releases yearly survey data, with files separated based on demographics, questionnaire, health examination, and nutrition data. The data for this blog were downloaded from the following links: <a href="https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Demographics">demographics</a> and <a href="https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Questionnaire">food security questionnaire (FSQ)</a>. Documentation regarding variable coding can also be found at those links.</p>
 <h2 id="batch-loading">Batch Loading</h2>
 <p>The <code>purrr::map</code> family of functions can be incredibly powerful when loading a large number of data files.</p>
 <h3 id="create-a-list-with-the-file-paths">Create a list with the file paths</h3>
 <p><code>here::here</code> is first used to define the path to the data files.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>rootpath</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>rootpath</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data&quot;</code></pre>

@@ -20,9 +20,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -32,16 +32,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -50,9 +48,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
@@ -86,47 +84,53 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Functional Programming Final Project: Parallel Iteration</title>
+<title>Functional Programming in R: Parallel Iteration</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Using `nest` with `map2_*` or `pmap_*` in `{purrr}`."/>
 
 <link rel="canonical" href="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"/>
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-05-13"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-05-13"/>
-<meta name="article:author" content="Lea Frank"/>
+<meta property="article:published" itemprop="datePublished" content="2021-05-20"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-05-20"/>
+<meta name="article:author" content="Wanjia Guo"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Functional Programming Final Project: Parallel Iteration"/>
+<meta property="og:title" content="Functional Programming in R: Parallel Iteration"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Using `nest` with `map2_*` or `pmap_*` in `{purrr}`."/>
 <meta property="og:url" content="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"/>
+<meta property="og:image" content="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png"/>
+<meta property="og:image:width" content="1920"/>
+<meta property="og:image:height" content="1152"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:site_name" content="Functional Programming Final Project"/>
+<meta property="og:site_name" content="Functional Programming in R"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
-<meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Functional Programming Final Project: Parallel Iteration"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Functional Programming in R: Parallel Iteration"/>
+<meta property="twitter:description" content="Using `nest` with `map2_*` or `pmap_*` in `{purrr}`."/>
 <meta property="twitter:url" content="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"/>
+<meta property="twitter:image" content="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png"/>
+<meta property="twitter:image:width" content="1920"/>
+<meta property="twitter:image:height" content="1152"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
-<meta name="citation_title" content="Functional Programming Final Project: Parallel Iteration"/>
+<meta name="citation_title" content="Functional Programming in R: Parallel Iteration"/>
 <meta name="citation_fulltext_html_url" content="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"/>
-<meta name="citation_online_date" content="2021/05/13"/>
-<meta name="citation_publication_date" content="2021/05/13"/>
-<meta name="citation_author" content="Lea Frank"/>
+<meta name="citation_online_date" content="2021/05/20"/>
+<meta name="citation_publication_date" content="2021/05/20"/>
+<meta name="citation_author" content="Wanjia Guo"/>
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Parallel Iteration"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Lea Frank"]},{"type":"character","attributes":{},"value":["https://example.com/norajones"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Parallel Iteration"]},{"type":"character","attributes":{},"value":["Using `nest` with `map2_*` or `pmap_*` in `{purrr}`."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Wanjia Guo"]}]}]},{"type":"character","attributes":{},"value":["05-20-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"NULL"}
+  {"type":"character","attributes":{},"value":["parallel-iteration_files/anchor-4.2.2/anchor.min.js","parallel-iteration_files/bowser-1.9.3/bowser.min.js","parallel-iteration_files/distill-2.2.21/template.v2.js","parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-6-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-7-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-9-1.png","parallel-iteration_files/jquery-1.11.3/jquery.min.js","parallel-iteration_files/popper-2.6.0/popper.min.js","parallel-iteration_files/tippy-6.2.7/tippy-bundle.umd.min.js","parallel-iteration_files/tippy-6.2.7/tippy-light-border.css","parallel-iteration_files/tippy-6.2.7/tippy.css","parallel-iteration_files/tippy-6.2.7/tippy.umd.min.js","parallel-iteration_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2049,6 +2053,317 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    sans-serif;
+  --mono-font:       monospace;
+  --body-font:       sans-serif;
+  --navbar-font:     sans-serif;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+</style>
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      40px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      14px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #7A9D96;
+  --header-color:    #DCAE1D;
+  --body-color:      #3C3C3C;
+  --aside-color:     #3C3C3C;
+  --fig-cap-color:   #3C3C3C;
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Roboto Condensed";
+  --mono-font:       monospace;
+  --body-font:       "Roboto";
+  --navbar-font:     "Roboto Condensed";  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+.d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   15px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+.d-appendix {
+  --heading-size:    20px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        18px;
+  --hover-color:      white;
+  --bkgd-color:       #7A9D96;
+}
+
+.distill-site-footer {
+  --text-color:       white;
+  --text-size:        15px;
+  --hover-color:      rgba(255, 255, 255, 0.8);
+  --bkgd-color:       #6B7A8F;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+</style>
+<style type="text/css">
+/* base style */
+
+/* FONT FAMILIES */
+
+:root {
+  --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+body,
+.posts-list .post-preview p,
+.posts-list .description p {
+  font-family: var(--body-font), var(--body-default);
+}
+
+h1, h2, h3, h4, h5, h6,
+.posts-list .post-preview h2,
+.posts-list .description h2 {
+  font-family: var(--heading-font), var(--heading-default);
+}
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: var(--mono-font), var(--mono-default);
+}
+
+
+/*-- TITLE --*/
+d-title h1,
+.posts-list > h1 {
+  color: var(--title-color, black);
+}
+
+d-title h1 {
+  font-size: var(--title-size, 50px);
+}
+
+/*-- HEADERS --*/
+d-article h1,
+d-article h2,
+d-article h3,
+d-article h4,
+d-article h5,
+d-article h6 {
+  color: var(--header-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- BODY --*/
+d-article > p,  /* only text inside of <p> tags */
+d-article > ul, /* lists */
+d-article > ol {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+  font-size: var(--body-size, 1.06rem);
+}
+
+
+/*-- CODE --*/
+d-article div.sourceCode code,
+d-article pre code {
+  font-size: var(--code-size, 14px);
+}
+
+/*-- ASIDE --*/
+d-article aside {
+  font-size: var(--aside-size, 12px);
+  color: var(--aside-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- FIGURE CAPTIONS --*/
+figure .caption,
+figure figcaption,
+.figure .caption {
+  font-size: var(--fig-cap-size, 13px);
+  color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- METADATA --*/
+d-byline h3 {
+  font-size: var(--heading-size, 0.6rem);
+  color: var(--heading-color, rgba(0, 0, 0, 0.5));
+}
+
+d-byline {
+  font-size: var(--body-size, 0.8rem);
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+d-byline a,
+d-article d-byline a {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- TABLE OF CONTENTS --*/
+.d-contents nav h3 {
+  font-size: var(--heading-size, 18px);
+}
+
+.d-contents nav a {
+  font-size: var(--contents-size, 13px);
+}
+
+/*-- APPENDIX --*/
+d-appendix h3 {
+  font-size: var(--heading-size, 15px);
+  color: var(--heading-color, rgba(0, 0, 0, 0.65));
+}
+
+d-appendix {
+  font-size: var(--text-size, 0.8em);
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+d-appendix d-footnote-list a.footnote-backlink {
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+.distill-site-header .title {
+  font-size: var(--title-size, 18px);
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a,
+.nav-dropdown .nav-dropbtn {
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.nav-dropdown .nav-dropbtn {
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  font-size: var(--text-size, 15px);
+}
+
+.distill-site-header a:hover,
+.nav-dropdown:hover .nav-dropbtn {
+  color: var(--hover-color, white);
+}
+
+.distill-site-header {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer a:hover {
+  color: var(--hover-color, white);
+}</style>
 <!--/radix_placeholder_distill-->
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
@@ -2060,6 +2375,88 @@ document.addEventListener('DOMContentLoaded', function() {
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
+<style type="text/css">
+
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      40px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      14px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #7A9D96;
+  --header-color:    #DCAE1D;
+  --body-color:      #3C3C3C;
+  --aside-color:     #3C3C3C;
+  --fig-cap-color:   #3C3C3C;
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Roboto Condensed";
+  --mono-font:       monospace;
+  --body-font:       "Roboto";
+  --navbar-font:     "Roboto Condensed";  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+.d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   15px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+.d-appendix {
+  --heading-size:    20px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        18px;
+  --hover-color:      white;
+  --bkgd-color:       #7A9D96;
+}
+
+.distill-site-footer {
+  --text-color:       white;
+  --text-size:        15px;
+  --hover-color:      rgba(255, 255, 255, 0.8);
+  --bkgd-color:       #6B7A8F;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+
+
+</style>
 <!--/radix_placeholder_site_in_header-->
 
 
@@ -2070,7 +2467,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Parallel Iteration","description":"A short description of the post.","authors":[{"author":"Lea Frank","authorURL":"https://example.com/norajones","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000+00:00","citationText":"Frank, 2021"}
+{"title":"Parallel Iteration","description":"Using `nest` with `map2_*` or `pmap_*` in `{purrr}`.","authors":[{"author":"Wanjia Guo","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-20T00:00:00.000+00:00","citationText":"Guo, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2078,11 +2475,26 @@ document.addEventListener('DOMContentLoaded', function() {
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a href="../../index.html" class="title">Functional Programming Final Project</a>
+<a href="../../index.html" class="title">Functional Programming in R</a>
+<a href="https://github.com/lfrank14/fp-w2021-final">
+<i class="fab fa-github" aria-hidden="true"></i>
+</a>
 <input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
-<a href="../../index.html">Home</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Home
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="../../posts/data-cleaning-with-purrr/index.html">Data cleaning with {purrr}</a>
+<a href="../../posts/looping/index.html">Looping</a>
+<a href="../../posts/parallel-iteration/index.html">Parallel iteration</a>
+<a href="../../posts/writing-functions/index.html">Writing functions</a>
+</div>
+</div>
 <a href="../../about.html">About</a>
 <a href="../../contributors.html">Contributors</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2097,19 +2509,264 @@ document.addEventListener('DOMContentLoaded', function() {
 <h1>Parallel Iteration</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p>Using <code>nest</code> with <code>map2_*</code> or <code>pmap_*</code> in <code>{purrr}</code>.</p>
 </div>
 
 <div class="d-byline">
-  Lea Frank <a href="https://example.com/norajones" class="uri">https://example.com/norajones</a> 
+  Wanjia Guo  
   
-<br/>05-13-2021
+<br/>05-20-2021
 </div>
 
 <div class="d-article">
-<p>Distill is a publication format for scientific and technical writing, native to the web.</p>
-<p>Learn more about using Distill at <a href="https://rstudio.github.io/distill" class="uri">https://rstudio.github.io/distill</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>In this post, we will dive deeper into the <code>{purrr}</code> package. We will explore <code>purrr::nest %&gt;% mutate()</code>, which is an alternative to the <code>split()</code> function in the base-R. Moreover, we will see how the combination of <code>purrr::nest %&gt;% mutate()</code> with <code>map2_*</code> or <code>pmap_*</code> can be a powerful tool in functional programming.</p>
+<p>The data we will use is taken from the <a href="https://www.cdc.gov/nchs/nhanes/index.htm"><em>National Health and Nutrition Examination Survey</em> (NHANES)</a>. Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For the current blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest for the current post:</p>
+<div class="l-body">
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable Code</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>year</code></td>
+<td><em>String</em></td>
+<td>The year that data was collected</td>
+</tr>
+<tr class="even">
+<td><code>id</code></td>
+<td><em>Integer</em></td>
+<td>Respondent ID</td>
+</tr>
+<tr class="odd">
+<td><code>age</code></td>
+<td><em>Integer</em></td>
+<td>Age in years at screening</td>
+</tr>
+<tr class="even">
+<td><code>gender</code></td>
+<td><em>Category</em></td>
+<td>Gender: male or female</td>
+</tr>
+<tr class="odd">
+<td><code>race_ethnic</code></td>
+<td><em>Category</em></td>
+<td>Race/Hispanic origin: mexican-american, non-hispanic-black, non-hispanic-white, other-hispanic, other-race</td>
+</tr>
+<tr class="even">
+<td><code>hh_food_secure</code></td>
+<td><em>Integer</em></td>
+<td>Household food security category over last 12 months</td>
+</tr>
+<tr class="odd">
+<td><code>age_group</code></td>
+<td><em>Binary</em></td>
+<td>Age group: adult(20+) or child(6-19)</td>
+</tr>
+<tr class="even">
+<td><code>educ</code></td>
+<td><em>Integer</em></td>
+<td>Education level for adults 20+ and children/youth 6-19</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Let’s take a look at the dataframe.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 6 x 8
+  year      id   age gender race_ethnic hh_food_secure age_group  educ
+  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;                &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt;
+1 1999-…     2    77 male   non-hispan…              1 adult         5
+2 1999-…     3    10 female non-hispan…              1 child         3
+3 1999-…     5    49 male   non-hispan…              1 adult         5
+4 1999-…     6    19 female other-race               1 child        15
+5 1999-…     8    13 male   non-hispan…              1 child         5
+6 1999-…     9    11 female non-hispan…              2 child         5</code></pre>
+</div>
+<p>We are interested in how food secure changes over time, separated by gender and age group (child and adult). For the first step, we want to split the dataframe into lists with <code>split</code> as the following. However, the three grouping variables (gender, age group, and year) are merged together into one column. This is less desirable because we will need each of these variables for later.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>split_df</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>gender</span>, <span class='va'>df</span><span class='op'>$</span><span class='va'>age_group</span>, <span class='va'>df</span><span class='op'>$</span><span class='va'>year</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>split_df</span><span class='op'>$</span><span class='va'>`female.adult.1999-2000`</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 6 x 8
+  year      id   age gender race_ethnic hh_food_secure age_group  educ
+  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;                &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt;
+1 1999-…    15    38 female non-hispan…              1 adult         5
+2 1999-…    16    85 female non-hispan…              4 adult         1
+3 1999-…    20    23 female mexican-am…              1 adult         1
+4 1999-…    24    53 female non-hispan…              1 adult         3
+5 1999-…    25    42 female non-hispan…              1 adult         4
+6 1999-…    34    38 female non-hispan…              3 adult         3</code></pre>
+</div>
+<p>Equivalently, we can also use <code>nest</code> from the <code>{purrr}</code> package as the following:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nest_df</span> <span class='op'>=</span> <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>age_group</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>nest_df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 6 x 4
+# Groups:   year, gender, age_group [6]
+  year      gender age_group data                
+  &lt;chr&gt;     &lt;fct&gt;  &lt;fct&gt;     &lt;list&gt;              
+1 1999-2000 male   adult     &lt;tibble [2,211 × 5]&gt;
+2 1999-2000 female child     &lt;tibble [1,698 × 5]&gt;
+3 1999-2000 male   child     &lt;tibble [1,744 × 5]&gt;
+4 1999-2000 female adult     &lt;tibble [2,534 × 5]&gt;
+5 2001-2002 male   adult     &lt;tibble [2,384 × 5]&gt;
+6 2001-2002 female adult     &lt;tibble [2,669 × 5]&gt;</code></pre>
+</div>
+<p>These two approaches ends with very similar results, only except gener, age_group, and year are maintaned as its orignal structure with <code>nest</code> but not <code>split</code>.</p>
+<p>Moreover, with <code>nest</code>, we can manipulate the dataframe within each row while save the output as another column. We will calculate within each gender, age group and year, how food security changes with age. (If you find the <code>map</code> function confusing, I encourage you take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/looping/" target="_blank">this post</a>.)</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_df</span> <span class='op'>=</span> <span class='va'>nest_df</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>nrow</span><span class='op'>)</span>,
+                   m1 <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hh_food_secure</span> <span class='op'>~</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>,
+                   coefs <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>coef</span><span class='op'>)</span>,
+                   intercept <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>1</span><span class='op'>)</span>,
+                   slope <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>model_df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 6 x 9
+# Groups:   year, gender, age_group [6]
+  year   gender age_group data        n m1    coefs intercept    slope
+  &lt;chr&gt;  &lt;fct&gt;  &lt;fct&gt;     &lt;list&gt;  &lt;dbl&gt; &lt;lis&gt; &lt;lis&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 1999-… male   adult     &lt;tibbl…  2211 &lt;lm&gt;  &lt;dbl…      1.60 -4.91e-3
+2 1999-… female child     &lt;tibbl…  1698 &lt;lm&gt;  &lt;dbl…      1.57 -1.86e-4
+3 1999-… male   child     &lt;tibbl…  1744 &lt;lm&gt;  &lt;dbl…      1.69 -2.03e-4
+4 1999-… female adult     &lt;tibbl…  2534 &lt;lm&gt;  &lt;dbl…      1.58 -4.25e-3
+5 2001-… male   adult     &lt;tibbl…  2384 &lt;lm&gt;  &lt;dbl…      1.75 -7.29e-3
+6 2001-… female adult     &lt;tibbl…  2669 &lt;lm&gt;  &lt;dbl…      1.70 -6.58e-3</code></pre>
+</div>
+<p>Let’s take a look at how the slope change with time:</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_df</span> <span class='op'>%&gt;%</span> <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>year</span>, y<span class='op'>=</span><span class='va'>slope</span>, color<span class='op'>=</span><span class='va'>age_group</span>, group <span class='op'>=</span> <span class='va'>age_group</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>geom_line</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span><span class='va'>gender</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'bottom'</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>labs</span><span class='op'>(</span>y <span class='op'>=</span> <span class='st'>'Slope: Age and Food Security'</span>,
+       x <span class='op'>=</span> <span class='st'>'Year'</span>,
+       color <span class='op'>=</span> <span class='st'>'Age Group'</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png" width="960" /></p>
+</div>
+<p>From the figure, we can see that for adults, the slope is consistently negative across all time. In other words, as people age, the food security score decreased. However, for children, the food security increased dramatically recently, especially since 2010s. What if we want to dig deeper and see how age influence children’s food security within each year for different gender?</p>
+<p>Let’s start with only one row of data:</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>child_model_df</span> <span class='op'>=</span> <span class='va'>model_df</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>age_group</span> <span class='op'>==</span> <span class='st'>'child'</span><span class='op'>)</span>
+
+<span class='va'>plotting</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>gender</span>, <span class='va'>year</span> <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span><span class='op'>{</span>
+  
+  <span class='va'>p</span> <span class='op'>=</span> <span class='va'>df</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>age</span>, <span class='va'>race_ethnic</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>summarise</span><span class='op'>(</span>m <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>hh_food_secure</span><span class='op'>)</span>,
+              sd <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>hh_food_secure</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>age</span>,
+               y<span class='op'>=</span><span class='va'>m</span>,
+               color <span class='op'>=</span> <span class='va'>race_ethnic</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+    <span class='fu'>geom_line</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.7</span>, size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'bottom'</span><span class='op'>)</span><span class='op'>+</span>
+    <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>'Age'</span>,
+         y <span class='op'>=</span> <span class='st'>'Food Secure Score'</span>,
+         color <span class='op'>=</span> <span class='st'>'Race and Ethnic'</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'>guides</span><span class='op'>(</span>color<span class='op'>=</span><span class='fu'>guide_legend</span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>2</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/missing.html'>missing</a></span><span class='op'>(</span><span class='va'>year</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <span class='va'>p</span> <span class='op'>=</span> <span class='va'>p</span> <span class='op'>+</span> <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='va'>gender</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='kw'>else</span><span class='op'>{</span>
+    <span class='va'>p</span> <span class='op'>=</span> <span class='va'>p</span> <span class='op'>+</span> <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>gender</span>, sep <span class='op'>=</span> <span class='st'>": "</span><span class='op'>)</span><span class='op'>)</span><span class='op'>}</span>
+
+  <span class='va'>p</span>
+  
+  <span class='op'>}</span>
+
+<span class='co'># make sure the funtion works for one row of data.</span>
+<span class='fu'>plotting</span><span class='op'>(</span><span class='va'>child_model_df</span><span class='op'>$</span><span class='va'>data</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, 
+         <span class='va'>child_model_df</span><span class='op'>$</span><span class='va'>gender</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, 
+         <span class='va'>child_model_df</span><span class='op'>$</span><span class='va'>year</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="parallel-iteration_files/figure-html5/unnamed-chunk-6-1.png" width="960" /></p>
+</div>
+<p>With <code>pmap_*</code>, we can easily use the above code to produce figures for each row. When using <code>pmap_*</code>, the first input is a list of column names that we need from the dataframe and the second input is the plotting function we used in the last part. The <code>..1</code>, <code>..2</code>, and <code>..3</code> are corresponding to data, gender, and year. Then, Voila, you have a figure for data from each row!</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>child_model_plot_df</span> <span class='op'>&lt;-</span> <span class='va'>child_model_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>nest_plot <span class='op'>=</span> <span class='fu'>pmap</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>gender</span>, <span class='va'>year</span><span class='op'>)</span>,
+                          <span class='op'>~</span><span class='op'>{</span><span class='fu'>plotting</span><span class='op'>(</span><span class='va'>..1</span>, <span class='va'>..2</span>, <span class='va'>..3</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
+                          <span class='op'>)</span>
+
+<span class='fu'>ggpubr</span><span class='fu'>::</span><span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html'>ggarrange</a></span><span class='op'>(</span><span class='va'>child_model_plot_df</span><span class='op'>$</span><span class='va'>nest_plot</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>,
+                  <span class='va'>child_model_plot_df</span><span class='op'>$</span><span class='va'>nest_plot</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>,
+                  <span class='va'>child_model_plot_df</span><span class='op'>$</span><span class='va'>nest_plot</span><span class='op'>[[</span><span class='fl'>17</span><span class='op'>]</span><span class='op'>]</span>,
+                  <span class='va'>child_model_plot_df</span><span class='op'>$</span><span class='va'>nest_plot</span><span class='op'>[[</span><span class='fl'>18</span><span class='op'>]</span><span class='op'>]</span>,
+                  ncol <span class='op'>=</span> <span class='fl'>2</span>, nrow <span class='op'>=</span> <span class='fl'>2</span>,
+                  common.legend <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                  legend <span class='op'>=</span> <span class='st'>'bottom'</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="parallel-iteration_files/figure-html5/unnamed-chunk-7-1.png" width="1152" /></p>
+</div>
+<p>Another cool thing about <code>nest</code>, is that we can easily reverse this process with <code>unnest</code> after we finished our grouped analysis.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>adult_df</span> <span class='op'>=</span> <span class='va'>model_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>age_group</span> <span class='op'>==</span> <span class='st'>'adult'</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>gender</span>, <span class='va'>age_group</span>, <span class='va'>data</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>unnest</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>adult_df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 6 x 8
+# Groups:   year, gender, age_group [1]
+  year   gender age_group    id   age race_ethnic hh_food_secure  educ
+  &lt;chr&gt;  &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;                &lt;dbl&gt; &lt;dbl&gt;
+1 1999-… male   adult         2    77 non-hispan…              1     5
+2 1999-… male   adult         5    49 non-hispan…              1     5
+3 1999-… male   adult        12    37 non-hispan…              1     4
+4 1999-… male   adult        13    70 mexican-am…              1     1
+5 1999-… male   adult        14    81 non-hispan…              1     2
+6 1999-… male   adult        29    62 non-hispan…              1     3</code></pre>
+</div>
+<p>Lastly, once we learned about <code>pmap_*</code>, <code>map2_*</code> is very similar. Instead of being able to use as many variables you need with <code>pmap</code>, <code>map2</code> is specialized for only 2 inputs. Let’s see an example below. Since we have found that the relationship between age and food secure are pretty consistent over the years, let’s make a plot that ignore the age factor with <code>map2</code>.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>adult_plot_df</span> <span class='op'>=</span> <span class='va'>adult_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>nest_plot <span class='op'>=</span> <span class='fu'>map2</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>gender</span>,
+                          <span class='op'>~</span><span class='fu'>plotting</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.y</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>ggpubr</span><span class='fu'>::</span><span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html'>ggarrange</a></span><span class='op'>(</span><span class='va'>adult_plot_df</span><span class='op'>$</span><span class='va'>nest_plot</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>,
+                  <span class='va'>adult_plot_df</span><span class='op'>$</span><span class='va'>nest_plot</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>,
+                  ncol <span class='op'>=</span> <span class='fl'>2</span>,
+                  common.legend <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                  legend <span class='op'>=</span> <span class='st'>'bottom'</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="parallel-iteration_files/figure-html5/unnamed-chunk-9-1.png" width="1152" /></p>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2124,11 +2781,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="appendix-bottom">
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
-  <pre class="citation-appendix short">Frank (2021, May 13). Functional Programming Final Project: Parallel Iteration. Retrieved from https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/</pre>
+  <pre class="citation-appendix short">Guo (2021, May 20). Functional Programming in R: Parallel Iteration. Retrieved from https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/</pre>
   <p>BibTeX citation</p>
-  <pre class="citation-appendix long">@misc{frank2021parallel,
-  author = {Frank, Lea},
-  title = {Functional Programming Final Project: Parallel Iteration},
+  <pre class="citation-appendix long">@misc{guo2021parallel,
+  author = {Guo, Wanjia},
+  title = {Functional Programming in R: Parallel Iteration},
   url = {https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/},
   year = {2021}
 }</pre>

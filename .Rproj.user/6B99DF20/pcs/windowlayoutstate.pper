@@ -10,5 +10,15 @@
         "topwindowstate": "NORMAL",
         "panelheight": 708,
         "windowheight": 746
+        "splitterpos": 209,
+        "topwindowstate": "NORMAL",
+        "panelheight": 717,
+        "windowheight": 755
+    },
+    "right": {
+        "splitterpos": 460,
+        "topwindowstate": "NORMAL",
+        "panelheight": 717,
+        "windowheight": 755
     }
 }

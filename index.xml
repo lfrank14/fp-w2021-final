@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
-    <title>Functional Programming Final Project</title>
+    <title>Functional Programming in R</title>
     <link>https://lfrank14.github.io/fp-w2021-final/</link>
     <atom:link href="https://lfrank14.github.io/fp-w2021-final/index.xml" rel="self" type="application/rss+xml"/>
-    <description>Functional Programming Final Project
+    <description>Final project for functional programming in R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 13 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Jun 2021 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Data cleaning with {purrr}</title>
       <dc:creator>Lea Frank</dc:creator>
       <link>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr</link>
-      <description>A tutorial on using {purrr} for data cleaning.</description>
+      <description>A tutorial for using {purrr} for data cleaning.</description>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr</guid>
-      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 03 Jun 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Parallel Iteration</title>
+      <dc:creator>Wanjia Guo</dc:creator>
+      <link>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</link>
+      <description>Using `nest` with `map2_*` or `pmap_*` in `{purrr}`.</description>
+      <guid>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</guid>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png" medium="image" type="image/png" width="1920" height="1152"/>
     </item>
     <item>
       <title>Looping</title>
@@ -23,20 +32,13 @@
       <description>A short description of the post.</description>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/looping</guid>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Parallel Iteration</title>
-      <dc:creator>Lea Frank</dc:creator>
-      <link>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</link>
-      <description>A short description of the post.</description>
-      <guid>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</guid>
-      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://lfrank14.github.io/fp-w2021-final/posts/looping/looping_files/figure-html5/unnamed-chunk-6-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>Writing Functions</title>
       <dc:creator>Sarah Dimakis</dc:creator>
       <link>https://lfrank14.github.io/fp-w2021-final/posts/writing-functions</link>
-      <description>A short description of the post.</description>
+      <description>This is a tutorial for how to write a function in R.</description>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/writing-functions</guid>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
     </item>
