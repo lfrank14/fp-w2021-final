@@ -5,7 +5,7 @@
       "title": "About this blog",
       "author": [],
       "contents": "\nThis blog is the final project for Functional Programming for Educational Data Science (Spring 2021). It incorporates the functional programming concepts and practices learned throughout the term and summarizes them in a series of tutorials. Information regarding the course can be found here.\nAbout the data\nThe data for this blog is taken from the National Health and Nutrition Examination Survey (NHANES). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:\n\nVariable Code\nDescription\nSEQN\nRespondent ID\nRIDAGEYR\nAge in years at screening\nRIAGENDR\nGender\nRIDRETH1\nRace/Hispanic origin\nDMDEDUC2\nEducation level (adults 20+)\nDMDEDUC3\nEducation level (children/youth 6-19)\nHHFDSEC\nHousehold food security category over last 12 months (1999-2002)\nFSDHH\nHousehold food security category over last 12 months (2003+)\n\nThe NHANES releases yearly survey data, with files separated based on demographics, questionnaire, health examination, and nutrition data. The data for this blog were downloaded from the following links: demographics and food security questionnaire (FSQ). Documentation regarding variable coding can also be found at those links.\n\n\n\n",
-      "last_modified": "2021-06-03T15:49:38-07:00"
+      "last_modified": "2021-06-07T15:55:49-07:00"
     },
     {
       "path": "contributors.html",
@@ -13,20 +13,20 @@
       "description": "Meet the team",
       "author": [],
       "contents": "\nMeghan Siritzky - some bio\nWanjia Guo - some bio\nSarah Dimakis is a PhD student studying social psychology at the University of Oregon. She studies how people form moral character judgments of others and how those judgments change (or fail to change) over time.\nLea Frank is a doctoral candidate studying cognitive neuroscience at the University of Oregon. Her research focuses on how past experiences are used to help make new decisions and generate new knowledge, and how these functions are supported in the brain.\n\n\n\n",
-      "last_modified": "2021-06-03T15:49:39-07:00"
+      "last_modified": "2021-06-07T15:55:50-07:00"
     },
     {
       "path": "index.html",
       "title": "Tutorials for Functional Programming in R",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-06-03T15:49:40-07:00"
+      "last_modified": "2021-06-07T15:55:51-07:00"
     },
     {
       "path": "LICENSE.html",
       "author": [],
       "contents": "\nThe MIT License (MIT)\nCopyright (c) 2021 Lea Frank\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n\n",
-      "last_modified": "2021-06-03T15:49:40-07:00"
+      "last_modified": "2021-06-07T15:55:51-07:00"
     }
   ],
   "collections": ["posts/posts.json"]
