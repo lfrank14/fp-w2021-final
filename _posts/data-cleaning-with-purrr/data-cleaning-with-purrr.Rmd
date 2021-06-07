@@ -74,7 +74,7 @@ fsq <- map_df(fsq_paths, rio::import, .id = "file")
 kable(head(fsq[,1:4]))
 
 ```
-
+#RL comment: maybe I am reading this incorrectly but it seems you say you chose to use map_dfr but then use map?
 While both options are valid, which one you choose will ultimately depend on what you intend to do with the output. I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators. For that reason, I chose to use `map_dfr` to create a single data frame. If instead I wanted to keep the data frames separated by year so I could more easily process and analyze the data, `map` would have have been the better approach. 
 
 For the sake of creating more content for the tutorial, let's take a look at how `map` can be used to iterate data cleaning steps over a list of data frames.
