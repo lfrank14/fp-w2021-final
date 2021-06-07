@@ -208,7 +208,8 @@ my_table <- function(data, var, grouping){
   colnames(table) <- temp_table[1,] 
   table %>% kbl() %>% 
     kable_styling(bootstrap_options = "striped", full_width = F) %>% 
-    row_spec(0, angle = -45)
+    # row_spec(0, angle = -45, hline_after = TRUE)
+    row_spec(0, hline_after = TRUE)
 }
 
 ```
