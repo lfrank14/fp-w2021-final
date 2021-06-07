@@ -4,12 +4,15 @@ description: |
   A tutorial for using {purrr} for data cleaning.
 author:
   - name: Lea Frank
+categories:
+  - map
+  - map_df
+  - map2
 output:
   distill::distill_article:
     toc: true
     toc_float: true
     self_contained: false
-    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -18,17 +21,20 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(fs)
 library(knitr)
+
+# devtools::install_github("gadenbuie/xaringanExtra")
+xaringanExtra::use_clipboard()
 ```
 
 The `{purrr}` package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the `map` family of functions can be. 
 
 ## Batch Loading
 
-The `purrr::map` family of functions can be incredibly powerful when loading a large number of data files.
+The original data files downloaded from the *NHANES* website were separated by year and data type (i.e. demographicss and FSQ), resulting in a number of data files. Rather than loading in each file one at a time, the `purrr::map` family of functions provides powerful tools for loading in large amounts of data. 
 
-### Create a list with the file paths
+#### Create a list with the file paths
 
-`here::here` is first used to define the path to the data files. 
+The `here::here` function is first used to define the path to the data files. 
 
 ```{r}
 (rootpath <- here::here("data"))
@@ -41,7 +47,7 @@ fnames <- fs::dir_ls(rootpath)
 head(fnames)
 ```
 
-Importantly, this vector is named with the associated paths, which will come in handy when using `map_df` below.
+Importantly, this vector is named with the associated paths. That is, each element of the vector is attributed a name that is also a character string of the file path. I know this sounds like redundant information, but it actually comes in handy when using `map_df` as shown below.
  
 ```{r}
 names(head(fnames))
@@ -50,17 +56,21 @@ names(head(fnames))
 The demographics and FSQ will be loaded separately since they will require different data cleaning steps. Regular expression can be used with the `fs::dir_ls` function to filter files that match a specific pattern.
 
 ```{r}
+# list file paths for files that contain the pattern "DEMO"
 demo_paths <- dir_ls(rootpath, regexp = "DEMO")
+
+# list file paths for files that contain the pattern "FSQ"
 fsq_paths <- dir_ls(rootpath, regexp = "FSQ")
 ```
 
-### Use `purrr::map` to read files
+#### Use `purrr::map` to read files
 
 The `purrr::map` family of functions allows us to iterate a function over elements of a list or vector. In this case, we want to use `rio::import` to read in the data files using the vectors of file paths. 
 
 There are two ways in which we can read in the data. The first option is to use the `purrr::map` function to read each data frame into a separate element of a list. This can be useful if you want to use `map` to iteration the same functions, like data cleaning, over each data frame.  
 
 ```{r}
+# Loading the data files into separate lists
 demos_list <- map(demo_paths, rio::import)
 fsq_list <- map(demo_paths, rio::import)
 ```
@@ -68,17 +78,20 @@ fsq_list <- map(demo_paths, rio::import)
 Another option is to use `purrr::map_df` to read each data file into a single data frame. Importantly, this function allows you to specify the `.id`, which will create a variable to identify each iteration of the function. As I mentioned earlier, the `fs::dir_ls` function will assign names to each path. Using `map_df` on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of `rio::import`. 
 
 ```{r, layout="l-body-outset"}
-demos <- map_df(demo_paths, rio::import, .id = "file")
+
+# Loading the data files into a single data frame
+demos <- map_dfr(demo_paths, rio::import, .id = "file")
 kable(head(demos[,1:4]))
-  
-fsq <- map_df(fsq_paths, rio::import, .id = "file")
+fsq <- map_dfr(fsq_paths, rio::import, .id = "file")
 kable(head(fsq[,1:4]))
 
 ```
 
-While both options are valid, which one you choose will ultimately depend on what you intend to do with the output. I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators. For that reason, I chose to use `map_dfr` to create a single data frame. If instead I wanted to keep the data frames separated by year so I could more easily process and analyze the data, `map` would have have been the better approach. 
+While both options are valid, which one you choose will ultimately depend on what you intend to do with the output. If I wanted to keep the data frames separated by year so I could more easily process and analyze the data, `map` would might be the better approach. 
 
-For the sake of creating more content for the tutorial, let's take a look at how `map` can be used to iterate data cleaning steps over a list of data frames.
+If I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators, I might choose to use `map_dfr` to create a single data frame. This option is demonstrated below in **My Final Solution**. 
+
+Let's take a look at how `map` can be used to iterate data cleaning steps over a list of data frames.
 
 ## Data cleaning 
 
@@ -86,27 +99,33 @@ Let's start with the list of data frames for the demographics surveys (`demos_li
 
 First, let's start by creating a variable in each data frame for the `year`. For this step, we can use `map2` to iterate through the file paths (`demo_paths`) and list of data frames (`demos_list`) in parallel. The year will be extracted from the file path and applied to the corresponding data frame. 
 
-This time, rather than using an existing function, we can create our own. 
+This time, rather than using an existing function, we can create our own. When writing a function to use within the map functions, it must be wrapped within the curly brackets `~{ [some custom function] }`. To call each input, you would use `.x` (for the first input, `demo_paths`) and `.y` (for the second input, `demos_list`).
 
 ```{r, }
 demos_list_clean <- map2(demo_paths, demos_list, ~{
+  # create a new variable in demos_list for th year
   .y %>% 
     mutate(year = str_extract(.x, "\\d{4}-\\d{4}")) 
-                  # extracts the pattern that has: 4 digits-4 digits
+                  # extracts the pattern that matches: 4 digits-4 digits (e.g. 2001-2002)
 })
 
 kable(head(demos_list_clean[[1]]["year"]))
 ```
 
-Next, I want to select the variables of interest and rename them to something more clear. This time, I will need to return the data frame in order for it to output.
+Next, I want to select the variables of interest and rename them to something more clear. This time, I will need to return the data frame in order for it to save in the output.
 
 ```{r, layout="l-body-outset"}
 demos_list_clean <- map(demos_list_clean, ~{
+  # selecting variables of interest
   .x <- .x %>% 
     select(year, SEQN, RIDAGEYR, RIAGENDR, 
          RIDRETH1, DMDEDUC2, DMDEDUC3)
+  
+  # renaming the columns
   names(.x) <- c("year", "id","age","gender",
                   "race_ethnic","educ_adult","educ_child")
+  
+  # return the new .x
   return(.x)
 })
 
@@ -117,6 +136,8 @@ Finally, I may want to convert some of the categorical variables into factors an
 
 ```{r, layout="l-body-outset"}
 demos_list_clean <- map(demos_list_clean, ~{
+  
+  # create new factors for gender and race/ethnicity
   .x %>% 
     mutate(gender = factor(gender, labels = c("male","female")),
            race_ethnic = factor(race_ethnic, labels = c("mexican-american",
@@ -148,38 +169,50 @@ demos_list_clean <- map2(demo_paths, demos_list, ~{
   return(.y)
 })
 
-str(demos_list_clean[1:3])
 ```
 
 ## My final solution
 
-As I mentioned earlier, the best route for me was to read the data files into a single data frame. The same data cleaning steps conducted above can then be applied to the single data frame.
+As I mentioned earlier, another possible route was to read the data files into a single data frame. Since the output was intended to be shared with collaborators on this blog, I decided this was the optimal solution. The same data cleaning steps conducted above can then be applied to the single data frame.
 
 ```{r}
 
 demos <- dir_ls(rootpath, 
-                 regexp = "DEMO") %>% 
+                 regexp = "DEMO") %>% # listing demographics files
+  # batch loading demographics files
   map_dfr(rio::import, .id = "file") %>% 
-  mutate(year = str_extract(file, "\\d{4}-\\d{4}"),
+                       # .id = "file" creates a variable with the file name
+  # creating a variable for year from the file name id
+  mutate(year = str_extract(file, "\\d{4}-\\d{4}"), 
+         # creating factors for gender and race/ethnicity 
          RIAGENDR = factor(RIAGENDR, labels = c("male","female")),
          RIDRETH1 = factor(RIDRETH1, labels = c("mexican-american",
                                                 "other-hispanic",
                                                 "non-hispanic-white",
                                                 "non-hispanic-black",
                                                 "other-race"))) %>% 
+  # selecting variables of interest
   select(year, SEQN, RIDAGEYR, RIAGENDR, 
          RIDRETH1, DMDEDUC2, DMDEDUC3)
+
+# renaming the columns into something more legible
 names(demos) <- c("year", "id","age","gender",
                   "race_ethnic","educ_adult","educ_child") 
 
 fsq <- dir_ls(rootpath, 
-                 regexp = "FSQ") %>% 
+                 regexp = "FSQ") %>% # listing questionnaire files
+  # batch importing questionnaire files
   map_dfr(rio::import, .id = "file") %>% 
-  mutate(year = str_extract(file, "\\d{4}-\\d{4}"),
+                       # .id = "file" creates a variable with the file name
+  # creating new variables for year and food security
+  mutate(year = str_extract(file, "\\d{4}-\\d{4}"), 
          hh_food_secure = ifelse(year == "1999-2000" | year == "2001-2002", 
                                  HHFDSEC, FSDHH)) %>% 
-  select(year, SEQN, hh_food_secure)
-names(fsq)[2] <- "id"
+  # selecting variables of interest
+  select(year, SEQN, hh_food_secure) 
+
+# renaming the 'SEQN' column so that it can be joined with the demographics data
+names(fsq)[2] <- "id" 
   
 ```
 

@@ -1,7 +1,5 @@
 ---
-title: "About the data"
-#description: |
-#  Some additional details about the blog
+title: "About this blog"
 ---
 
 ```{r setup, include=FALSE}

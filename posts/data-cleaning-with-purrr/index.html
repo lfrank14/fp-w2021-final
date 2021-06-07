@@ -106,16 +106,22 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <meta property="twitter:description" content="A tutorial for using {purrr} for data cleaning."/>
 <meta property="twitter:url" content="https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/"/>
 
+<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+<meta name="citation_title" content="Functional Programming in R: Data cleaning with {purrr}"/>
+<meta name="citation_fulltext_html_url" content="https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/"/>
+<meta name="citation_online_date" content="2021/06/07"/>
+<meta name="citation_publication_date" content="2021/06/07"/>
+<meta name="citation_author" content="Lea Frank"/>
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","output","date","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Data cleaning with {purrr}"]},{"type":"character","attributes":{},"value":["A tutorial for using {purrr} for data cleaning."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Lea Frank"]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained","css","highlight","highlight_downlit"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["style.css"]},{"type":"character","attributes":{},"value":["haddock"]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["06-07-2021"]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","categories","output","date","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Data cleaning with {purrr}"]},{"type":"character","attributes":{},"value":["A tutorial for using {purrr} for data cleaning."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Lea Frank"]}]}]},{"type":"character","attributes":{},"value":["map","map_df","map2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["06-07-2021"]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/"]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data-cleaning-with-purrr_files/anchor-4.2.2/anchor.min.js","data-cleaning-with-purrr_files/bowser-1.9.3/bowser.min.js","data-cleaning-with-purrr_files/distill-2.2.21/template.v2.js","data-cleaning-with-purrr_files/header-attrs-2.8/header-attrs.js","data-cleaning-with-purrr_files/jquery-1.11.3/jquery.min.js","data-cleaning-with-purrr_files/popper-2.6.0/popper.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-bundle.umd.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-light-border.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.umd.min.js","data-cleaning-with-purrr_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data-cleaning-with-purrr_files/anchor-4.2.2/anchor.min.js","data-cleaning-with-purrr_files/bowser-1.9.3/bowser.min.js","data-cleaning-with-purrr_files/clipboard-2.0.6/clipboard.min.js","data-cleaning-with-purrr_files/distill-2.2.21/template.v2.js","data-cleaning-with-purrr_files/header-attrs-2.8/header-attrs.js","data-cleaning-with-purrr_files/jquery-1.11.3/jquery.min.js","data-cleaning-with-purrr_files/popper-2.6.0/popper.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-bundle.umd.min.js","data-cleaning-with-purrr_files/tippy-6.2.7/tippy-light-border.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.css","data-cleaning-with-purrr_files/tippy-6.2.7/tippy.umd.min.js","data-cleaning-with-purrr_files/webcomponents-2.0.0/webcomponents.js","data-cleaning-with-purrr_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css","data-cleaning-with-purrr_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2092,6 +2098,10 @@ d-appendix d-footnote-list a.footnote-backlink {
 }</style>
 <!--/radix_placeholder_distill-->
   <script src="../../site_libs/header-attrs-2.8/header-attrs.js"></script>
+  <script src="../../site_libs/clipboard-2.0.6/clipboard.min.js"></script>
+  <link href="../../site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+  <script src="../../site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+  <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2186,7 +2196,6 @@ html {
 </style>
 <!--/radix_placeholder_site_in_header-->
 
-  <link rel="stylesheet" href="style.css" type="text/css"/>
 
 </head>
 
@@ -2233,6 +2242,11 @@ About
 <div class="d-title">
 <h1>Data cleaning with {purrr}</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../index.html#category:map" class="dt-tag">map</a>
+  <a href="../../index.html#category:map_df" class="dt-tag">map_df</a>
+  <a href="../../index.html#category:map2" class="dt-tag">map2</a>
+</div>
 <!--/radix_placeholder_categories-->
 <p><p>A tutorial for using {purrr} for data cleaning.</p></p>
 </div>
@@ -2248,11 +2262,7 @@ About
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#batch-loading">Batch Loading</a>
-<ul>
-<li><a href="#create-a-list-with-the-file-paths">Create a list with the file paths</a></li>
-<li><a href="#use-purrrmap-to-read-files">Use <code>purrr::map</code> to read files</a></li>
-</ul></li>
+<li><a href="#batch-loading">Batch Loading</a></li>
 <li><a href="#data-cleaning">Data cleaning</a></li>
 <li><a href="#my-final-solution">My final solution</a></li>
 </ul>
@@ -2260,9 +2270,9 @@ About
 </div>
 <p>The <code>{purrr}</code> package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the <code>map</code> family of functions can be.</p>
 <h2 id="batch-loading">Batch Loading</h2>
-<p>The <code>purrr::map</code> family of functions can be incredibly powerful when loading a large number of data files.</p>
-<h3 id="create-a-list-with-the-file-paths">Create a list with the file paths</h3>
-<p><code>here::here</code> is first used to define the path to the data files.</p>
+<p>The original data files downloaded from the <em>NHANES</em> website were separated by year and data type (i.e. demographicss and FSQ), resulting in a number of data files. Rather than loading in each file one at a time, the <code>purrr::map</code> family of functions provides powerful tools for loading in large amounts of data.</p>
+<h4 id="create-a-list-with-the-file-paths">Create a list with the file paths</h4>
+<p>The <code>here::here</code> function is first used to define the path to the data files.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(rootpath <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data&quot;</code></pre>
@@ -2278,7 +2288,7 @@ About
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2007-2008.XPT
 /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2009-2010.XPT</code></pre>
 </div>
-<p>Importantly, this vector is named with the associated paths, which will come in handy when using <code>map_df</code> below.</p>
+<p>Importantly, this vector is named with the associated paths. That is, each element of the vector is attributed a name that is also a character string of the file path. I know this sounds like redundant information, but it actually comes in handy when using <code>map_df</code> as shown below.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">head</span>(fnames))</span></code></pre></div>
 <pre><code>[1] &quot;/Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT&quot;
@@ -2290,20 +2300,33 @@ About
 </div>
 <p>The demographics and FSQ will be loaded separately since they will require different data cleaning steps. Regular expression can be used with the <code>fs::dir_ls</code> function to filter files that match a specific pattern.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>demo_paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, <span class="at">regexp =</span> <span class="st">&quot;DEMO&quot;</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fsq_paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, <span class="at">regexp =</span> <span class="st">&quot;FSQ&quot;</span>)</span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># list file paths for files that contain the pattern "DEMO"</span>
+<span class='va'>demo_paths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, regexp <span class='op'>=</span> <span class='st'>"DEMO"</span><span class='op'>)</span>
+
+<span class='co'># list file paths for files that contain the pattern "FSQ"</span>
+<span class='va'>fsq_paths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, regexp <span class='op'>=</span> <span class='st'>"FSQ"</span><span class='op'>)</span>
+</code></pre>
 </div>
-<h3 id="use-purrrmap-to-read-files">Use <code>purrr::map</code> to read files</h3>
+</div>
+<h4 id="use-purrrmap-to-read-files">Use <code>purrr::map</code> to read files</h4>
 <p>The <code>purrr::map</code> family of functions allows us to iterate a function over elements of a list or vector. In this case, we want to use <code>rio::import</code> to read in the data files using the vectors of file paths.</p>
 <p>There are two ways in which we can read in the data. The first option is to use the <code>purrr::map</code> function to read each data frame into a separate element of a list. This can be useful if you want to use <code>map</code> to iteration the same functions, like data cleaning, over each data frame.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>demos_list <span class="ot">&lt;-</span> <span class="fu">map</span>(demo_paths, rio<span class="sc">::</span>import)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fsq_list <span class="ot">&lt;-</span> <span class="fu">map</span>(demo_paths, rio<span class="sc">::</span>import)</span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Loading the data files into separate lists</span>
+<span class='va'>demos_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
+<span class='va'>fsq_list</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>)</span>
+</code></pre>
 </div>
 <p>Another option is to use <code>purrr::map_df</code> to read each data file into a single data frame. Importantly, this function allows you to specify the <code>.id</code>, which will create a variable to identify each iteration of the function. As I mentioned earlier, the <code>fs::dir_ls</code> function will assign names to each path. Using <code>map_df</code> on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of <code>rio::import</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>demos <span class="ot">&lt;-</span> <span class="fu">map_df</span>(demo_paths, rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Loading the data files into a single data frame</span>
+<span class='va'>demos</span> <span class='op'>&lt;-</span> <span class='fu'>map_dfr</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <table>
 <thead>
 <tr class="header">
@@ -2352,8 +2375,11 @@ About
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fsq <span class="ot">&lt;-</span> <span class="fu">map_df</span>(fsq_paths, rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(fsq[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fsq</span> <span class='op'>&lt;-</span> <span class='fu'>map_dfr</span><span class='op'>(</span><span class='va'>fsq_paths</span>, <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>fsq</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <table>
 <thead>
 <tr class="header">
@@ -2403,20 +2429,25 @@ About
 </tbody>
 </table>
 </div>
-<p>While both options are valid, which one you choose will ultimately depend on what you intend to do with the output. I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators. For that reason, I chose to use <code>map_dfr</code> to create a single data frame. If instead I wanted to keep the data frames separated by year so I could more easily process and analyze the data, <code>map</code> would have have been the better approach.</p>
-<p>For the sake of creating more content for the tutorial, let’s take a look at how <code>map</code> can be used to iterate data cleaning steps over a list of data frames.</p>
+<p>While both options are valid, which one you choose will ultimately depend on what you intend to do with the output. If I wanted to keep the data frames separated by year so I could more easily process and analyze the data, <code>map</code> would might be the better approach.</p>
+<p>If I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators, I might choose to use <code>map_dfr</code> to create a single data frame. This option is demonstrated below in <strong>My Final Solution</strong>.</p>
+<p>Let’s take a look at how <code>map</code> can be used to iterate data cleaning steps over a list of data frames.</p>
 <h2 id="data-cleaning">Data cleaning</h2>
 <p>Let’s start with the list of data frames for the demographics surveys (<code>demos_list</code>). Each element of the list contains the demographics survey data for a specific year range (e.g. 1999-2000 or 2013-2014). If we want to apply the same data cleaning steps to each data frame, we can use <code>map</code> to iterate those data cleaning functions to each element of the list.</p>
 <p>First, let’s start by creating a variable in each data frame for the <code>year</code>. For this step, we can use <code>map2</code> to iterate through the file paths (<code>demo_paths</code>) and list of data frames (<code>demos_list</code>) in parallel. The year will be extracted from the file path and applied to the corresponding data frame.</p>
-<p>This time, rather than using an existing function, we can create our own.</p>
+<p>This time, rather than using an existing function, we can create our own. When writing a function to use within the map functions, it must be wrapped within the curly brackets <code>~{ [some custom function] }</code>. To call each input, you would use <code>.x</code> (for the first input, <code>demo_paths</code>) and <code>.y</code> (for the second input, <code>demos_list</code>).</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map2</span>(demo_paths, demos_list, <span class="sc">~</span>{</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  .y <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(.x, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>)) </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># extracts the pattern that has: 4 digits-4 digits</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos_list_clean[[<span class="dv">1</span>]][<span class="st">&quot;year&quot;</span>]))</span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map2</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='va'>demos_list</span>, <span class='op'>~</span><span class='op'>{</span>
+  <span class='co'># create a new variable in demos_list for th year</span>
+  <span class='va'>.y</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>.x</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span><span class='op'>)</span> 
+                  <span class='co'># extracts the pattern that matches: 4 digits-4 digits (e.g. 2001-2002)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos_list_clean</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>[</span><span class='st'>"year"</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <table>
 <thead>
 <tr class="header">
@@ -2445,18 +2476,26 @@ About
 </tbody>
 </table>
 </div>
-<p>Next, I want to select the variables of interest and rename them to something more clear. This time, I will need to return the data frame in order for it to output.</p>
+<p>Next, I want to select the variables of interest and rename them to something more clear. This time, I will need to return the data frame in order for it to save in the output.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map</span>(demos_list_clean, <span class="sc">~</span>{</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  .x <span class="ot">&lt;-</span> .x <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, SEQN, RIDAGEYR, RIAGENDR, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         RIDRETH1, DMDEDUC2, DMDEDUC3)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(.x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;id&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;race_ethnic&quot;</span>,<span class="st">&quot;educ_adult&quot;</span>,<span class="st">&quot;educ_child&quot;</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(.x)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos_list_clean[[<span class="dv">1</span>]]))</span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demos_list_clean</span>, <span class='op'>~</span><span class='op'>{</span>
+  <span class='co'># selecting variables of interest</span>
+  <span class='va'>.x</span> <span class='op'>&lt;-</span> <span class='va'>.x</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>RIDAGEYR</span>, <span class='va'>RIAGENDR</span>, 
+         <span class='va'>RIDRETH1</span>, <span class='va'>DMDEDUC2</span>, <span class='va'>DMDEDUC3</span><span class='op'>)</span>
+  
+  <span class='co'># renaming the columns</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"year"</span>, <span class='st'>"id"</span>,<span class='st'>"age"</span>,<span class='st'>"gender"</span>,
+                  <span class='st'>"race_ethnic"</span>,<span class='st'>"educ_adult"</span>,<span class='st'>"educ_child"</span><span class='op'>)</span>
+  
+  <span class='co'># return the new .x</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos_list_clean</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <table>
 <thead>
 <tr class="header">
@@ -2529,17 +2568,22 @@ About
 </div>
 <p>Finally, I may want to convert some of the categorical variables into factors and add labels to the different levels.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map</span>(demos_list_clean, <span class="sc">~</span>{</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  .x <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>)),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">race_ethnic =</span> <span class="fu">factor</span>(race_ethnic, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;mexican-american&quot;</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-hispanic&quot;</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-white&quot;</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-black&quot;</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-race&quot;</span>)))</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(demos_list_clean[[<span class="dv">1</span>]]))</span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>demos_list_clean</span>, <span class='op'>~</span><span class='op'>{</span>
+  
+  <span class='co'># create new factors for gender and race/ethnicity</span>
+  <span class='va'>.x</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>mutate</span><span class='op'>(</span>gender <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>gender</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"male"</span>,<span class='st'>"female"</span><span class='op'>)</span><span class='op'>)</span>,
+           race_ethnic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>race_ethnic</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mexican-american"</span>,
+                                                        <span class='st'>"other-hispanic"</span>,
+                                                        <span class='st'>"non-hispanic-white"</span>,
+                                                        <span class='st'>"non-hispanic-black"</span>,
+                                                        <span class='st'>"other-race"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>demos_list_clean</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 <table>
 <thead>
 <tr class="header">
@@ -2612,63 +2656,27 @@ About
 </div>
 <p>These steps can all be combined to produce the following code:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>demos_list_clean <span class="ot">&lt;-</span> <span class="fu">map2</span>(demo_paths, demos_list, <span class="sc">~</span>{</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  .y <span class="ot">&lt;-</span> .y <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(.x, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">RIAGENDR =</span> <span class="fu">factor</span>(RIAGENDR, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>)),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">RIDRETH1 =</span> <span class="fu">factor</span>(RIDRETH1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;mexican-american&quot;</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-hispanic&quot;</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-white&quot;</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;non-hispanic-black&quot;</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;other-race&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, SEQN, RIDAGEYR, RIAGENDR, </span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>         RIDRETH1, DMDEDUC2, DMDEDUC3)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(.y) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;id&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>,</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;race_ethnic&quot;</span>,<span class="st">&quot;educ_adult&quot;</span>,<span class="st">&quot;educ_child&quot;</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(.y)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(demos_list_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
-<pre><code>List of 3
- $ /Users/leafrank/Documents/fp-w2021-final/data/DEMO_1999-2000.XPT:&#39;data.frame&#39;:   9965 obs. of  7 variables:
-  ..$ year       : chr [1:9965] &quot;1999-2000&quot; &quot;1999-2000&quot; &quot;1999-2000&quot; &quot;1999-2000&quot; ...
-  ..$ id         : num [1:9965] 1 2 3 4 5 6 7 8 9 10 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Respondent sequence number&quot;
-  ..$ age        : num [1:9965] 2 77 10 1 49 19 59 13 11 43 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Age at Screening Adjudicated - Recode&quot;
-  ..$ gender     : Factor w/ 2 levels &quot;male&quot;,&quot;female&quot;: 2 1 2 1 1 2 2 1 2 1 ...
-  ..$ race_ethnic: Factor w/ 5 levels &quot;mexican-american&quot;,..: 4 3 3 4 3 5 4 3 4 4 ...
-  ..$ educ_adult : num [1:9965] NA 5 NA NA 5 NA 2 NA NA 3 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Education Level - Adults 20+&quot;
-  ..$ educ_child : num [1:9965] NA NA 3 NA NA 15 NA 5 5 NA ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Education Level - Children/Youth 6-19&quot;
- $ /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2001-2002.XPT:&#39;data.frame&#39;:   11039 obs. of  7 variables:
-  ..$ year       : chr [1:11039] &quot;2001-2002&quot; &quot;2001-2002&quot; &quot;2001-2002&quot; &quot;2001-2002&quot; ...
-  ..$ id         : num [1:11039] 9966 9967 9968 9969 9970 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Respondent sequence number&quot;
-  ..$ age        : num [1:11039] 39 23 84 51 16 14 44 63 13 80 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Age at Screening Adjudicated - Recode&quot;
-  ..$ gender     : Factor w/ 2 levels &quot;male&quot;,&quot;female&quot;: 1 1 2 2 1 2 1 2 1 1 ...
-  ..$ race_ethnic: Factor w/ 5 levels &quot;mexican-american&quot;,..: 3 4 3 3 2 2 3 1 4 3 ...
-  ..$ educ_adult : num [1:11039] 4 4 2 5 NA NA 3 2 NA 4 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Education Level - Adults 20+&quot;
-  ..$ educ_child : num [1:11039] NA NA NA NA 10 9 NA NA 6 NA ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Education Level - Children/Youth 6-19&quot;
- $ /Users/leafrank/Documents/fp-w2021-final/data/DEMO_2003-2004.XPT:&#39;data.frame&#39;:   10122 obs. of  7 variables:
-  ..$ year       : chr [1:10122] &quot;2003-2004&quot; &quot;2003-2004&quot; &quot;2003-2004&quot; &quot;2003-2004&quot; ...
-  ..$ id         : num [1:10122] 21005 21006 21007 21008 21009 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Respondent sequence number&quot;
-  ..$ age        : num [1:10122] 19 16 14 17 55 52 0 63 13 3 ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Age at Screening Adjudicated - Recode&quot;
-  ..$ gender     : Factor w/ 2 levels &quot;male&quot;,&quot;female&quot;: 1 2 2 1 1 2 1 1 2 1 ...
-  ..$ race_ethnic: Factor w/ 5 levels &quot;mexican-american&quot;,..: 4 4 3 4 3 3 1 4 4 4 ...
-  ..$ educ_adult : num [1:10122] NA NA NA NA 3 4 NA 3 NA NA ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Education Level - Adults 20+&quot;
-  ..$ educ_child : num [1:10122] 11 11 8 10 NA NA NA NA 6 NA ...
-  .. ..- attr(*, &quot;label&quot;)= chr &quot;Education Level - Children/Youth 6-19&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos_list_clean</span> <span class='op'>&lt;-</span> <span class='fu'>map2</span><span class='op'>(</span><span class='va'>demo_paths</span>, <span class='va'>demos_list</span>, <span class='op'>~</span><span class='op'>{</span>
+  <span class='va'>.y</span> <span class='op'>&lt;-</span> <span class='va'>.y</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>.x</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span>,
+           RIAGENDR <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIAGENDR</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"male"</span>,<span class='st'>"female"</span><span class='op'>)</span><span class='op'>)</span>,
+           RIDRETH1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIDRETH1</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mexican-american"</span>,
+                                                        <span class='st'>"other-hispanic"</span>,
+                                                        <span class='st'>"non-hispanic-white"</span>,
+                                                        <span class='st'>"non-hispanic-black"</span>,
+                                                        <span class='st'>"other-race"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>RIDAGEYR</span>, <span class='va'>RIAGENDR</span>, 
+         <span class='va'>RIDRETH1</span>, <span class='va'>DMDEDUC2</span>, <span class='va'>DMDEDUC3</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>.y</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"year"</span>, <span class='st'>"id"</span>,<span class='st'>"age"</span>,<span class='st'>"gender"</span>,
+                  <span class='st'>"race_ethnic"</span>,<span class='st'>"educ_adult"</span>,<span class='st'>"educ_child"</span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>.y</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h2 id="my-final-solution">My final solution</h2>
-<p>As I mentioned earlier, the best route for me was to read the data files into a single data frame. The same data cleaning steps conducted above can then be applied to the single data frame.</p>
+<p>As I mentioned earlier, another possible route was to read the data files into a single data frame. Since the output was intended to be shared with collaborators on this blog, I decided this was the optimal solution. The same data cleaning steps conducted above can then be applied to the single data frame.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>demos <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(rootpath, </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">regexp =</span> <span class="st">&quot;DEMO&quot;</span>) <span class="sc">%&gt;%</span> </span>
@@ -2689,10 +2697,47 @@ About
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">regexp =</span> <span class="st">&quot;FSQ&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(rio<span class="sc">::</span>import, <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_extract</span>(file, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>),</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">hh_food_secure =</span> <span class="fu">ifelse</span>(year <span class="sc">==</span> <span class="st">&quot;1999-2000&quot;</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="st">&quot;2001-2002&quot;</span>, </span>
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                                 HHFDSEC, FSDHH)) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, SEQN, hh_food_secure)</span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fsq)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;id&quot;</span></span></code></pre></div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>demos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, 
+                 regexp <span class='op'>=</span> <span class='st'>"DEMO"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'># listing demographics files</span>
+  <span class='co'># batch loading demographics files</span>
+  <span class='fu'>map_dfr</span><span class='op'>(</span><span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+                       <span class='co'># .id = "file" creates a variable with the file name</span>
+  <span class='co'># creating a variable for year from the file name id</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>file</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span>, 
+         <span class='co'># creating factors for gender and race/ethnicity </span>
+         RIAGENDR <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIAGENDR</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"male"</span>,<span class='st'>"female"</span><span class='op'>)</span><span class='op'>)</span>,
+         RIDRETH1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>RIDRETH1</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mexican-american"</span>,
+                                                <span class='st'>"other-hispanic"</span>,
+                                                <span class='st'>"non-hispanic-white"</span>,
+                                                <span class='st'>"non-hispanic-black"</span>,
+                                                <span class='st'>"other-race"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='co'># selecting variables of interest</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>RIDAGEYR</span>, <span class='va'>RIAGENDR</span>, 
+         <span class='va'>RIDRETH1</span>, <span class='va'>DMDEDUC2</span>, <span class='va'>DMDEDUC3</span><span class='op'>)</span>
+
+<span class='co'># renaming the columns into something more legible</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>demos</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"year"</span>, <span class='st'>"id"</span>,<span class='st'>"age"</span>,<span class='st'>"gender"</span>,
+                  <span class='st'>"race_ethnic"</span>,<span class='st'>"educ_adult"</span>,<span class='st'>"educ_child"</span><span class='op'>)</span> 
+
+<span class='va'>fsq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span><span class='va'>rootpath</span>, 
+                 regexp <span class='op'>=</span> <span class='st'>"FSQ"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'># listing questionnaire files</span>
+  <span class='co'># batch importing questionnaire files</span>
+  <span class='fu'>map_dfr</span><span class='op'>(</span><span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>, .id <span class='op'>=</span> <span class='st'>"file"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+                       <span class='co'># .id = "file" creates a variable with the file name</span>
+  <span class='co'># creating new variables for year and food security</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>file</span>, <span class='st'>"\\d{4}-\\d{4}"</span><span class='op'>)</span>, 
+         hh_food_secure <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='st'>"1999-2000"</span> <span class='op'>|</span> <span class='va'>year</span> <span class='op'>==</span> <span class='st'>"2001-2002"</span>, 
+                                 <span class='va'>HHFDSEC</span>, <span class='va'>FSDHH</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='co'># selecting variables of interest</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>SEQN</span>, <span class='va'>hh_food_secure</span><span class='op'>)</span> 
+
+<span class='co'># renaming the 'SEQN' column so that it can be joined with the demographics data</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>fsq</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"id"</span> 
+</code></pre>
 </div>
 <p>After creating data frames for the demographics and FSQ data, they were then joined by the <code>year</code> and <code>id</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
@@ -2779,6 +2824,8 @@ About
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df, <span class="fu">str_c</span>(rootpath,<span class="st">&quot;/nhanes_1999-2016.csv&quot;</span>))</span></code></pre></div>
 </div>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
   <p class="social_footer">
@@ -2803,7 +2850,18 @@ About
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+  <h3 id="citation">Citation</h3>
+  <p>For attribution, please cite this work as</p>
+  <pre class="citation-appendix short">Frank (2021, June 7). Functional Programming in R: Data cleaning with {purrr}. Retrieved from https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/</pre>
+  <p>BibTeX citation</p>
+  <pre class="citation-appendix long">@misc{frank2021data,
+  author = {Frank, Lea},
+  title = {Functional Programming in R: Data cleaning with {purrr}},
+  url = {https://lfrank14.github.io/fp-w2021-final/posts/data-cleaning-with-purrr/},
+  year = {2021}
+}</pre>
+</div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->
