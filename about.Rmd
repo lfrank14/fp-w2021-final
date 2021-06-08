@@ -6,7 +6,7 @@ title: "About this blog"
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-The data for this blog is taken from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:
+The data for this blog is taken from the [**National Health and Nutrition Examination Survey** (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For this blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest:
 
 ::: l-body
 | Variable Code    | Description                                                       |
@@ -21,5 +21,5 @@ The data for this blog is taken from the [*National Health and Nutrition Examina
 | `FSDHH`          | Household food security category over last 12 months (2003+)      |
 :::
 
-The NHANES releases yearly survey data, with files separated based on demographics, questionnaire, health examination, and nutrition data. The data for this blog were downloaded from the following links: [demographics](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Demographics) and [food security questionnaire (FSQ)](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Questionnaire). Documentation regarding variable coding can also be found at those links. 
+The NHANES releases yearly survey data, with files separated based on demographics, questionnaire, health examination, and nutrition data. The data for this blog were downloaded from the following links: [**demographics**](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Demographics) and [**food security questionnaire (FSQ)**](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Questionnaire). Documentation regarding variable coding can also be found at those links. 
 

@@ -3,4 +3,5 @@ title: "Welcome to our blog!"
 site: distill::distill_website
 ---
 
-This blog is the final project for *Functional Programming for Educational Data Science* (Spring 2021). It incorporates the functional programming concepts and practices learned throughout the term and summarizes them in a series of tutorials. Information regarding the course can be found [here](https://fp-2021.netlify.app/).
+Welcome to our final project for *Functional Programming for Educational Data Science* (Spring 2021). Information regarding the course can be found [here](https://fp-2021.netlify.app/). This blog incorporates the functional programming concepts and practices learned throughout the term and summarizes them in a series of tutorials. Before reading the tutorials, please read through the [**About the Data**](about.html) page.
+
