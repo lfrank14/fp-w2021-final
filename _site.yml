@@ -6,7 +6,7 @@ base_url: https://lfrank14.github.io/fp-w2021-final/
 output_dir: "."
 theme: style.css
 navbar:
-  search: false
+  search: true
   left:
     - icon: fab fa-github
       href: https://github.com/lfrank14/fp-w2021-final
@@ -27,6 +27,4 @@ collections:
     citations: false
 output: 
   distill::distill_article:
-    toc: true
-    toc_float: true
     css: style.css

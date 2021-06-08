@@ -22,8 +22,8 @@ html {
   --aside-size:      14px;
   --fig-cap-size:    13px;
   /*-- Main font colors --*/
-  --title-color:     #7A9D96;
-  --header-color:    #9d7a8f;
+  --title-color:     #3C3C3C;
+  --header-color:    #844c6e;
   --body-color:      #3C3C3C;
   --aside-color:     #3C3C3C;
   --fig-cap-color:   #3C3C3C;
@@ -61,19 +61,35 @@ html {
 
 .distill-site-header {
   --title-size:       18px;
-  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-color:       white;
   --text-size:        18px;
-  --hover-color:      white;
-  --bkgd-color:       #7A9D96;
+  --hover-color:      #9d7a8f;
+  --bkgd-color:       #844c6e;
 }
 
 .distill-site-footer {
-  --text-color:       white;
+  --text-color:       rgba(255, 255, 255, 0.8);
   --text-size:        15px;
-  --hover-color:      rgba(255, 255, 255, 0.8);
-  --bkgd-color:       #6B7A8F;
+  --hover-color:      white;
+  --bkgd-color:       #7A9D96;
 }
 
 /*-- Additional custom styles --*/
 /* Add any additional CSS rules below                      */
 
+.sourceCode {
+    background-color: #ededed;
+}
+
+.sourceCode pre {
+    border-left: 3px solid #3C3C3C;
+}
+
+.d-article-with-toc p code {
+    color: #66b2b9;
+    font-weight: bold;
+}
+
+body {
+  background-color: white;
+}

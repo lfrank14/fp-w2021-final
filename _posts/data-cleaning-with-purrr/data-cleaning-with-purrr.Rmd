@@ -13,6 +13,7 @@ output:
     toc: true
     toc_float: true
     self_contained: false
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -30,9 +31,9 @@ The `{purrr}` package provides a number of helpful functions for loading in mult
 
 ## Batch Loading
 
-The original data files downloaded from the *NHANES* website were separated by year and data type (i.e. demographicss and FSQ), resulting in a number of data files. Rather than loading in each file one at a time, the `purrr::map` family of functions provides powerful tools for loading in large amounts of data. 
+The original data files downloaded from the *NHANES* website were separated by year and data type (i.e. demographics and FSQ), resulting in a number of data files. Rather than loading in each file one at a time, the `purrr::map` family of functions provides powerful tools for loading in large amounts of data. 
 
-#### Create a list with the file paths
+### Create a list with the file paths
 
 The `here::here` function is first used to define the path to the data files. 
 
@@ -40,7 +41,7 @@ The `here::here` function is first used to define the path to the data files.
 (rootpath <- here::here("data"))
 ```
 
-The `dir_ls` function from the `fs` package creates a vector of the paths for the files listed within the `rootpath`.
+The `dir_ls` function from the `{fs}` package creates a vector of the paths for the files listed within `rootpath`.
 
 ```{r}
 fnames <- fs::dir_ls(rootpath)
@@ -63,7 +64,7 @@ demo_paths <- dir_ls(rootpath, regexp = "DEMO")
 fsq_paths <- dir_ls(rootpath, regexp = "FSQ")
 ```
 
-#### Use `purrr::map` to read files
+### Use `purrr::map` to read files
 
 The `purrr::map` family of functions allows us to iterate a function over elements of a list or vector. In this case, we want to use `rio::import` to read in the data files using the vectors of file paths. 
 
