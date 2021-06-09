@@ -176,7 +176,7 @@ my_pet4("she", "dog")
 ```
 
 
-This is obviously a silly example, but there are many reasons why you would want the function to output a warning or error. For example, you many want the function to warn someone if their input is not going to give them the output they expect, or if the function will not work for certain input. This will help the user work with your function to get their desired output.
+This is a silly example, but there are many reasons why you would want the function to output a warning or error. For example, you many want the function to warn someone if their input is not going to give them the output they expect, or if the function will not work for certain input. This will help the user work with your function to get their desired output.
 
 # Example function 1
 
@@ -212,46 +212,46 @@ total_grouping(data, year, gender)
 
 ```
 
-Unfortunately, we get an error that says that the columns `var` and `grouping` are not found. This is because R is looking for these variables in your global environment but can't find them. Here are a couple solutions that use non-standard evaluation:
+Unfortunately, from running this code, we get an error that says that the columns `var` and `grouping` are not found. This can happen when you use tidyverse functions to write functions because the tidyverse uses what is called **non-standard evaluation**. NSE makes the functions really user friendly. For example, when you use dplyr functions like `select(data, year)` or `group_by(data, year)`, the function knows that year is referring to `data$year` and not `year` from your global environment. However, this causes trouble when you try to use `select()` or `group_by()` (or in our case, `counts()`) in your own function. R looks for the column names (in our case, `var` and `grouping`) in your global environment but can't find them. In order to  work around this, we can use *non-standard evaluation*. Here are two ways you can write the function with NSE:
 
 1. {{}} Syntax
 
 ```{r}
 total_grouping <- function(data, var, grouping){
-  a <- count(data, {{var}}, {{grouping}})
+  a <- count(data, {{var}}, {{grouping}}) ##wrap the variables in {{}}
   b <- count(data, {{var}})
-  b <- rename(b, "total" = "n")
-  c <- left_join(a,b)
-  na.omit(c)
+  left_join(a,b,by = "year", 
+          suffix = c("_group", "_total"))
 }
+
+total_grouping(data, year, gender) %>% head()
 ```
 
 2. Quote the variables
 ```{r}
 total_grouping <- function(data, var, grouping){
-  v1 <- enquo(var) 
+  v1 <- enquo(var)  #quote the variables
   v2 <- enquo(grouping)
   
-  a <- count(data, !!v1, !!v2) # Use !! and the the quoted variables
+  a <- count(data, !!v1, !!v2) # use !! to evaluate the quoted variables
   b <- count(data, !!v1)
-  b <- rename(b, "total" = "n")
-  c <- left_join(a,b)
-  na.omit(c)
+  left_join(a,b,by = "year", 
+          suffix = c("_group", "_total"))
 }
+
+total_grouping(data, year, gender) %>% head()
+
 ```
 
-```{r}
-total_grouping(data, year, gender)
-```
+The great thing about functions is that we can now use our function with other variables, without having to copy,paste, and change the numbers. This cuts down on mistakes and makes your code easier to read.
 
-Now I can do it with other variables!
 
 ```{r}
 total_grouping(data, year, race_ethnic) %>% 
-  head(10)
+  head()
 
 total_grouping(data, year, food_security) %>% 
-  head(10)
+  head()
 ```
 
 # Example function 2
@@ -262,20 +262,17 @@ Let's first try an example.
 
 ```{r}
 total_grouping(data, year, gender) %>% 
-  mutate(percent = n/total * 100,
+  mutate(percent = n_group/n_total * 100,
          percent = round(percent, 2),
          percent = paste0(percent, "%"))
 
 ```
 
-Okay, now we're ready to generalize.
+Okay, now we're ready to generalize. Note
 ```{r}
 percent_grouping <- function(data, var, grouping){
-  v1 <- enquo(var) 
-  v2 <- enquo(grouping)
-  
-  total_grouping(data, !!v1, !!v2) %>% 
-  mutate(percent = n/total * 100,
+  total_grouping(data, {{var}}, {{grouping}}) %>% 
+  mutate(percent = n_group/n_total * 100,
          percent = round(percent, 2),
          percent = paste0(percent, "%")) 
 }
@@ -284,13 +281,10 @@ percent_grouping <- function(data, var, grouping){
 ```
 
 ```{r}
-total_grouping(data, year, gender)
+percent_grouping(data, year, gender) %>% head()
 
-total_grouping(data, year, race_ethnic) %>% 
-  head(10)
+percent_grouping(data, year, race_ethnic) %>% head()
 
-total_grouping(data, year, food_security) %>% 
-  head(10)
 
 ```
 
