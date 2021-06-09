@@ -1,7 +1,7 @@
 ---
 title: "Writing Functions"
 description: |
-  This is a tutorial for how to write a function in R.
+  This is a tutorial for how to write your first custom function in R.
 author:
   - name: Sarah Dimakis
 date: 05-13-2021
@@ -124,14 +124,15 @@ my_pet2(pronoun = "she",
 ```
 
 
-# Warnings
+# Errors and warnings
 
-If someone else (or your future self) is going to use your function, it is helpful to embed warnings (via `warning()`) or errors (via `stop()`) into your code to explain why the code will not work (or if it will not work as expected). 
+If someone else (or your future self) is going to use your function, it is helpful to embed errors with `stop()` and/or warnings with `warning()`  into your code to explain why the code will not work (or if it will not work as expected). 
 
 
 ```{r}
 # I am using an if else structure
-# If the user inputs "cat" for animal, the function will throw an error and say "Sorry, this function doesn't work for people who own cats"
+# If the user inputs "cat" for animal, the function will 
+# throw an error and say "Sorry, this function doesn't work # for people who own cats"
 # If they use input any other animal, it will work
 
 my_pet3 <- function(pronoun, animal, verb = "stretch"){
@@ -166,6 +167,11 @@ my_pet4 <- function(pronoun, animal, verb = "stretch"){
     
 }
 
+```
+
+
+```{r, warning= TRUE}
+
 my_pet4("he", "cat")
 my_pet4("he", "fish", "swim")
 
@@ -176,7 +182,7 @@ my_pet4("she", "dog")
 ```
 
 
-This is a silly example, but there are many reasons why you would want the function to output a warning or error. For example, you many want the function to warn someone if their input is not going to give them the output they expect, or if the function will not work for certain input. This will help the user work with your function to get their desired output.
+These are silly examples, but there are many reasons why you would want the function to output a warning or error. For example, you may want the function to warn someone if their input is not going to give them the output they expect, or if the function will not work for certain input. This will help the user work with your function to get their desired output.
 
 # Example function 1
 
@@ -212,7 +218,7 @@ total_grouping(data, year, gender)
 
 ```
 
-Unfortunately, from running this code, we get an error that says that the columns `var` and `grouping` are not found. This can happen when you use tidyverse functions to write functions because the tidyverse uses what is called **non-standard evaluation**. NSE makes the functions really user friendly. For example, when you use dplyr functions like `select(data, year)` or `group_by(data, year)`, the function knows that year is referring to `data$year` and not `year` from your global environment. However, this causes trouble when you try to use `select()` or `group_by()` (or in our case, `counts()`) in your own function. R looks for the column names (in our case, `var` and `grouping`) in your global environment but can't find them. In order to  work around this, we can use *non-standard evaluation*. Here are two ways you can write the function with NSE:
+Unfortunately, from running this code, we get an error that says that the columns `var` and `grouping` are not found. This can happen when you use tidyverse functions to write functions because the tidyverse uses what is called **non-standard evaluation**. NSE makes the functions really user friendly. For example, when you use dplyr functions like `select(data, year)` or `group_by(data, year)`, the function knows that year is referring to `data$year` and not `year` from your global environment. However, this causes trouble when you try to use `select()` or `group_by()` (or in our case, `counts()`) in your own function. R looks for the column names (in our case, `var` and `grouping`) in your global environment but can't find them. In order to  work around this, we need to also use NSE. Here are two ways you can write the function with NSE:
 
 1. {{}} Syntax
 
@@ -228,6 +234,7 @@ total_grouping(data, year, gender) %>% head()
 ```
 
 2. Quote the variables
+
 ```{r}
 total_grouping <- function(data, var, grouping){
   v1 <- enquo(var)  #quote the variables
@@ -262,13 +269,14 @@ Let's first try an example.
 
 ```{r}
 total_grouping(data, year, gender) %>% 
-  mutate(percent = n_group/n_total * 100,
+  mutate(percent = n_group/n_total * 100, #make a new variable called percent 
          percent = round(percent, 2),
-         percent = paste0(percent, "%"))
+         percent = paste0(percent, "%")) #round it and add a % sign
 
 ```
 
-Okay, now we're ready to generalize. Note
+Okay, now we're ready to generalize. Note that I'm using NSE here too.
+
 ```{r}
 percent_grouping <- function(data, var, grouping){
   total_grouping(data, {{var}}, {{grouping}}) %>% 
@@ -290,35 +298,44 @@ percent_grouping(data, year, race_ethnic) %>% head()
 
 # Tables
 
-Now, let's make a table with our output.
+Now, let's make a table with our output. These tables will tell us how the demographics of our sample changed from year to year.
 
 ```{r}
+# creates an ugly first draft 
 temp_table <- percent_grouping(data, year, gender) %>% 
   select(year, gender, percent) %>% 
   pivot_wider(names_from = gender,
               values_from = percent) %>% t(.)
+
+temp_table
+
+# moves the first row to the title
 table <- temp_table[2:3,]
 colnames(table) <- temp_table[1,] 
+rownames(table) <- rownames(table) %>% str_to_title()
+
+#stylized table
 table %>% kbl() %>% 
-  kable_styling(bootstrap_options = "striped", full_width = F) %>% 
-  row_spec(0, angle = -45)
+  kable_styling(bootstrap_options = "striped", full_width = F)  %>% #gives me a stylized striped table
+  row_spec(0, angle = -45) #rotates column names
 
 
 ```
 
 
-I can generalize this with a function and I'll make tables for other variables! 
+I can generalize this with a function so I can make tables for other variables! 
 
 ```{r}
 my_table <- function(data, var, grouping){
-  v1 <- enquo(var) 
-  v2 <- enquo(grouping)
-  temp_table <- percent_grouping(data, !!v1, !!v2) %>% 
-    select(!!v1, !!v2, percent) %>% 
-    pivot_wider(names_from = !!v2,
+  temp_table <- percent_grouping(data, {{var}}, {{grouping}}) %>% 
+    select({{var}}, {{grouping}}, percent) %>% 
+    pivot_wider(names_from = {{grouping}},
                 values_from = percent) %>% t(.)
+  
   table <- temp_table[2:nrow(temp_table),]
   colnames(table) <- temp_table[1,] 
+  rownames(table) <- rownames(table) %>% str_to_title()
+  
   table %>% kbl() %>% 
     kable_styling(bootstrap_options = "striped", full_width = F) %>% 
     row_spec(0, angle = -45)
@@ -333,4 +350,10 @@ my_table(data, year, race_ethnic)
 
 my_table(data, year, food_security)
 ```
+
+Over time, as you use your function with different examples, you may want to tweak it. For example, I noticed by using the food security variable that I never explictly removed NAs. You may want to always remove NAs. Or, you can give your user an option to remove NAs or not by creating an argument called "remove.nas" and set it to TRUE to remove NAs by default. Then, if the user wants to see the NAs, they can set it to FALSE.
+
+Additionally, I noticed that I made sure that my row names were capitalized, but I didn't do that for the column names because it wasn't relevant here (in all my examples the column names were numbers). This is why it is helpful to test your functions under as many different conditions as you can think of!
+
+
 
