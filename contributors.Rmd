@@ -1,7 +1,7 @@
 ---
 title: "Contributors"
 description: |
- Meet the team
+ Meet the team!
 output:
   distill::distill_article:
     toc: false
@@ -11,11 +11,11 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-**Meg Siritzky** is a PhD student studying social/personality psychology at the University of Oregon. Her research focuses on measuring attitudes associated with violent political extremism.
+[**Meg Siritzky**](https://github.com/msiritzky) is a PhD student studying social/personality psychology at the University of Oregon. Her research focuses on measuring attitudes associated with violent political extremism.
 
 [**Wanjia Guo**](https://wanjiag.github.io/) is a third year graduate student in Dr. Brice Kuhl's Lab at the University of Oregon. She is currently interested in how the hippocampus helps us to distinguish between similar events.
 
-**Sarah Dimakis** is a PhD student studying social psychology at the University of Oregon. She studies how people form moral character judgments of others and how those judgments change (or fail to change) over time.
+[**Sarah Dimakis**](https://github.com/sdimakis) is a PhD student studying social psychology at the University of Oregon. She studies how people form moral character judgments of others and how those judgments change (or fail to change) over time.
 
 [**Lea Frank**](https://github.com/lfrank14) is a doctoral candidate studying cognitive neuroscience at the University of Oregon. Her research focuses on how past experiences are used to help make new decisions and generate new knowledge, and how these functions are supported in the brain. 
 
