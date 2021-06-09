@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Functional Programming in R: Looping</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="A tutorial for using {purrr} for looping functions."/>
 
 <link rel="canonical" href="https://lfrank14.github.io/fp-w2021-final/posts/looping/"/>
 
@@ -100,7 +100,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Functional Programming in R: Looping"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="A tutorial for using {purrr} for looping functions."/>
 <meta property="og:url" content="https://lfrank14.github.io/fp-w2021-final/posts/looping/"/>
 <meta property="og:image" content="https://lfrank14.github.io/fp-w2021-final/posts/looping/looping_files/figure-html5/unnamed-chunk-6-1.png"/>
 <meta property="og:image:width" content="1248"/>
@@ -111,7 +111,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:title" content="Functional Programming in R: Looping"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="A tutorial for using {purrr} for looping functions."/>
 <meta property="twitter:url" content="https://lfrank14.github.io/fp-w2021-final/posts/looping/"/>
 <meta property="twitter:image" content="https://lfrank14.github.io/fp-w2021-final/posts/looping/looping_files/figure-html5/unnamed-chunk-6-1.png"/>
 <meta property="twitter:image:width" content="1248"/>
@@ -121,12 +121,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Looping"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Meg Siritzky"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/looping/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","editor_options","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Looping"]},{"type":"character","attributes":{},"value":["A tutorial for using {purrr} for looping functions."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Meg Siritzky"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/looping/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["looping_files/anchor-4.2.2/anchor.min.js","looping_files/bowser-1.9.3/bowser.min.js","looping_files/distill-2.2.21/template.v2.js","looping_files/figure-html5/unnamed-chunk-6-1.png","looping_files/figure-html5/unnamed-chunk-9-1.png","looping_files/jquery-1.11.3/jquery.min.js","looping_files/popper-2.6.0/popper.min.js","looping_files/tippy-6.2.7/tippy-bundle.umd.min.js","looping_files/tippy-6.2.7/tippy-light-border.css","looping_files/tippy-6.2.7/tippy.css","looping_files/tippy-6.2.7/tippy.umd.min.js","looping_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["looping_draft_files/anchor-4.2.2/anchor.min.js","looping_draft_files/bowser-1.9.3/bowser.min.js","looping_draft_files/distill-2.2.21/template.v2.js","looping_draft_files/figure-html5/unnamed-chunk-6-1.png","looping_draft_files/header-attrs-2.6/header-attrs.js","looping_draft_files/jquery-1.11.3/jquery.min.js","looping_draft_files/popper-2.6.0/popper.min.js","looping_draft_files/tippy-6.2.7/tippy-bundle.umd.min.js","looping_draft_files/tippy-6.2.7/tippy-light-border.css","looping_draft_files/tippy-6.2.7/tippy.css","looping_draft_files/tippy-6.2.7/tippy.umd.min.js","looping_draft_files/webcomponents-2.0.0/webcomponents.js","looping_draft.html","looping_files/anchor-4.2.2/anchor.min.js","looping_files/bowser-1.9.3/bowser.min.js","looping_files/distill-2.2.21/template.v2.js","looping_files/figure-html5/unnamed-chunk-6-1.png","looping_files/figure-html5/unnamed-chunk-9-1.png","looping_files/header-attrs-2.6/header-attrs.js","looping_files/jquery-1.11.3/jquery.min.js","looping_files/popper-2.6.0/popper.min.js","looping_files/tippy-6.2.7/tippy-bundle.umd.min.js","looping_files/tippy-6.2.7/tippy-light-border.css","looping_files/tippy-6.2.7/tippy.css","looping_files/tippy-6.2.7/tippy.umd.min.js","looping_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2495,7 +2495,7 @@ body {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Looping","description":"A short description of the post.","authors":[{"author":"Meg Siritzky","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000-07:00","citationText":"Siritzky, 2021"}
+{"title":"Looping","description":"A tutorial for using {purrr} for looping functions.","authors":[{"author":"Meg Siritzky","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000+00:00","citationText":"Siritzky, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2535,7 +2535,7 @@ About
 <h1>Looping</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>A tutorial for using {purrr} for looping functions.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2545,15 +2545,76 @@ About
 </div>
 
 <div class="d-article">
-<p>The question we’re trying to answer is what is the change in the relationship between age and percentage of the population experiencing food insecurity over time.</p>
-<p>First we’ll import our data using the <em>here</em> package.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span>, <span class='st'>"nhanes_1999-2016.csv"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#background">Background</a>
+<ul>
+<li><a href="#dataset">Dataset</a></li>
+<li><a href="#theoretical-background-research-question">Theoretical Background &amp; Research Question</a></li>
+<li><a href="#references">References</a></li>
+</ul></li>
+<li><a href="#using-purrr">Using <code>{purrr}</code></a>
+<ul>
+<li><a href="#data-cleaing">Data cleaing</a></li>
+<li><a href="#using-map-and-map_dbl-functions">Using <code>map</code> and <code>map_dbl</code> functions</a></li>
+<li><a href="#creating-plots-using-pmap-and-list">Creating plots using <code>pmap</code> and <code>list</code></a></li>
+<li><a href="#exporting-plots-using-walk2-function">Exporting plots using <code>walk2</code> function</a></li>
+</ul></li>
+</ul>
+</nav>
 </div>
+<p>In this post, we will use the <code>{purrr}</code> package to loop through functions in a data frame. We will look at <code>purrr::map()</code> and <code>purrr:map_dbl()</code>, which can iterate functions over multiple elements of a vector or list. We will also explore <code>walk2</code> as an alternative to <code>map2</code>.</p>
+<h1 id="background">Background</h1>
+<h2 id="dataset">Dataset</h2>
+<p>For this post, we’ll be using data from the <a href="https://www.cdc.gov/nchs/nhanes/index.htm"><em>National Health and Nutrition Examination Survey</em> (NHANES)</a>, which provides longitudinal data on health and nutrition in the United States. We’ll be looking at survey data from 1999 - 2016. To keep it simple, we narrowed the dataset down to the following variables of interest for the current post:</p>
+<div class="l-body">
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 10%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable Code</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>year</code></td>
+<td><em>String</em></td>
+<td>The year that data was collected</td>
+</tr>
+<tr class="even">
+<td><code>educ_adult</code></td>
+<td><em>Integer</em></td>
+<td>Level of education reached</td>
+</tr>
+<tr class="odd">
+<td><code>hh_food_secure</code></td>
+<td><em>Integer</em></td>
+<td>Household food security category over last 12 months</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>Next, we’re going to convert the food insecurity variable to a factor, rename the levels, and remove NAs.</p>
+<h2 id="theoretical-background-research-question">Theoretical Background &amp; Research Question</h2>
+<p>Research has found a negative relation between educational attainment and food insecurity - that is, individuals who have received more education also experience greater food security (Mutisya et al., 2016). However, this relationship could be attributed to a number of factors, including inequitable access to education across SES groups and the inclusion of food literacy education in schooling (American Psychological Association, 2017; Begley, Paynter, Butcher, &amp; Dhaliwal, 2019; Hochschild, 2003; Zhang, 2003). Thus, the relationship between educational attainment and food insecurity may change over time as public policy and education change.</p>
+<p>To practice using the <code>purrr:map()</code> family of functions, we’re going to investigate the following research question: <strong>How does the relationship between educational attainment and food insecurity change over time?</strong></p>
+<h2 id="references">References</h2>
+<p>American Psychological Association. (2017). Education &amp; Socioeconomic status. <a href="https://www.apa.org/pi/ses/resources/publications/factsheet-education.pdf" class="uri">https://www.apa.org/pi/ses/resources/publications/factsheet-education.pdf</a></p>
+<p>Begley, A., Paynter, E., Butcher, L. M., &amp; Dhaliwal, S. S. (2019). Examining the association between food literacy and food insecurity. Nutrients, 11(2), 445.</p>
+<p>Hochschild, J. L. (2003). Social class in public schools. Journal of Social Issues, 59, 821-840.</p>
+<p>Mutisya, M., Ngware, M.W., Kabiru, C.W. et al. The effect of education on household food security in two informal urban settlements in Kenya: a longitudinal analysis. Food Sec. 8, 743–756 (2016). <a href="https://doi.org/10.1007/s12571-016-0589-3" class="uri">https://doi.org/10.1007/s12571-016-0589-3</a></p>
+<p>Zhang, M. (2003). Links between school absenteeism and child poverty. Pastoral Care in Education, 21, 10-17. <a href="doi:10.1111/1468-0122.00249" class="uri">doi:10.1111/1468-0122.00249</a></p>
+<h1 id="using-purrr">Using <code>{purrr}</code></h1>
+<p>We’ll be looking at the variable of <em>educ_adult</em> to represent the level of educational attainment in the general population, and comparing that to a new variable we’ll create to represent the percentage of the total population experiencing food insecurity.</p>
+<h2 id="data-cleaing">Data cleaing</h2>
+<p>First, we’re going to convert our food insecurity variable <em>hh_food_secure</em> to a factor named <em>security</em>, rename the levels of the factor so they are meaningful, and remove any NAs in our variables of interest.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_factor</span> <span class='op'>&lt;-</span> <span class='va'>fi</span> <span class='op'>%&gt;%</span> 
@@ -2563,24 +2624,12 @@ About
     <span class='va'>security</span> <span class='op'>==</span> <span class='st'>"2"</span> <span class='op'>~</span> <span class='st'>"marginal food security"</span>,
     <span class='va'>security</span> <span class='op'>==</span> <span class='st'>"3"</span> <span class='op'>~</span> <span class='st'>"low food security"</span>,
     <span class='va'>security</span> <span class='op'>==</span> <span class='st'>"4"</span> <span class='op'>~</span> <span class='st'>"very low food security"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>security</span> <span class='op'>!=</span> <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>security</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>security</span> <span class='op'>!=</span> <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>security</span><span class='op'>)</span>,
+         <span class='va'>educ_adult</span> <span class='op'>!=</span> <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>educ_adult</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<p>We want to get the percentage of the population that falls in each food security group at each time point, so we’re going to first count the number of people in each group in each year and the population in each year, and then create a new column called <em>percent_insecurity</em> that has the percentage of people in the population that report that level of food security.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_factor</span> <span class='op'>&lt;-</span> <span class='va'>fi_factor</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>add_count</span><span class='op'>(</span><span class='va'>year</span>, name <span class='op'>=</span> <span class='st'>"pop"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>add_count</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>security</span>, name <span class='op'>=</span> <span class='st'>"ct"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>security</span>, <span class='va'>age</span>, <span class='va'>pop</span>, <span class='va'>ct</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>pop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>pop</span><span class='op'>)</span>,
-         ct <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>ct</span><span class='op'>)</span>,
-         percent_insecurity <span class='op'>=</span> <span class='va'>ct</span><span class='op'>/</span><span class='va'>pop</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<p>Now we use the <em>group_by</em> and <em>nest</em> functions to create a nested data frame that groups our data by year and level of food insecurity.</p>
+<p>Now we’ll use <code>group_by</code> and the <code>nest</code> function from the <code>{purrr}</code> package to create a nested data frame that groups our data by year and level of food insecurity. To learn more about using the <code>nest</code> function, take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/" target="_blank">this post on parallel iteration</a>.)</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_grouped</span> <span class='op'>&lt;-</span> <span class='va'>fi_factor</span> <span class='op'>%&gt;%</span> 
@@ -2589,30 +2638,51 @@ About
 </code></pre>
 </div>
 </div>
-<p>We’re want to look at the linear relationship between age and percent of food insecurity over time. To do this, we fit a linear regression model predicting food insecurity from age using <em>map</em>. We can then extract the intercepts and slopes of each model using <em>map_dbl</em>. I’m going to want to use our <em>percent_insecurity</em> variable later, so to move it from a nested list to the main data frame, I <em>unnest</em> the <em>data</em> list and then save that column.</p>
+<p>Remember, we want to compare educational attainment to the percentage of the population experiencing food insecurity, so we need to create a variable that will tell us the percentage of the population that falls into each food security category at each time point. To do this, we’re going to first count the number of people in each food security category in each year (<em>ct</em>) and the population in each year (<em>pop</em>), and then create a new column called <em>percent_insecurity</em> that has the percentage of people in the population that report a given level of food security.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_grouped_lm</span> <span class='op'>&lt;-</span> <span class='va'>fi_grouped</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>m1 <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>percent_insecurity</span> <span class='op'>~</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>,
-         coefs <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>coefficients</span><span class='op'>)</span>,
-         intercept <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>1</span><span class='op'>)</span>,
-         slope <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>unnest</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>security</span>, <span class='va'>intercept</span>, <span class='va'>slope</span>, <span class='va'>percent_insecurity</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_factor</span> <span class='op'>&lt;-</span> <span class='va'>fi_factor</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>add_count</span><span class='op'>(</span><span class='va'>year</span>, name <span class='op'>=</span> <span class='st'>"pop"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>add_count</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>security</span>, name <span class='op'>=</span> <span class='st'>"ct"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>security</span>, <span class='va'>educ_adult</span>, <span class='va'>pop</span>, <span class='va'>ct</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>pop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>pop</span><span class='op'>)</span>,
+         ct <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>ct</span><span class='op'>)</span>,
+         percent_insecurity <span class='op'>=</span> <span class='va'>ct</span><span class='op'>/</span><span class='va'>pop</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<p>Now we want to look at the change in slope of how age predicts food insecurity across time. So I’m creating a line graph where the x axis is year and the y-axis is slope, and I’m visualizing to see the change in slope over time. I’m using the <em>pmap</em> and <em>list</em> functions to create a new list in our nested data frame with a plot for each level of food security.</p>
+<h2 id="using-map-and-map_dbl-functions">Using <code>map</code> and <code>map_dbl</code> functions</h2>
+<p>To measure the the relationship between educational attainment and the percentage of the population experiencing food insecurity at each time point, we’re going to run a linear regression model for each food security category in each year. To do this, we’re first going to use the <code>group_by</code> and <code>nest</code> functions to create lists of data nested within each value of <em>year</em> and <em>security</em>.</p>
+<p>Now that the data are nested, we want to use the <code>lm</code> function to run a linear regression model regressing <em>percent_insecurity</em> on <em>educ_adult</em>. We’re going to use the <code>map</code> function from the <code>{purrr}</code> package to iterate this function across each combination of <em>year</em> and <em>security</em>.</p>
+<p>Now, to examine how the relationship changes over time, we want to compare the slopes across years for each food security category. To do this, we’re going to need the slopes. We can extract the slopes using the <code>map_dbl</code> function. Why <code>map_dbl</code> instead of <code>map</code>? Because <code>map</code> will give us the output in a list format, whereas <code>map_dbl</code> will return a vector* that we can save as a column in our data frame.</p>
+<p>*By using <code>map_dbl</code>, we’re saving the data as type double. If we wanted to save the data as an integer vector instead, we could use <code>map_int</code>. Alternatively, if we wanted to save the data as a character vector, we could use <code>map_char</code>.</p>
+<p>We’re going to want to use our <em>percent_insecurity</em> variable later, so to move it from a nested list to the main data frame, we can <code>unnest</code> the <em>data</em> list and then use <code>select</code> from <code>{dplyr}</code> to save the columns we’re interested in.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_grouped_plots</span> <span class='op'>&lt;-</span> <span class='va'>fi_grouped_lm</span> <span class='op'>%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_lm</span> <span class='op'>&lt;-</span> <span class='va'>fi_factor</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>security</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>m1 <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>percent_insecurity</span> <span class='op'>~</span> <span class='va'>educ_adult</span>, data <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>,
+         coefs <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>coefficients</span><span class='op'>)</span>,
+         slope <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>unnest</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>security</span>, <span class='va'>slope</span>, <span class='va'>percent_insecurity</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="creating-plots-using-pmap-and-list">Creating plots using <code>pmap</code> and <code>list</code></h2>
+<p>To visualize the change in slope of how educational attainment predicts food insecurity across time, we can create a scatterplot for each food security category with an x-axis of <em>year</em> and a y-axis of <em>slope</em>. To create a plot for each food security category, we can use the <code>pmap</code> and <code>list</code> functions to create a new list in our nested data frame with a plot for each value of <code>security</code>. I’m using <code>{.x}</code> here in the title to customize each plot title to the food security category it corresponds to.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_plots</span> <span class='op'>&lt;-</span> <span class='va'>fi_lm</span> <span class='op'>%&gt;%</span>
   <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>security</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>mutate</span><span class='op'>(</span>plot <span class='op'>=</span> <span class='fu'>pmap</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>security</span>, <span class='va'>data</span><span class='op'>)</span>, <span class='op'>~</span><span class='op'>{</span>
     <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>..2</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>slope</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
       <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-      <span class='fu'>geom_line</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-      <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Slope of relation between age and {.x} by year"</span><span class='op'>)</span>,
+      <span class='fu'>theme</span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+      <span class='fu'>theme_minimal</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+      <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Slope of relation between adult education levels and {.x} by year"</span><span class='op'>)</span>,
            x <span class='op'>=</span> <span class='st'>"Year"</span>,
            y <span class='op'>=</span> <span class='st'>"Slope"</span><span class='op'>)</span>
     <span class='op'>}</span><span class='op'>)</span>
@@ -2620,60 +2690,23 @@ About
 </code></pre>
 </div>
 </div>
-<p>Here’s an example of one of the plots.</p>
+<p>Here’s an example of one of the plots:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_grouped_plots</span><span class='op'>$</span><span class='va'>plot</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_plots</span><span class='op'>$</span><span class='va'>plot</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
 </code></pre>
 </div>
 <p><img src="looping_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
 </div>
-<p>Now I’m going to export a plot for each level of food security using <em>walk2</em>.</p>
+<h2 id="exporting-plots-using-walk2-function">Exporting plots using <code>walk2</code> function</h2>
+<p>Now we can export a plot for each food security category to a new folder. First we’ll use the <code>here</code> function from the <code>{here}</code> package to create a new folder called <em>plots</em> and a folder within that called <em>slope_plots</em>. We’ll then use the same package to create a pathway through which we can create files for each plot that incorporate the name of the food security category they fit in. Using the <code>walk2</code> function from the <code>{purrr}</code> package, we can save these plots and specify their dimensions. Why use <code>walk2</code> instead of <code>map2</code>? The <code>walk</code> family of functions are most useful for calling a function for its side effects (like saving files) rather than its return output (like displaying the plots) (see <a href = "https://r4ds.had.co.nz/iteration.html#walk" target="_blank">r4ds</a> for more details).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/create.html'>dir_create</a></span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"plots"</span>, <span class='st'>"slope_plots"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>food_security_groups</span> <span class='op'>&lt;-</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>fi_grouped_plots</span><span class='op'>$</span><span class='va'>security</span><span class='op'>)</span>, <span class='st'>" "</span>, <span class='st'>"-"</span><span class='op'>)</span>
+<span class='va'>food_security_groups</span> <span class='op'>&lt;-</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>fi_plots</span><span class='op'>$</span><span class='va'>security</span><span class='op'>)</span>, <span class='st'>" "</span>, <span class='st'>"-"</span><span class='op'>)</span>
 <span class='va'>paths</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"plots"</span>, <span class='st'>"slope_plots"</span>, <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"age_{food_security_groups}.png"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>walk2</span><span class='op'>(</span><span class='va'>paths</span>, <span class='va'>fi_grouped_plots</span><span class='op'>$</span><span class='va'>plot</span>, <span class='va'>ggsave</span>,
-      width <span class='op'>=</span> <span class='fl'>9.5</span>, 
-      height <span class='op'>=</span> <span class='fl'>6.5</span>,
-      dpi <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<p>Now I want to look at the change in percent of different levels of food security across time. So, again, I’m using the the <em>pmap</em> and <em>list</em> functions to create a new list in our nested data frame with bar graphs where the x axis is year and the y-axis is percent of food security.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_grouped_plots_2</span> <span class='op'>&lt;-</span> <span class='va'>fi_grouped_lm</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>security</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>mutate</span><span class='op'>(</span>plot <span class='op'>=</span> <span class='fu'>pmap</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>security</span>, <span class='va'>data</span><span class='op'>)</span>, <span class='op'>~</span><span class='op'>{</span>
-    <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>..2</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>percent_insecurity</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-      <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-      <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Percent of {.x} in the population by year"</span><span class='op'>)</span>,
-           x <span class='op'>=</span> <span class='st'>"Year"</span>,
-           y <span class='op'>=</span> <span class='st'>"Percent"</span><span class='op'>)</span>
-    <span class='op'>}</span><span class='op'>)</span>
-    <span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<p>Here’s an example of one of the plots.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fi_grouped_plots_2</span><span class='op'>$</span><span class='va'>plot</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
-</code></pre>
-</div>
-<p><img src="looping_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
-</div>
-<p>Again, I’m going to export a plot for each level of food security using <em>walk2</em>.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/create.html'>dir_create</a></span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"plots"</span>, <span class='st'>"percent_plots"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>paths_2</span> <span class='op'>&lt;-</span> <span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"plots"</span>, <span class='st'>"percent_plots"</span>, <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"percent_{food_security_groups}.png"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>walk2</span><span class='op'>(</span><span class='va'>paths_2</span>, <span class='va'>fi_grouped_plots_2</span><span class='op'>$</span><span class='va'>plot</span>, <span class='va'>ggsave</span>,
+<span class='fu'>walk2</span><span class='op'>(</span><span class='va'>paths</span>, <span class='va'>fi_plots</span><span class='op'>$</span><span class='va'>plot</span>, <span class='va'>ggsave</span>,
       width <span class='op'>=</span> <span class='fl'>9.5</span>, 
       height <span class='op'>=</span> <span class='fl'>6.5</span>,
       dpi <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span>
