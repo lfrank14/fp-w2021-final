@@ -1,15 +1,19 @@
 ---
 title: "Writing Functions"
 description: |
-  This is a tutorial for how to write a function in R.
+  This is a tutorial for how to write your first custom function in R.
 author:
   - name: Sarah Dimakis
 date: 05-13-2021
+categories:
+  - custom functions
 output:
   distill::distill_article:
     toc: true
     toc_float: true
     self_contained: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -17,14 +21,23 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, echo = FALSE}
+xaringanExtra::use_clipboard()
+```
+
 # Load libraries and read in data
+
+For this tutorial, you will first need to load `tidyverse` for data wrangling and `kableExtra` for tables. Next, I am using `rio::import` to import the cleaned data file to my environment. Note, you may need to change the file path if your file structure is not the same as mine. Last, I am using `mutate` and `case_when` to label the levels of the food_secure variable.
+
+If you would like to copy the code, you can hover of the code, and a "copy code" box should appear.
+
 
 ```{r}
 
-library(rio)
 library(tidyverse)
 library(kableExtra)
-data <- import(here::here("data", "nhanes_1999-2016.csv")) %>% 
+
+data <- rio::import(here::here("data", "nhanes_1999-2016.csv")) %>% 
   mutate(food_security = case_when(hh_food_secure == 1 ~ "Fully food secure",
             hh_food_secure == 2 ~ "Marginally food secure",
             hh_food_secure == 3 ~ "Food insecure without hunger",
@@ -32,9 +45,20 @@ data <- import(here::here("data", "nhanes_1999-2016.csv")) %>%
 
 ```
 
-# Functions in R
+# Functions
 
-Let's first create a function called `my_pet()` that will print out a statement about your pet. For best practice, you should try to name your function something descriptive. It should also not be named another function that is popular like `mean` because it will overwrite the default `mean` function for your script.
+A **function** is code that carries out an operation. For example `+` is a function that carries out the operation addition.
+
+```{r}
+2 + 3
+```
+In algebra, you may recall learning functions such as $f(x,y) = x^2+y$, where you put in inputs `x = 2` and `y = 1`, the function computes the operation, $2^2+1$, and outputs $5$. Similarly, when using a function in R, it takes a form like `f(x,y,z..)` where f is the function name and x,y,z... are the arguments of the function.
+
+```{r}
+`+`(2,3)
+```
+
+Let's create our first function in R called `my_pet()` that will print out a statement about your pet. For best practice, you should try to name your function something descriptive. It should also not be named another function that is popular like `mean` because it will overwrite the default `mean` function for your script.
 
 ```{r}
 my_pet <- function(pronoun, animal, verb){
@@ -43,18 +67,11 @@ my_pet <- function(pronoun, animal, verb){
 
 ```
 
-The **arguments** of the function (which are called `formals`) are what the user supplies the function to get their desired output. You can see the formals of a function in R by using the `formals()` function. Now, in order to use the function, you can supply it with your desired arguments.
 
 
 
-```{r}
-my_pet("she", "dog", "play outside")
-my_pet("he", "cat", "sleep")
-my_pet("she", "lizard", "eat")
 
-```
-
-If you aren't sure what the `formals()` of a function are, you can access them with the `formals()` function.
+The **arguments** of the function (which are called `formals`) are what the user supplies the function to get their desired output. You can see the formals of a function in R by using the `formals()` function. 
 
 ```{r}
 formals(my_pet)
@@ -66,32 +83,116 @@ The **body** of the function is where the function takes in the `formals` and cr
 body(my_pet)
 ```
 
+Now, in order to use the function, you can supply it with your desired formals.
 
-# Warnings
+```{r}
+my_pet(pronoun = "she", 
+       animal = "dog", 
+       verb = "play outside")
 
-If someone else (or your future self) is going to use your function, it is helpful to embed warnings (via `warning()`) or errors (via `stop()`) into your code to explain why the code will not work (or if it will not work as expected). In this example, I am also demonstrating the structure of an if else statement. I am saying that if each argument is a character, then I can proceed. Otherwise, I should produce a warning. 
+
+```
+When you use your function, you can drop the argument names as long as you keep the same order.
+
+```{r}
+my_pet("he", "cat", "sleep")
+```
+
+If you want to use arguments out of the order they were defined in, you will need to label them.
+
+```{r}
+my_pet(animal = "lizard",
+       pronoun ="she", 
+       verb = "eat")
+
+```
+# Default settings
+
+You can set a "default" setting for an argument. This is the setting that occurs when the user does not specify the argument. 
+
+```{r}
+my_pet2 <- function(pronoun, animal, verb = "dance"){
+  paste0(str_to_title(pronoun), " is a ", animal, " who likes to ", verb, ".")
+}
+```
+
+```{r}
+my_pet2(pronoun = "she",
+        animal = "dog")
+```
+
+The user can overwrite the default.
+
+```{r}
+my_pet2(pronoun = "she",
+        animal = "dog",
+        verb = "cuddle")
+```
+
+
+# Errors and warnings
+
+If someone else (or your future self) is going to use your function, it is helpful to embed errors with `stop()` and/or warnings with `warning()`  into your code to explain why the code will not work (or if it will not work as expected). 
 
 
 ```{r}
-my_pet <- function(pronoun, animal, verb){
-  if(is.character(pronoun) & is.character(animal) & is.character(verb)){
-  paste0(str_to_title(pronoun), " is a ", animal, " who likes to ", verb, ".")}
-  else{
-    warning("You need to input the pronoun, animal, and verb as a character variable. Returning Null.")
-    return()
+# I am using an if else structure
+# If the user inputs "cat" for animal, the function will 
+# throw an error and say "Sorry, this function doesn't work # for people who own cats"
+# If they use input any other animal, it will work
+
+my_pet3 <- function(pronoun, animal, verb = "stretch"){
+  if(animal == "cat"){
+    stop("Sorry, this function doesn't work for people who own cats.")
   }
+  else{
+    paste0(str_to_title(pronoun), " is a ", animal, " who likes to ", verb, ".")
+    }
 }
 
-my_pet("she", "dog", "play outside")
-my_pet("she", 3, "play outside")
+```
 
+```{r, error = TRUE}
+# This works
+my_pet3("she", "dog")
+
+# This throws an error
+my_pet3("he", "cat")
+
+```
+
+Instead of an error, you might just want to throw a warning, but still allow the function to work. 
+
+```{r}
+
+my_pet4 <- function(pronoun, animal, verb = "stretch"){
+  if(animal != "dog"){
+    warning(paste0("Really? A ", animal, "? You should really consider getting a dog."))
+  }
+  paste0(str_to_title(pronoun), " is a ", animal, " who likes to ", verb, ".")
+    
+}
 
 ```
 
 
+```{r, warning= TRUE}
+
+my_pet4("he", "cat")
+my_pet4("he", "fish", "swim")
+
+
+# works as normal
+my_pet4("she", "dog")
+
+```
+
+
+These are silly examples, but there are many reasons why you would want the function to output a warning or error. For example, you may want the function to warn someone if their input is not going to give them the output they expect, or if the function will not work for certain input. This will help the user work with your function to get their desired output.
+
 # Example function 1
 
-What makes a particularly good function is code that you write a lot. Additionally, you want to make a function that is simple and only does one thing. For this first function, I am going to create a function that will create a "total" column that calculates the total observations across a grouping variable.
+What makes a particularly good function is code that you write a lot. Additionally, you want to make a function that is simple and only does one thing. For this first function, I am going to create a function that will create a "total" column that calculates the total observations across all levels of a grouping variable.
 
 Before I create a function, I first like to try to make it work in a single case.
 
@@ -102,37 +203,68 @@ a
 b <- count(data, year)
 b
 
-b <- rename(b, "total" = "n")
-b
+# Join a and b by year
+# There are two n's so I am also changing the suffix of n so that they are labeled more clearly
 
-left_join(a,b)
+left_join(a,b, by = "year", 
+          suffix = c("_group", "_total"))
 ```
+
+Now, let's try to generalize it.
+
+
+```{r, error = TRUE}
+total_grouping <- function(data, var, grouping){
+  a <- count(data, var, grouping)
+  b <- count(data, var)
+  c <- left_join(a,b,by = "year", 
+          suffix = c("_group", "_total"))
+}
+total_grouping(data, year, gender)
+
+```
+
+Unfortunately, from running this code, we get an error that says that the columns `var` and `grouping` are not found. This can happen when you use tidyverse functions to write functions because the tidyverse uses what is called **non-standard evaluation**. NSE makes the functions really user friendly. For example, when you use dplyr functions like `select(data, year)` or `group_by(data, year)`, the function knows that year is referring to `data$year` and not `year` from your global environment. However, this causes trouble when you try to use `select()` or `group_by()` (or in our case, `counts()`) in your own function. R looks for the column names (in our case, `var` and `grouping`) in your global environment but can't find them. In order to  work around this, we need to also use NSE. Here are two ways you can write the function with NSE:
+
+1. {{}} Syntax
 
 ```{r}
 total_grouping <- function(data, var, grouping){
-  v1 <- enquo(var) 
-  v2 <- enquo(grouping)
-  
-  a <- count(data, !!v1, !!v2)
-  b <- count(data, !!v1)
-  b <- rename(b, "total" = "n")
-  c <- left_join(a,b)
-  na.omit(c)
+  a <- count(data, {{var}}, {{grouping}}) ##wrap the variables in {{}}
+  b <- count(data, {{var}})
+  left_join(a,b,by = "year", 
+          suffix = c("_group", "_total"))
 }
+
+total_grouping(data, year, gender) %>% head()
 ```
+
+2. Quote the variables
 
 ```{r}
-total_grouping(data, year, gender)
+total_grouping <- function(data, var, grouping){
+  v1 <- enquo(var)  #quote the variables
+  v2 <- enquo(grouping)
+  
+  a <- count(data, !!v1, !!v2) # use !! to evaluate the quoted variables
+  b <- count(data, !!v1)
+  left_join(a,b,by = "year", 
+          suffix = c("_group", "_total"))
+}
+
+total_grouping(data, year, gender) %>% head()
+
 ```
 
-Now I can do it with other variables!
+The great thing about functions is that we can now use our function with other variables, without having to copy,paste, and change the numbers. This cuts down on mistakes and makes your code easier to read.
+
 
 ```{r}
 total_grouping(data, year, race_ethnic) %>% 
-  head(10)
+  head()
 
 total_grouping(data, year, food_security) %>% 
-  head(10)
+  head()
 ```
 
 # Example function 2
@@ -143,20 +275,18 @@ Let's first try an example.
 
 ```{r}
 total_grouping(data, year, gender) %>% 
-  mutate(percent = n/total * 100,
+  mutate(percent = n_group/n_total * 100, #make a new variable called percent 
          percent = round(percent, 2),
-         percent = paste0(percent, "%"))
+         percent = paste0(percent, "%")) #round it and add a % sign
 
 ```
 
-Okay, now we're ready to generalize.
+Okay, now we're ready to generalize. Note that I'm using NSE here too.
+
 ```{r}
 percent_grouping <- function(data, var, grouping){
-  v1 <- enquo(var) 
-  v2 <- enquo(grouping)
-  
-  total_grouping(data, !!v1, !!v2) %>% 
-  mutate(percent = n/total * 100,
+  total_grouping(data, {{var}}, {{grouping}}) %>% 
+  mutate(percent = n_group/n_total * 100,
          percent = round(percent, 2),
          percent = paste0(percent, "%")) 
 }
@@ -165,47 +295,53 @@ percent_grouping <- function(data, var, grouping){
 ```
 
 ```{r}
-total_grouping(data, year, gender)
+percent_grouping(data, year, gender) %>% head()
 
-total_grouping(data, year, race_ethnic) %>% 
-  head(10)
+percent_grouping(data, year, race_ethnic) %>% head()
 
-total_grouping(data, year, food_security) %>% 
-  head(10)
 
 ```
 
 # Tables
 
-Now, let's make a table with our output.
+Now, let's make a table with our output. These tables will tell us how the demographics of our sample changed from year to year.
 
 ```{r}
+# creates an ugly first draft 
 temp_table <- percent_grouping(data, year, gender) %>% 
   select(year, gender, percent) %>% 
   pivot_wider(names_from = gender,
               values_from = percent) %>% t(.)
+
+temp_table
+
+# moves the first row to the title
 table <- temp_table[2:3,]
 colnames(table) <- temp_table[1,] 
+rownames(table) <- rownames(table) %>% str_to_title()
+
+#stylized table
 table %>% kbl() %>% 
-  kable_styling(bootstrap_options = "striped", full_width = F) %>% 
-  row_spec(0, angle = -45)
+  kable_styling(bootstrap_options = "striped", full_width = F)  %>% #gives me a stylized striped table
+  row_spec(0, angle = -45) #rotates column names
 
 
 ```
 
 
-I can generalize this with a function and I'll make tables for other variables! 
+I can generalize this with a function so I can make tables for other variables! 
 
 ```{r}
 my_table <- function(data, var, grouping){
-  v1 <- enquo(var) 
-  v2 <- enquo(grouping)
-  temp_table <- percent_grouping(data, !!v1, !!v2) %>% 
-    select(!!v1, !!v2, percent) %>% 
-    pivot_wider(names_from = !!v2,
+  temp_table <- percent_grouping(data, {{var}}, {{grouping}}) %>% 
+    select({{var}}, {{grouping}}, percent) %>% 
+    pivot_wider(names_from = {{grouping}},
                 values_from = percent) %>% t(.)
+  
   table <- temp_table[2:nrow(temp_table),]
   colnames(table) <- temp_table[1,] 
+  rownames(table) <- rownames(table) %>% str_to_title()
+  
   table %>% kbl() %>% 
     kable_styling(bootstrap_options = "striped", full_width = F) %>% 
     row_spec(0, angle = -45)
@@ -220,4 +356,10 @@ my_table(data, year, race_ethnic)
 
 my_table(data, year, food_security)
 ```
+
+Over time, as you use your function with different examples, you may want to tweak it. For example, I noticed by using the food security variable that I never explictly removed NAs. You may want to always remove NAs. Or, you can give your user an option to remove NAs or not by creating an argument called "remove.nas" and set it to TRUE to remove NAs by default. Then, if the user wants to see the NAs, they can set it to FALSE.
+
+Additionally, I noticed that I made sure that my row names were capitalized, but I didn't do that for the column names because it wasn't relevant here (in all my examples the column names were numbers). This is why it is helpful to test your functions under as many different conditions as you can think of!
+
+
 
