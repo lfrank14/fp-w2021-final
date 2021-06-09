@@ -42,6 +42,7 @@
       <dc:creator>Sarah Dimakis</dc:creator>
       <link>https://lfrank14.github.io/fp-w2021-final/posts/writing-functions</link>
       <description>This is a tutorial for how to write a function in R.</description>
+      <category>custom functions</category>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/writing-functions</guid>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
     </item>

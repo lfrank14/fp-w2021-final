@@ -20,19 +20,19 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -52,37 +52,37 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #545454; font-weight: bold; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #a1024a; } /* BaseN */
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007faa; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #008000; } /* Char */
-code span.cn { color: #d91e18; } /* Constant */
-code span.co { color: #545454; } /* Comment */
-code span.cv { color: #545454; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #aa5d00; } /* DataType */
-code span.dv { color: #a1024a; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
 code span.ex { } /* Extension */
-code span.fl { color: #a1024a; } /* Float */
-code span.fu { color: #4254a7; } /* Function */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
-code span.in { color: #545454; font-weight: bold; } /* Information */
-code span.kw { color: #007faa; font-weight: bold; } /* Keyword */
-code span.op { color: #696969; } /* Operator */
-code span.ot { color: #007faa; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #008000; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #008000; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #008000; } /* VerbatimString */
-code span.wa { color: #545454; font-weight: bold; font-style: italic; } /* Warning */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
@@ -115,12 +115,12 @@ code span.wa { color: #545454; font-weight: bold; font-style: italic; } /* Warni
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Writing Functions"]},{"type":"character","attributes":{},"value":["This is a tutorial for how to write a function in R."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Sarah Dimakis"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/writing-functions/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","output","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Writing Functions"]},{"type":"character","attributes":{},"value":["This is a tutorial for how to write a function in R."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Sarah Dimakis"]}]}]},{"type":"character","attributes":{},"value":["05-13-2021"]},{"type":"character","attributes":{},"value":["custom functions"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/writing-functions/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["writing-functions_files/anchor-4.2.2/anchor.min.js","writing-functions_files/bowser-1.9.3/bowser.min.js","writing-functions_files/distill-2.2.21/template.v2.js","writing-functions_files/jquery-1.11.3/jquery.min.js","writing-functions_files/kePrint-0.0.1/kePrint.js","writing-functions_files/lightable-0.0.1/lightable.css","writing-functions_files/popper-2.6.0/popper.min.js","writing-functions_files/tippy-6.2.7/tippy-bundle.umd.min.js","writing-functions_files/tippy-6.2.7/tippy-light-border.css","writing-functions_files/tippy-6.2.7/tippy.css","writing-functions_files/tippy-6.2.7/tippy.umd.min.js","writing-functions_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["writing-functions_files/anchor-4.2.2/anchor.min.js","writing-functions_files/bowser-1.9.3/bowser.min.js","writing-functions_files/distill-2.2.21/template.v2.js","writing-functions_files/header-attrs-2.8/header-attrs.js","writing-functions_files/jquery-1.11.3/jquery.min.js","writing-functions_files/kePrint-0.0.1/kePrint.js","writing-functions_files/lightable-0.0.1/lightable.css","writing-functions_files/popper-2.6.0/popper.min.js","writing-functions_files/tippy-6.2.7/tippy-bundle.umd.min.js","writing-functions_files/tippy-6.2.7/tippy-light-border.css","writing-functions_files/tippy-6.2.7/tippy.css","writing-functions_files/tippy-6.2.7/tippy.umd.min.js","writing-functions_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2371,9 +2371,14 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.8/header-attrs.js"></script>
   <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -2486,7 +2491,7 @@ body {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Writing Functions","description":"This is a tutorial for how to write a function in R.","authors":[{"author":"Sarah Dimakis","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000+00:00","citationText":"Dimakis, 2021"}
+{"title":"Writing Functions","description":"This is a tutorial for how to write a function in R.","authors":[{"author":"Sarah Dimakis","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-13T00:00:00.000-07:00","citationText":"Dimakis, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2525,6 +2530,9 @@ About
 <div class="d-title">
 <h1>Writing Functions</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../tutorials.html#category:custom_functions" class="dt-tag">custom functions</a>
+</div>
 <!--/radix_placeholder_categories-->
 <p><p>This is a tutorial for how to write a function in R.</p></p>
 </div>
@@ -2541,7 +2549,8 @@ About
 <h3>Contents</h3>
 <ul>
 <li><a href="#load-libraries-and-read-in-data">Load libraries and read in data</a></li>
-<li><a href="#functions-in-r">Functions in R</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#default-settings">Default settings</a></li>
 <li><a href="#warnings">Warnings</a></li>
 <li><a href="#example-function-1">Example function 1</a></li>
 <li><a href="#example-function-2">Example function 2</a></li>
@@ -2550,12 +2559,13 @@ About
 </nav>
 </div>
 <h1 id="load-libraries-and-read-in-data">Load libraries and read in data</h1>
+<p>For this tutorial, you will first need to load <code>tidyverse</code> for data wrangling and <code>kableExtra</code> for tables. Next, I am using <code>rio::import</code> to import the cleaned data file to my environment. Note, you may need to change the file path if your file structure is not the same as mine. Last, I am using <code>mutate</code> and <code>case_when</code> to label the levels of the food_secure variable.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/leeper/rio'>rio</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span>, <span class='st'>"nhanes_1999-2016.csv"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>rio</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span><span class='op'>(</span><span class='fu'>here</span><span class='fu'>::</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span>, <span class='st'>"nhanes_1999-2016.csv"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>mutate</span><span class='op'>(</span>food_security <span class='op'>=</span> <span class='fu'>case_when</span><span class='op'>(</span><span class='va'>hh_food_secure</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"Fully food secure"</span>,
             <span class='va'>hh_food_secure</span> <span class='op'>==</span> <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"Marginally food secure"</span>,
             <span class='va'>hh_food_secure</span> <span class='op'>==</span> <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"Food insecure without hunger"</span>,
@@ -2563,38 +2573,36 @@ About
 </code></pre>
 </div>
 </div>
-<h1 id="functions-in-r">Functions in R</h1>
-<p>Let’s first create a function called <code>my_pet()</code> that will print out a statement about your pet. For best practice, you should try to name your function something descriptive. It should also not be named another function that is popular like <code>mean</code> because it will overwrite the default <code>mean</code> function for your script.</p>
+<h1 id="functions">Functions</h1>
+<p>A <strong>function</strong> is code that carries out an operation. For example <code>+</code> is a function that carries out the operation addition.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>my_pet</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pronoun</span>, <span class='va'>animal</span>, <span class='va'>verb</span><span class='op'>)</span><span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fl'>2</span> <span class='op'>+</span> <span class='fl'>3</span>
+</code></pre>
+</div>
+<pre><code>[1] 5</code></pre>
+</div>
+<p>In algebra, you may recall learning functions such as <span class="math inline">\(f(x,y) = x^2+y\)</span>, where you put in inputs <code>x = 2</code> and <code>y = 1</code>, the function computes the operation, <span class="math inline">\(2^2+1\)</span>, and outputs <span class="math inline">\(5\)</span>. Similarly, when using a function in R, it takes a form like <code>f(x,y,z..)</code> where f is the function name and x,y,z… are the arguments of the function.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>`+`</span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 5</code></pre>
+</div>
+<p>Let’s create our first function in R called <code>my_pet()</code> that will print out a statement about your pet. For best practice, you should try to name your function something descriptive. It should also not be named another function that is popular like <code>mean</code> because it will overwrite the default <code>mean</code> function for your script.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_pet</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pronoun</span>, <span class='va'>animal</span>, <span class='va'>verb</span><span class='op'>)</span><span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>str_to_title</span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span>, <span class='st'>" is a "</span>, <span class='va'>animal</span>, <span class='st'>" who likes to "</span>, <span class='va'>verb</span>, <span class='st'>"."</span><span class='op'>)</span>
 <span class='op'>}</span>
 </code></pre>
 </div>
 </div>
-<p>The <strong>arguments</strong> of the function (which are called <code>formals</code>) are what the user supplies the function to get their desired output. You can see the formals of a function in R by using the <code>formals()</code> function. Now, in order to use the function, you can supply it with your desired arguments.</p>
+<p>The <strong>arguments</strong> of the function (which are called <code>formals</code>) are what the user supplies the function to get their desired output. You can see the formals of a function in R by using the <code>formals()</code> function.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='st'>"dog"</span>, <span class='st'>"play outside"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>[1] &quot;She is a dog who likes to play outside.&quot;</code></pre>
-<div class="sourceCode">
-<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"he"</span>, <span class='st'>"cat"</span>, <span class='st'>"sleep"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>[1] &quot;He is a cat who likes to sleep.&quot;</code></pre>
-<div class="sourceCode">
-<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='st'>"lizard"</span>, <span class='st'>"eat"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>[1] &quot;She is a lizard who likes to eat.&quot;</code></pre>
-</div>
-<p>If you aren’t sure what the <code>formals()</code> of a function are, you can access them with the <code>formals()</code> function.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/formals.html'>formals</a></span><span class='op'>(</span><span class='va'>my_pet</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/formals.html'>formals</a></span><span class='op'>(</span><span class='va'>my_pet</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>$pronoun
@@ -2608,7 +2616,7 @@ $verb</code></pre>
 <p>The <strong>body</strong> of the function is where the function takes in the <code>formals</code> and creates the output. You can see the body of a function in R by using the <code>body()</code> function.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/r/base/body.html'>body</a></span><span class='op'>(</span><span class='va'>my_pet</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/body.html'>body</a></span><span class='op'>(</span><span class='va'>my_pet</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>{
@@ -2616,35 +2624,101 @@ $verb</code></pre>
         verb, &quot;.&quot;)
 }</code></pre>
 </div>
-<h1 id="warnings">Warnings</h1>
-<p>If someone else (or your future self) is going to use your function, it is helpful to embed warnings (via <code>warning()</code>) or errors (via <code>stop()</code>) into your code to explain why the code will not work (or if it will not work as expected). In this example, I am also demonstrating the structure of an if else statement. I am saying that if each argument is a character, then I can proceed. Otherwise, I should produce a warning.</p>
+<p>Now, in order to use the function, you can supply it with your desired formals.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>my_pet</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pronoun</span>, <span class='va'>animal</span>, <span class='va'>verb</span><span class='op'>)</span><span class='op'>{</span>
-  <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>animal</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>verb</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>str_to_title</span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span>, <span class='st'>" is a "</span>, <span class='va'>animal</span>, <span class='st'>" who likes to "</span>, <span class='va'>verb</span>, <span class='st'>"."</span><span class='op'>)</span><span class='op'>}</span>
-  <span class='kw'>else</span><span class='op'>{</span>
-    <span class='kw'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span><span class='op'>(</span><span class='st'>"You need to input the pronoun, animal, and verb as a character variable. Returning Null."</span><span class='op'>)</span>
-    <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='op'>)</span>
-  <span class='op'>}</span>
-<span class='op'>}</span>
-
-<span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='st'>"dog"</span>, <span class='st'>"play outside"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_pet</span><span class='op'>(</span>pronoun <span class='op'>=</span> <span class='st'>"she"</span>, 
+       animal <span class='op'>=</span> <span class='st'>"dog"</span>, 
+       verb <span class='op'>=</span> <span class='st'>"play outside"</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>[1] &quot;She is a dog who likes to play outside.&quot;</code></pre>
+</div>
+<p>When you use your function, you can drop the argument names as long as you keep the same order.</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='fl'>3</span>, <span class='st'>"play outside"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_pet</span><span class='op'>(</span><span class='st'>"he"</span>, <span class='st'>"cat"</span>, <span class='st'>"sleep"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>NULL</code></pre>
+<pre><code>[1] &quot;He is a cat who likes to sleep.&quot;</code></pre>
+</div>
+<p>If you want to use arguments out of the order they were defined in, you will need to label them.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_pet</span><span class='op'>(</span>animal <span class='op'>=</span> <span class='st'>"lizard"</span>,
+       pronoun <span class='op'>=</span><span class='st'>"she"</span>, 
+       verb <span class='op'>=</span> <span class='st'>"eat"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;She is a lizard who likes to eat.&quot;</code></pre>
+</div>
+<h1 id="default-settings">Default settings</h1>
+<p>You can set a “default” setting for an argument. This is the setting that occurs when the user does not specify the argument.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_pet2</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pronoun</span>, <span class='va'>animal</span>, <span class='va'>verb</span> <span class='op'>=</span> <span class='st'>"dance"</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>str_to_title</span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span>, <span class='st'>" is a "</span>, <span class='va'>animal</span>, <span class='st'>" who likes to "</span>, <span class='va'>verb</span>, <span class='st'>"."</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_pet2</span><span class='op'>(</span>pronoun <span class='op'>=</span> <span class='st'>"she"</span>,
+        animal <span class='op'>=</span> <span class='st'>"dog"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;She is a dog who likes to dance.&quot;</code></pre>
+</div>
+<p>The user can overwrite the default.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_pet2</span><span class='op'>(</span>pronoun <span class='op'>=</span> <span class='st'>"she"</span>,
+        animal <span class='op'>=</span> <span class='st'>"dog"</span>,
+        verb <span class='op'>=</span> <span class='st'>"cuddle"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;She is a dog who likes to cuddle.&quot;</code></pre>
+</div>
+<h1 id="warnings">Warnings</h1>
+<p>If someone else (or your future self) is going to use your function, it is helpful to embed warnings (via <code>warning()</code>) or errors (via <code>stop()</code>) into your code to explain why the code will not work (or if it will not work as expected).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># I am using an if else structure</span>
+<span class='co'># If the user inputs "cat" for animal, the function will throw an error and say "This function doesn't work for people who own cats"</span>
+<span class='co'># If they use input any other animal, it will work</span>
+
+<span class='va'>my_pet3</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>pronoun</span>, <span class='va'>animal</span>, <span class='va'>verb</span> <span class='op'>=</span> <span class='st'>"stretch"</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'>if</span><span class='op'>(</span><span class='va'>animal</span> <span class='op'>==</span> <span class='st'>"cat"</span><span class='op'>)</span><span class='op'>{</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span><span class='op'>(</span><span class='st'>"This function doesn't work for people who own cats."</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='kw'>else</span><span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'>str_to_title</span><span class='op'>(</span><span class='va'>pronoun</span><span class='op'>)</span>, <span class='st'>" is a "</span>, <span class='va'>animal</span>, <span class='st'>" who likes to "</span>, <span class='va'>verb</span>, <span class='st'>"."</span><span class='op'>)</span>
+    <span class='op'>}</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># This works</span>
+<span class='fu'>my_pet3</span><span class='op'>(</span><span class='st'>"she"</span>, <span class='st'>"dog"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;She is a dog who likes to stretch.&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># This throws an error</span>
+<span class='fu'>my_pet3</span><span class='op'>(</span><span class='st'>"he"</span>, <span class='st'>"cat"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Error in my_pet3(&quot;he&quot;, &quot;cat&quot;): This function doesn&#39;t work for people who own cats.</code></pre>
 </div>
 <h1 id="example-function-1">Example function 1</h1>
 <p>What makes a particularly good function is code that you write a lot. Additionally, you want to make a function that is simple and only does one thing. For this first function, I am going to create a function that will create a “total” column that calculates the total observations across a grouping variable.</p>
 <p>Before I create a function, I first like to try to make it work in a single case.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
 <span class='va'>a</span>
 </code></pre>
 </div>
@@ -2668,7 +2742,7 @@ $verb</code></pre>
 17 2015-2016 female 5079
 18 2015-2016   male 4892</code></pre>
 <div class="sourceCode">
-<pre><code><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>count</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span><span class='op'>)</span>
 <span class='va'>b</span>
 </code></pre>
 </div>
@@ -2683,7 +2757,7 @@ $verb</code></pre>
 8 2013-2014 10175
 9 2015-2016  9971</code></pre>
 <div class="sourceCode">
-<pre><code><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>rename</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>"total"</span> <span class='op'>=</span> <span class='st'>"n"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>rename</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>"total"</span> <span class='op'>=</span> <span class='st'>"n"</span><span class='op'>)</span>
 <span class='va'>b</span>
 </code></pre>
 </div>
@@ -2698,7 +2772,7 @@ $verb</code></pre>
 8 2013-2014 10175
 9 2015-2016  9971</code></pre>
 <div class="sourceCode">
-<pre><code><span class='fu'>left_join</span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>left_join</span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>        year gender    n total
@@ -2723,7 +2797,7 @@ $verb</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>total_grouping</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>total_grouping</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
   <span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>var</span><span class='op'>)</span> 
   <span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>grouping</span><span class='op'>)</span>
   
@@ -2738,7 +2812,7 @@ $verb</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>        year gender    n total
@@ -2764,7 +2838,7 @@ $verb</code></pre>
 <p>Now I can do it with other variables!</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2780,7 +2854,7 @@ $verb</code></pre>
 9  2001-2002     other-hispanic  517 11039
 10 2001-2002         other-race  459 11039</code></pre>
 <div class="sourceCode">
-<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2801,7 +2875,7 @@ $verb</code></pre>
 <p>Let’s first try an example.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>mutate</span><span class='op'>(</span>percent <span class='op'>=</span> <span class='va'>n</span><span class='op'>/</span><span class='va'>total</span> <span class='op'>*</span> <span class='fl'>100</span>,
          percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>percent</span>, <span class='fl'>2</span><span class='op'>)</span>,
          percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>percent</span>, <span class='st'>"%"</span><span class='op'>)</span><span class='op'>)</span>
@@ -2830,7 +2904,7 @@ $verb</code></pre>
 Okay, now we’re ready to generalize.
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>percent_grouping</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>percent_grouping</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
   <span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>var</span><span class='op'>)</span> 
   <span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>grouping</span><span class='op'>)</span>
   
@@ -2844,7 +2918,7 @@ Okay, now we’re ready to generalize.
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>        year gender    n total
@@ -2867,7 +2941,7 @@ Okay, now we’re ready to generalize.
 17 2015-2016 female 5079  9971
 18 2015-2016   male 4892  9971</code></pre>
 <div class="sourceCode">
-<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2883,7 +2957,7 @@ Okay, now we’re ready to generalize.
 9  2001-2002     other-hispanic  517 11039
 10 2001-2002         other-race  459 11039</code></pre>
 <div class="sourceCode">
-<pre><code><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>total_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2903,7 +2977,7 @@ Okay, now we’re ready to generalize.
 <p>Now, let’s make a table with our output.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>temp_table</span> <span class='op'>&lt;-</span> <span class='fu'>percent_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>temp_table</span> <span class='op'>&lt;-</span> <span class='fu'>percent_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>gender</span>, <span class='va'>percent</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>pivot_wider</span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>gender</span>,
               values_from <span class='op'>=</span> <span class='va'>percent</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span>
@@ -3019,7 +3093,7 @@ male
 <p>I can generalize this with a function and I’ll make tables for other variables!</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='va'>my_table</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_table</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var</span>, <span class='va'>grouping</span><span class='op'>)</span><span class='op'>{</span>
   <span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>var</span><span class='op'>)</span> 
   <span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'>enquo</span><span class='op'>(</span><span class='va'>grouping</span><span class='op'>)</span>
   <span class='va'>temp_table</span> <span class='op'>&lt;-</span> <span class='fu'>percent_grouping</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v1</span>, <span class='op'>!</span><span class='op'>!</span><span class='va'>v2</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
@@ -3037,7 +3111,7 @@ male
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>gender</span><span class='op'>)</span>
 </code></pre>
 </div>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -3142,7 +3216,7 @@ male
 </tbody>
 </table>
 <div class="sourceCode">
-<pre><code><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>race_ethnic</span><span class='op'>)</span>
 </code></pre>
 </div>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -3343,7 +3417,7 @@ other-race
 </tbody>
 </table>
 <div class="sourceCode">
-<pre><code><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>my_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>year</span>, <span class='va'>food_security</span><span class='op'>)</span>
 </code></pre>
 </div>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -3512,7 +3586,7 @@ Marginally food secure
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
   <p class="social_footer">
@@ -3533,6 +3607,15 @@ Marginally food secure
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
