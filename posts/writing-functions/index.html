@@ -120,7 +120,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["writing-functions_files/anchor-4.2.2/anchor.min.js","writing-functions_files/bowser-1.9.3/bowser.min.js","writing-functions_files/distill-2.2.21/template.v2.js","writing-functions_files/header-attrs-2.8/header-attrs.js","writing-functions_files/jquery-1.11.3/jquery.min.js","writing-functions_files/kePrint-0.0.1/kePrint.js","writing-functions_files/lightable-0.0.1/lightable.css","writing-functions_files/popper-2.6.0/popper.min.js","writing-functions_files/tippy-6.2.7/tippy-bundle.umd.min.js","writing-functions_files/tippy-6.2.7/tippy-light-border.css","writing-functions_files/tippy-6.2.7/tippy.css","writing-functions_files/tippy-6.2.7/tippy.umd.min.js","writing-functions_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["writing-functions_files/anchor-4.2.2/anchor.min.js","writing-functions_files/bowser-1.9.3/bowser.min.js","writing-functions_files/clipboard-2.0.6/clipboard.min.js","writing-functions_files/distill-2.2.21/template.v2.js","writing-functions_files/header-attrs-2.8/header-attrs.js","writing-functions_files/jquery-1.11.3/jquery.min.js","writing-functions_files/kePrint-0.0.1/kePrint.js","writing-functions_files/lightable-0.0.1/lightable.css","writing-functions_files/popper-2.6.0/popper.min.js","writing-functions_files/tippy-6.2.7/tippy-bundle.umd.min.js","writing-functions_files/tippy-6.2.7/tippy-light-border.css","writing-functions_files/tippy-6.2.7/tippy.css","writing-functions_files/tippy-6.2.7/tippy.umd.min.js","writing-functions_files/webcomponents-2.0.0/webcomponents.js","writing-functions_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css","writing-functions_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2372,6 +2372,10 @@ d-appendix d-footnote-list a.footnote-backlink {
 }</style>
 <!--/radix_placeholder_distill-->
   <script src="../../site_libs/header-attrs-2.8/header-attrs.js"></script>
+  <script src="../../site_libs/clipboard-2.0.6/clipboard.min.js"></script>
+  <link href="../../site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+  <script src="../../site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+  <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
   <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -2558,8 +2562,12 @@ About
 </ul>
 </nav>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h1 id="load-libraries-and-read-in-data">Load libraries and read in data</h1>
 <p>For this tutorial, you will first need to load <code>tidyverse</code> for data wrangling and <code>kableExtra</code> for tables. Next, I am using <code>rio::import</code> to import the cleaned data file to my environment. Note, you may need to change the file path if your file structure is not the same as mine. Last, I am using <code>mutate</code> and <code>case_when</code> to label the levels of the food_secure variable.</p>
+<p>If you would like to copy the code, you can hover of the code, and a “copy code” box should appear.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
