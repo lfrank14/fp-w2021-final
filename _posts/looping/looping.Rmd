@@ -4,6 +4,12 @@ description: |
   A tutorial for using {purrr} for looping functions.
 author:
   - name: Meg Siritzky
+categories:
+  - map
+  - map_dbl
+  - nest
+  - pmap
+  - walk2
 date: 05-13-2021
 output:
   distill::distill_article:
@@ -29,15 +35,7 @@ In this post, we will use the `{purrr}` package to loop through functions in a d
 
 ## Dataset
 
-For this post, we'll be using data from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm), which provides longitudinal data on health and nutrition in the United States. We'll be looking at survey data from 1999 - 2016. To keep it simple, we narrowed the dataset down to the following variables of interest for the current post:
-
-::: l-body
-| Variable Code    | Type    | Description                                            |
-|------------------|---------|--------------------------------------------------------|
-| `year`           | *String* | The year that data was collected                      |
-| `educ_adult`     | *Integer* | Level of education reached                           |
-| `hh_food_secure` | *Integer* | Household food security category over last 12 months |
-:::
+For this post, we'll be using data from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm), which provides longitudinal data on health and nutrition in the United States. More information about the dataset is available <a href = "https://lfrank14.github.io/fp-w2021-final/about.html" target="_blank">here</a>.
 
 ## Theoretical Background & Research Question
 
@@ -83,12 +81,13 @@ fi_factor <- fi %>%
          educ_adult != is.na(educ_adult))
 ```
 
-Now we'll use `group_by` and the `nest` function from the `{purrr}` package to create a nested data frame that groups our data by year and level of food insecurity. To learn more about using the `nest` function, take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/" target="_blank">this post on parallel iteration</a>.)
+Now we'll use `group_by` and the `nest` function from the `{purrr}` package to create a nested data frame that groups our data by year and level of food insecurity. To learn more about using the `nest` function, take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/" target="_blank">this post on parallel iteration</a>. The data frame now looks like this:
 
 ```{r}
 fi_grouped <- fi_factor %>% 
   group_by(year, security) %>% 
   nest()
+head(fi_grouped)
 ```
 
 Remember, we want to compare educational attainment to the percentage of the population experiencing food insecurity, so we need to create a variable that will tell us the percentage of the population that falls into each food security category at each time point. To do this, we're going to first count the number of people in each food security category in each year (*ct*) and the population in each year (*pop*), and then create a new column called *percent_insecurity* that has the percentage of people in the population that report a given level of food security.
@@ -101,6 +100,7 @@ fi_factor <- fi_factor %>%
   mutate(pop = as.numeric(pop),
          ct = as.numeric(ct),
          percent_insecurity = ct/pop)
+head(fi_factor)
 ```
 
 ## Using `map` and `map_dbl` functions
@@ -113,8 +113,7 @@ Now, to examine how the relationship changes over time, we want to compare the s
 
 *By using `map_dbl`, we're saving the data as type double. If we wanted to save the data as an integer vector instead, we could use `map_int`. Alternatively, if we wanted to save the data as a character vector, we could use `map_char`.
 
-We're going to want to use our _percent_insecurity_ variable later, so to move it from a nested list to the main data frame, we can `unnest` the _data_ list and then use `select` from `{dplyr}` to save the columns we're interested in.
-
+We're going to want to use our _percent_insecurity_ variable later, so to move it from a nested list to the main data frame, we can `unnest` the _data_ list and then use `select` from `{dplyr}` to save the columns we're interested in. 
 
 ```{r}
 fi_lm <- fi_factor %>% 
@@ -127,22 +126,34 @@ fi_lm <- fi_factor %>%
   dplyr::select(year, security, slope, percent_insecurity)
 ```
 
-## Creating plots using `pmap` and `list`
-
-To visualize the change in slope of how educational attainment predicts food insecurity across time, we can create a scatterplot for each food security category with an x-axis of *year* and a y-axis of *slope*. To create a plot for each food security category, we can use the `pmap` and `list` functions to create a new list in our nested data frame with a plot for each value of `security`. I'm using `{.x}` here in the title to customize each plot title to the food security category it corresponds to.
+Unnested, our data frame now looks like this:
 
 ```{r}
+head(fi_lm)
+```
+
+## Creating plots using `pmap` and `list`
+
+To visualize the change in slope of how educational attainment predicts food insecurity across time, we can create a scatterplot for each food security category with an x-axis of *year* and a y-axis of *slope*. To create a plot for each food security category, we can use the `pmap` and `list` functions to create a new list in our nested data frame with a plot for each value of `security`. To learn more about using the `pmap` function, see <a href = "https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/" target="_blank">this post</a>.) I'm using `{.x}` here in the title to customize each plot title to the food security category it corresponds to. I'm also including a custom function called `scientific_10` developed <a href = "https://stackoverflow.com/questions/10762287/how-can-i-format-axis-labels-with-exponents-with-ggplot2-and-scales" target="_blank">here</a> that will make the scientific notation in our y-axis easier to read.
+
+```{r}
+scientific_10 <- function(x) {
+  parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
+}
+
 fi_plots <- fi_lm %>%
   group_by(security) %>%
   nest() %>%
   mutate(plot = pmap(list(security, data), ~{
     ggplot(..2, aes(year, slope)) +
       geom_point() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-      theme_minimal() +
+      geom_line() +
       labs(title = glue("Slope of relation between adult education levels and {.x} by year"),
            x = "Year",
-           y = "Slope")
+           y = "Slope") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 90)) +
+      scale_y_continuous(labels = scientific_10)
     })
     )
 ```
@@ -156,7 +167,6 @@ fi_plots$plot[[2]]
 ## Exporting plots using `walk2` function
 
 Now we can export a plot for each food security category to a new folder. First we'll use the `here` function from the `{here}` package to create a new folder called *plots* and a folder within that called *slope_plots*. We'll then use the same package to create a pathway through which we can create files for each plot that incorporate the name of the food security category they fit in. Using the `walk2` function from the `{purrr}` package, we can save these plots and specify their dimensions. Why use `walk2` instead of `map2`? The `walk` family of functions are most useful for calling a function for its side effects (like saving files) rather than its return output (like displaying the plots) (see <a href = "https://r4ds.had.co.nz/iteration.html#walk" target="_blank">r4ds</a> for more details).
-
 
 ```{r}
 fs::dir_create(here::here("plots", "slope_plots"))
