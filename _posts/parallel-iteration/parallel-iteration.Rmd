@@ -16,6 +16,8 @@ output:
     self_contained: false
 ---
 
+# intro
+
 In this post, we will dive deeper into the `{purrr}` package. 
 We will explore `purrr::nest %>% mutate()`, which is an alternative to the 
 `split()` function in the base-R. Moreover, we will see how the combination of 
@@ -69,6 +71,8 @@ head(df)
 
 ```
 
+# split vs. nest
+
 We are interested in how food security changes over time, separated by gender
 and age group (child and adult). For the first step, we want to split the dataframe 
 into lists with `split` as the following. However, the three 
@@ -112,6 +116,8 @@ model_df = nest_df %>% mutate(n = map_dbl(data, nrow),
 
 head(model_df)
 ```
+
+# first figure
 
 Let's take a look at how the slope change with time:
 
@@ -166,6 +172,8 @@ plotting(child_model_df$data[[1]],
          child_model_df$year[[1]])
 ```
 
+# pmap_*
+
 With `pmap_*`, we can easily use the above code to produce figures for each row.
 When using `pmap_*`, the first input is a list of column names that we need 
 from the dataframe and the second input is the plotting function we used in the 
@@ -198,6 +206,8 @@ adult_df = model_df %>%
   select(year, gender, age_group, data) %>% unnest(data)
 head(adult_df)
 ```
+
+# map2_*
 
 Lastly, once we learned about `pmap_*`, `map2_*` is very similar. Instead 
 of being able to use as many variables you need with `pmap`, `map2` is specialized
