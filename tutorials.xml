@@ -35,6 +35,8 @@
       <description>A tutorial for using {purrr} for looping functions.</description>
       <category>map</category>
       <category>map_dbl</category>
+      <category>nest</category>
+      <category>pmap</category>
       <category>walk2</category>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/looping</guid>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
