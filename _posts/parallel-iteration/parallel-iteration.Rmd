@@ -4,6 +4,10 @@ description: |
   Using `nest` with `map2_*` or `pmap_*` in `{purrr}`.
 author:
   - name: Wanjia Guo
+categories:
+  - nest
+  - map2
+  - pmap
 date: 05-20-2021
 output:
   distill::distill_article:
@@ -18,7 +22,7 @@ We will explore `purrr::nest %>% mutate()`, which is an alternative to the
 `purrr::nest %>% mutate()` with `map2_*` or `pmap_*` can be a powerful tool in
 functional programming. 
 
-The data we will use is taken from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm). Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For the current blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest for the current post:
+The data we are going to use was narrowed down to the following variables of interest for the current post. For more information about data, please checkout <a href = "https://lfrank14.github.io/fp-w2021-final/about.html" target="_blank">here</a>. 
 
 ::: l-body
 | Variable Code    | Type    | Description                                              |
@@ -65,7 +69,7 @@ head(df)
 
 ```
 
-We are interested in how food secure changes over time, separated by gender
+We are interested in how food security changes over time, separated by gender
 and age group (child and adult). For the first step, we want to split the dataframe 
 into lists with `split` as the following. However, the three 
 grouping variables (gender, age group, and year) are merged together into one column.
@@ -90,8 +94,7 @@ head(nest_df)
 ```
 
 These two approaches ends with very similar results,
-only except gener, age_group, and year are maintaned as its orignal structure 
-with `nest` but not `split`. 
+only except gender, age_group, and year are maintained as its original structure with `nest` but not `split`. 
 
 Moreover, with `nest`, we can manipulate the dataframe within each row 
  while save the output as another column. We will calculate within each gender,
@@ -125,8 +128,7 @@ model_df %>% ggplot(aes(x=year, y=slope, color=age_group, group = age_group)) +
 From the figure, we can see that for adults, the slope is consistently negative 
 across all time. In other words, as people age, the food security score decreased.
 However, for children, the food security increased dramatically recently,
-especially since 2010s. What if we want to dig deeper and see how age influence
-children's food security within each year for different gender?
+especially since 2010s. What if we want to dig deeper and see how age influences children's food security within each year for different gender?
 
 Let's start with only one row of data:
 
@@ -200,7 +202,7 @@ head(adult_df)
 Lastly, once we learned about `pmap_*`, `map2_*` is very similar. Instead 
 of being able to use as many variables you need with `pmap`, `map2` is specialized
 for only 2 inputs. Let's see an example below. Since we have found that the 
-relationship between age and food secure are pretty consistent over the years,
+relationship between age and food security are pretty consistent over the years,
 let's make a plot that ignore the age factor with `map2`.
 
 ```{r fig.height=4, fig.width=12, warning=FALSE, layout="l-body-outset"}

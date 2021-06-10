@@ -24,6 +24,9 @@
       <dc:creator>Wanjia Guo</dc:creator>
       <link>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</link>
       <description>Using `nest` with `map2_*` or `pmap_*` in `{purrr}`.</description>
+      <category>nest</category>
+      <category>map2</category>
+      <category>pmap</category>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration</guid>
       <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
       <media:content url="https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png" medium="image" type="image/png" width="1920" height="1152"/>

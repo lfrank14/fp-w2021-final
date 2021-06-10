@@ -20,26 +20,28 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -48,9 +50,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
@@ -119,12 +121,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Parallel Iteration"]},{"type":"character","attributes":{},"value":["Using `nest` with `map2_*` or `pmap_*` in `{purrr}`."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Wanjia Guo"]}]}]},{"type":"character","attributes":{},"value":["05-20-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","categories","date","output","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Parallel Iteration"]},{"type":"character","attributes":{},"value":["Using `nest` with `map2_*` or `pmap_*` in `{purrr}`."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Wanjia Guo"]}]}]},{"type":"character","attributes":{},"value":["nest","map2","pmap"]},{"type":"character","attributes":{},"value":["05-20-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["parallel-iteration_files/anchor-4.2.2/anchor.min.js","parallel-iteration_files/bowser-1.9.3/bowser.min.js","parallel-iteration_files/distill-2.2.21/template.v2.js","parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-6-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-7-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-9-1.png","parallel-iteration_files/jquery-1.11.3/jquery.min.js","parallel-iteration_files/popper-2.6.0/popper.min.js","parallel-iteration_files/tippy-6.2.7/tippy-bundle.umd.min.js","parallel-iteration_files/tippy-6.2.7/tippy-light-border.css","parallel-iteration_files/tippy-6.2.7/tippy.css","parallel-iteration_files/tippy-6.2.7/tippy.umd.min.js","parallel-iteration_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["parallel-iteration_files/anchor-4.2.2/anchor.min.js","parallel-iteration_files/bowser-1.9.3/bowser.min.js","parallel-iteration_files/distill-2.2.21/template.v2.js","parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-6-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-7-1.png","parallel-iteration_files/figure-html5/unnamed-chunk-9-1.png","parallel-iteration_files/header-attrs-2.8/header-attrs.js","parallel-iteration_files/jquery-1.11.3/jquery.min.js","parallel-iteration_files/popper-2.6.0/popper.min.js","parallel-iteration_files/tippy-6.2.7/tippy-bundle.umd.min.js","parallel-iteration_files/tippy-6.2.7/tippy-light-border.css","parallel-iteration_files/tippy-6.2.7/tippy.css","parallel-iteration_files/tippy-6.2.7/tippy.umd.min.js","parallel-iteration_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2375,6 +2377,7 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.8/header-attrs.js"></script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2492,7 +2495,7 @@ body {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Parallel Iteration","description":"Using `nest` with `map2_*` or `pmap_*` in `{purrr}`.","authors":[{"author":"Wanjia Guo","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-20T00:00:00.000-07:00","citationText":"Guo, 2021"}
+{"title":"Parallel Iteration","description":"Using `nest` with `map2_*` or `pmap_*` in `{purrr}`.","authors":[{"author":"Wanjia Guo","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-05-20T00:00:00.000+00:00","citationText":"Guo, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2531,8 +2534,13 @@ About
 <div class="d-title">
 <h1>Parallel Iteration</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../tutorials.html#category:nest" class="dt-tag">nest</a>
+  <a href="../../tutorials.html#category:map2" class="dt-tag">map2</a>
+  <a href="../../tutorials.html#category:pmap" class="dt-tag">pmap</a>
+</div>
 <!--/radix_placeholder_categories-->
-<p>Using <code>nest</code> with <code>map2_*</code> or <code>pmap_*</code> in <code>{purrr}</code>.</p>
+<p><p>Using <code>nest</code> with <code>map2_*</code> or <code>pmap_*</code> in <code>{purrr}</code>.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2543,7 +2551,7 @@ About
 
 <div class="d-article">
 <p>In this post, we will dive deeper into the <code>{purrr}</code> package. We will explore <code>purrr::nest %&gt;% mutate()</code>, which is an alternative to the <code>split()</code> function in the base-R. Moreover, we will see how the combination of <code>purrr::nest %&gt;% mutate()</code> with <code>map2_*</code> or <code>pmap_*</code> can be a powerful tool in functional programming.</p>
-<p>The data we will use is taken from the <a href="https://www.cdc.gov/nchs/nhanes/index.htm"><em>National Health and Nutrition Examination Survey</em> (NHANES)</a>. Each year, the survey collects information on the health and nutritional status of children and adults across the United States. For the current blog, survey data was taken from the years 1999 - 2016. The data was narrowed down to the following variables of interest for the current post:</p>
+<p>The data we are going to use was narrowed down to the following variables of interest for the current post. For more information about data, please checkout <a href = "https://lfrank14.github.io/fp-w2021-final/about.html" target="_blank">here</a>.</p>
 <div class="l-body">
 <table>
 <colgroup>
@@ -2618,7 +2626,7 @@ About
 5 1999-…     8    13 male   non-hispan…              1 child         5
 6 1999-…     9    11 female non-hispan…              2 child         5</code></pre>
 </div>
-<p>We are interested in how food secure changes over time, separated by gender and age group (child and adult). For the first step, we want to split the dataframe into lists with <code>split</code> as the following. However, the three grouping variables (gender, age group, and year) are merged together into one column. This is less desirable because we will need each of these variables for later.</p>
+<p>We are interested in how food security changes over time, separated by gender and age group (child and adult). For the first step, we want to split the dataframe into lists with <code>split</code> as the following. However, the three grouping variables (gender, age group, and year) are merged together into one column. This is less desirable because we will need each of these variables for later.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>split_df</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>gender</span>, <span class='va'>df</span><span class='op'>$</span><span class='va'>age_group</span>, <span class='va'>df</span><span class='op'>$</span><span class='va'>year</span><span class='op'>)</span><span class='op'>)</span>
@@ -2655,7 +2663,7 @@ About
 5 2001-2002 male   adult     &lt;tibble [2,384 × 5]&gt;
 6 2001-2002 female adult     &lt;tibble [2,669 × 5]&gt;</code></pre>
 </div>
-<p>These two approaches ends with very similar results, only except gener, age_group, and year are maintaned as its orignal structure with <code>nest</code> but not <code>split</code>.</p>
+<p>These two approaches ends with very similar results, only except gender, age_group, and year are maintained as its original structure with <code>nest</code> but not <code>split</code>.</p>
 <p>Moreover, with <code>nest</code>, we can manipulate the dataframe within each row while save the output as another column. We will calculate within each gender, age group and year, how food security changes with age. (If you find the <code>map</code> function confusing, I encourage you take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/looping/" target="_blank">this post</a>.)</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2693,7 +2701,7 @@ About
 </div>
 <p><img src="parallel-iteration_files/figure-html5/unnamed-chunk-5-1.png" width="960" /></p>
 </div>
-<p>From the figure, we can see that for adults, the slope is consistently negative across all time. In other words, as people age, the food security score decreased. However, for children, the food security increased dramatically recently, especially since 2010s. What if we want to dig deeper and see how age influence children’s food security within each year for different gender?</p>
+<p>From the figure, we can see that for adults, the slope is consistently negative across all time. In other words, as people age, the food security score decreased. However, for children, the food security increased dramatically recently, especially since 2010s. What if we want to dig deeper and see how age influences children’s food security within each year for different gender?</p>
 <p>Let’s start with only one row of data:</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
@@ -2771,7 +2779,7 @@ About
 5 1999-… male   adult        14    81 non-hispan…              1     2
 6 1999-… male   adult        29    62 non-hispan…              1     3</code></pre>
 </div>
-<p>Lastly, once we learned about <code>pmap_*</code>, <code>map2_*</code> is very similar. Instead of being able to use as many variables you need with <code>pmap</code>, <code>map2</code> is specialized for only 2 inputs. Let’s see an example below. Since we have found that the relationship between age and food secure are pretty consistent over the years, let’s make a plot that ignore the age factor with <code>map2</code>.</p>
+<p>Lastly, once we learned about <code>pmap_*</code>, <code>map2_*</code> is very similar. Instead of being able to use as many variables you need with <code>pmap</code>, <code>map2</code> is specialized for only 2 inputs. Let’s see an example below. Since we have found that the relationship between age and food security are pretty consistent over the years, let’s make a plot that ignore the age factor with <code>map2</code>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>adult_plot_df</span> <span class='op'>=</span> <span class='va'>adult_df</span> <span class='op'>%&gt;%</span> 
