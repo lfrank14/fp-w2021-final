@@ -33,6 +33,9 @@
       <dc:creator>Meg Siritzky</dc:creator>
       <link>https://lfrank14.github.io/fp-w2021-final/posts/looping</link>
       <description>A tutorial for using {purrr} for looping functions.</description>
+      <category>map</category>
+      <category>map_dbl</category>
+      <category>walk2</category>
       <guid>https://lfrank14.github.io/fp-w2021-final/posts/looping</guid>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
       <media:content url="https://lfrank14.github.io/fp-w2021-final/posts/looping/looping_files/figure-html5/unnamed-chunk-6-1.png" medium="image" type="image/png" width="1248" height="768"/>

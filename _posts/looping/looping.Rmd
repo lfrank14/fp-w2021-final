@@ -4,6 +4,10 @@ description: |
   A tutorial for using {purrr} for looping functions.
 author:
   - name: Meg Siritzky
+categories:
+  - map
+  - map_dbl
+  - walk2
 date: 05-13-2021
 output:
   distill::distill_article:
@@ -129,7 +133,7 @@ fi_lm <- fi_factor %>%
 
 ## Creating plots using `pmap` and `list`
 
-To visualize the change in slope of how educational attainment predicts food insecurity across time, we can create a scatterplot for each food security category with an x-axis of *year* and a y-axis of *slope*. To create a plot for each food security category, we can use the `pmap` and `list` functions to create a new list in our nested data frame with a plot for each value of `security`. I'm using `{.x}` here in the title to customize each plot title to the food security category it corresponds to.
+To visualize the change in slope of how educational attainment predicts food insecurity across time, we can create a scatterplot for each food security category with an x-axis of *year* and a y-axis of *slope*. To create a plot for each food security category, we can use the `pmap` and `list` functions to create a new list in our nested data frame with a plot for each value of `security`. To learn more about using the `pmap` function, see <a href = "https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/" target="_blank">this post</a>.) I'm using `{.x}` here in the title to customize each plot title to the food security category it corresponds to.
 
 ```{r}
 fi_plots <- fi_lm %>%
