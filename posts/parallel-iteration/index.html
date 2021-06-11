@@ -23,7 +23,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -2377,7 +2376,7 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/header-attrs-2.8/header-attrs.js"></script>
+  <script src="../../site_libs/header-attrs-2.7/header-attrs.js"></script>
   <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2554,7 +2553,7 @@ About
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#intro">intro</a></li>
+<li><a href="#intro">Intro</a></li>
 <li><a href="#split-vs.-nest">split vs. nest</a></li>
 <li><a href="#first-figure">first figure</a></li>
 <li><a href="#pmap_">pmap_*</a></li>
@@ -2562,8 +2561,8 @@ About
 </ul>
 </nav>
 </div>
-<h1 id="intro">intro</h1>
-<p>In this post, we will dive deeper into the <code>{purrr}</code> package. We will explore <code>purrr::nest %&gt;% mutate()</code>, which is an alternative to the <code>split()</code> function in the base-R. Moreover, we will see how the combination of <code>purrr::nest %&gt;% mutate()</code> with <code>map2_*</code> or <code>pmap_*</code> can be a powerful tool in functional programming.</p>
+<h1 id="intro">Intro</h1>
+<p>In this post, we will dive deeper into the <code>{purrr}</code> package. We will explore <code>purrr::nest() %&gt;% dplyr::mutate()</code>, which is an alternative to the <code>split()</code> function in the base-R. Moreover, we will see how the combination of <code>purrr::nest() %&gt;% dplyr::mutate()</code> with <code>purrr::map2_*()</code> or <code>purrr::pmap_*()</code> can be a powerful tool in functional programming.</p>
 <p>The data we are going to use was narrowed down to the following variables of interest for the current post. For more information about data, please checkout <a href = "https://lfrank14.github.io/fp-w2021-final/about.html" target="_blank">here</a>.</p>
 <div class="l-body">
 <table>
@@ -2630,14 +2629,15 @@ About
 </code></pre>
 </div>
 <pre><code># A tibble: 6 x 8
-  year      id   age gender race_ethnic hh_food_secure age_group  educ
-  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;                &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt;
-1 1999-…     2    77 male   non-hispan…              1 adult         5
-2 1999-…     3    10 female non-hispan…              1 child         3
-3 1999-…     5    49 male   non-hispan…              1 adult         5
-4 1999-…     6    19 female other-race               1 child        15
-5 1999-…     8    13 male   non-hispan…              1 child         5
-6 1999-…     9    11 female non-hispan…              2 child         5</code></pre>
+  year         id   age gender race_ethnic        hh_food_secure
+  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;                       &lt;dbl&gt;
+1 1999-2000     2    77 male   non-hispanic-white              1
+2 1999-2000     3    10 female non-hispanic-white              1
+3 1999-2000     5    49 male   non-hispanic-white              1
+4 1999-2000     6    19 female other-race                      1
+5 1999-2000     8    13 male   non-hispanic-white              1
+6 1999-2000     9    11 female non-hispanic-black              2
+# … with 2 more variables: age_group &lt;fct&gt;, educ &lt;dbl&gt;</code></pre>
 </div>
 <h1 id="split-vs.-nest">split vs. nest</h1>
 <p>We are interested in how food security changes over time, separated by gender and age group (child and adult). For the first step, we want to split the dataframe into lists with <code>split</code> as the following. However, the three grouping variables (gender, age group, and year) are merged together into one column. This is less desirable because we will need each of these variables for later.</p>
@@ -2649,19 +2649,22 @@ About
 </code></pre>
 </div>
 <pre><code># A tibble: 6 x 8
-  year      id   age gender race_ethnic hh_food_secure age_group  educ
-  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;                &lt;dbl&gt; &lt;fct&gt;     &lt;dbl&gt;
-1 1999-…    15    38 female non-hispan…              1 adult         5
-2 1999-…    16    85 female non-hispan…              4 adult         1
-3 1999-…    20    23 female mexican-am…              1 adult         1
-4 1999-…    24    53 female non-hispan…              1 adult         3
-5 1999-…    25    42 female non-hispan…              1 adult         4
-6 1999-…    34    38 female non-hispan…              3 adult         3</code></pre>
+  year         id   age gender race_ethnic        hh_food_secure
+  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;                       &lt;dbl&gt;
+1 1999-2000    15    38 female non-hispanic-white              1
+2 1999-2000    16    85 female non-hispanic-black              4
+3 1999-2000    20    23 female mexican-american                1
+4 1999-2000    24    53 female non-hispanic-white              1
+5 1999-2000    25    42 female non-hispanic-white              1
+6 1999-2000    34    38 female non-hispanic-black              3
+# … with 2 more variables: age_group &lt;fct&gt;, educ &lt;dbl&gt;</code></pre>
 </div>
 <p>Equivalently, we can also use <code>nest</code> from the <code>{purrr}</code> package as the following:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nest_df</span> <span class='op'>=</span> <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>age_group</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nest_df</span> <span class='op'>=</span> <span class='va'>df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>age_group</span>, <span class='va'>gender</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>nest</span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>nest_df</span><span class='op'>)</span>
 </code></pre>
@@ -2677,35 +2680,38 @@ About
 5 2001-2002 male   adult     &lt;tibble [2,384 × 5]&gt;
 6 2001-2002 female adult     &lt;tibble [2,669 × 5]&gt;</code></pre>
 </div>
-<p>These two approaches ends with very similar results, only except gender, age_group, and year are maintained as its original structure with <code>nest</code> but not <code>split</code>.</p>
-<p>Moreover, with <code>nest</code>, we can manipulate the dataframe within each row while save the output as another column. We will calculate within each gender, age group and year, how food security changes with age. (If you find the <code>map</code> function confusing, I encourage you take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/looping/" target="_blank">this post</a>.)</p>
+<p>These two approaches end with very similar results, except <code>gender</code>, <code>age_group</code>, and <code>year</code> are maintained with its original structure with <code>nest()</code> but not with <code>split()</code>.</p>
+<p>Moreover, with <code>nest()</code>, we can manipulate the data frame within each row while save the output as another column. We will calculate within each gender, age group and year, how food security changes with age. (If you find the <code>map()</code> function confusing, I encourage you take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/looping/" target="_blank">this post</a>.)</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_df</span> <span class='op'>=</span> <span class='va'>nest_df</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>nrow</span><span class='op'>)</span>,
-                   m1 <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hh_food_secure</span> <span class='op'>~</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>,
-                   coefs <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>coef</span><span class='op'>)</span>,
-                   intercept <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>1</span><span class='op'>)</span>,
-                   slope <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_df</span> <span class='op'>=</span> <span class='va'>nest_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>nrow</span><span class='op'>)</span>,
+         m1 <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>data</span>, <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hh_food_secure</span> <span class='op'>~</span> <span class='va'>age</span>, data <span class='op'>=</span> <span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>,
+         coefs <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>coef</span><span class='op'>)</span>,
+         intercept <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>1</span><span class='op'>)</span>,
+         slope <span class='op'>=</span> <span class='fu'>map_dbl</span><span class='op'>(</span><span class='va'>coefs</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>model_df</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code># A tibble: 6 x 9
 # Groups:   year, gender, age_group [6]
-  year   gender age_group data        n m1    coefs intercept    slope
-  &lt;chr&gt;  &lt;fct&gt;  &lt;fct&gt;     &lt;list&gt;  &lt;dbl&gt; &lt;lis&gt; &lt;lis&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 1999-… male   adult     &lt;tibbl…  2211 &lt;lm&gt;  &lt;dbl…      1.60 -4.91e-3
-2 1999-… female child     &lt;tibbl…  1698 &lt;lm&gt;  &lt;dbl…      1.57 -1.86e-4
-3 1999-… male   child     &lt;tibbl…  1744 &lt;lm&gt;  &lt;dbl…      1.69 -2.03e-4
-4 1999-… female adult     &lt;tibbl…  2534 &lt;lm&gt;  &lt;dbl…      1.58 -4.25e-3
-5 2001-… male   adult     &lt;tibbl…  2384 &lt;lm&gt;  &lt;dbl…      1.75 -7.29e-3
-6 2001-… female adult     &lt;tibbl…  2669 &lt;lm&gt;  &lt;dbl…      1.70 -6.58e-3</code></pre>
+  year      gender age_group data            n m1     coefs  intercept
+  &lt;chr&gt;     &lt;fct&gt;  &lt;fct&gt;     &lt;list&gt;      &lt;dbl&gt; &lt;list&gt; &lt;list&gt;     &lt;dbl&gt;
+1 1999-2000 male   adult     &lt;tibble [2…  2211 &lt;lm&gt;   &lt;dbl …  1.599724
+2 1999-2000 female child     &lt;tibble [1…  1698 &lt;lm&gt;   &lt;dbl …  1.573725
+3 1999-2000 male   child     &lt;tibble [1…  1744 &lt;lm&gt;   &lt;dbl …  1.691323
+4 1999-2000 female adult     &lt;tibble [2…  2534 &lt;lm&gt;   &lt;dbl …  1.582938
+5 2001-2002 male   adult     &lt;tibble [2…  2384 &lt;lm&gt;   &lt;dbl …  1.752420
+6 2001-2002 female adult     &lt;tibble [2…  2669 &lt;lm&gt;   &lt;dbl …  1.703107
+# … with 1 more variable: slope &lt;dbl&gt;</code></pre>
 </div>
 <h1 id="first-figure">first figure</h1>
 <p>Let’s take a look at how the slope change with time:</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_df</span> <span class='op'>%&gt;%</span> <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>year</span>, y<span class='op'>=</span><span class='va'>slope</span>, color<span class='op'>=</span><span class='va'>age_group</span>, group <span class='op'>=</span> <span class='va'>age_group</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>model_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>slope</span>, color <span class='op'>=</span> <span class='va'>age_group</span>, group <span class='op'>=</span> <span class='va'>age_group</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
   <span class='fu'>geom_line</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span> <span class='op'>+</span> 
   <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span><span class='va'>gender</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>'bottom'</span><span class='op'>)</span> <span class='op'>+</span> 
@@ -2786,14 +2792,15 @@ About
 </div>
 <pre><code># A tibble: 6 x 8
 # Groups:   year, gender, age_group [1]
-  year   gender age_group    id   age race_ethnic hh_food_secure  educ
-  &lt;chr&gt;  &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;                &lt;dbl&gt; &lt;dbl&gt;
-1 1999-… male   adult         2    77 non-hispan…              1     5
-2 1999-… male   adult         5    49 non-hispan…              1     5
-3 1999-… male   adult        12    37 non-hispan…              1     4
-4 1999-… male   adult        13    70 mexican-am…              1     1
-5 1999-… male   adult        14    81 non-hispan…              1     2
-6 1999-… male   adult        29    62 non-hispan…              1     3</code></pre>
+  year      gender age_group    id   age race_ethnic       
+  &lt;chr&gt;     &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;             
+1 1999-2000 male   adult         2    77 non-hispanic-white
+2 1999-2000 male   adult         5    49 non-hispanic-white
+3 1999-2000 male   adult        12    37 non-hispanic-white
+4 1999-2000 male   adult        13    70 mexican-american  
+5 1999-2000 male   adult        14    81 non-hispanic-white
+6 1999-2000 male   adult        29    62 non-hispanic-white
+# … with 2 more variables: hh_food_secure &lt;dbl&gt;, educ &lt;dbl&gt;</code></pre>
 </div>
 <h1 id="map2_">map2_*</h1>
 <p>Lastly, once we learned about <code>pmap_*</code>, <code>map2_*</code> is very similar. Instead of being able to use as many variables you need with <code>pmap</code>, <code>map2</code> is specialized for only 2 inputs. Let’s see an example below. Since we have found that the relationship between age and food security are pretty consistent over the years, let’s make a plot that ignore the age factor with <code>map2</code>.</p>

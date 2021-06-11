@@ -27,21 +27,25 @@ library(knitr)
 xaringanExtra::use_clipboard()
 ```
 
-The `{purrr}` package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that how just how powerful the `map` family of functions can be. 
+The [**{purrr}**](https://purrr.tidyverse.org/) package provides a number of helpful functions for loading in multiple data files and iterating data processing steps over multiple data frames. This tutorial will provide step-by-step instructions that show just how powerful the `purrr::map()` family of functions can be. 
 
 ## Batch Loading
 
-The original data files downloaded from the *NHANES* website were separated by year and data type (i.e. demographics and FSQ), resulting in a number of data files. Rather than loading in each file one at a time, the `purrr::map` family of functions provides powerful tools for loading in large amounts of data. 
+The original data files downloaded from the *NHANES* website were separated by year and data type (i.e. demographics and FSQ), resulting in a number of data files, as shown below. Rather than loading in each file one at a time, which would require a lot of repetitive copy/pasting of code, the `purrr::map()` family of functions provides powerful tools for loading in large amounts of data. 
+
+![](img/files.png)
 
 ### Create a list with the file paths
 
-The `here::here` function is first used to define the path to the data files. 
+The `here::here()` function is first used to define the path to the data files. 
 
 ```{r}
 (rootpath <- here::here("data"))
 ```
 
-The `dir_ls` function from the `{fs}` package creates a vector of the paths for the files listed within `rootpath`.
+Your specific path will differ, based on the directories on your machine.
+
+The `dir_ls` function from the [**{fs}**](https://fs.r-lib.org/) package creates a vector of the paths for the files listed within `rootpath`.
 
 ```{r}
 fnames <- fs::dir_ls(rootpath)
@@ -54,7 +58,7 @@ Importantly, this vector is named with the associated paths. That is, each eleme
 names(head(fnames))
 ```
 
-The demographics and FSQ will be loaded separately since they will require different data cleaning steps. Regular expression can be used with the `fs::dir_ls` function to filter files that match a specific pattern.
+The demographics and FSQ will be loaded separately since they will require different data cleaning steps. [Regular expressions](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html) can be used with the `fs::dir_ls()` function to filter files that match a specific pattern.
 
 ```{r}
 # list file paths for files that contain the pattern "DEMO"
@@ -64,11 +68,11 @@ demo_paths <- dir_ls(rootpath, regexp = "DEMO")
 fsq_paths <- dir_ls(rootpath, regexp = "FSQ")
 ```
 
-### Use `purrr::map` to read files
+### Use `purrr::map()` to read files
 
-The `purrr::map` family of functions allows us to iterate a function over elements of a list or vector. In this case, we want to use `rio::import` to read in the data files using the vectors of file paths. 
+The `purrr::map()` family of functions allows us to iterate a function over elements of a vector (which could be atomic or a list). In this case, we want to use `rio::import()` to read in the data files using the vectors of file paths. 
 
-There are two ways in which we can read in the data. The first option is to use the `purrr::map` function to read each data frame into a separate element of a list. This can be useful if you want to use `map` to iteration the same functions, like data cleaning, over each data frame.  
+There are two ways in which we can read in the data. The first option is to use the `purrr::map()` function to read each data frame into a separate element of a list. This can be useful if you want to use `map()` to iterate the same functions, like data cleaning, over each data frame.  
 
 ```{r}
 # Loading the data files into separate lists
@@ -76,7 +80,7 @@ demos_list <- map(demo_paths, rio::import)
 fsq_list <- map(demo_paths, rio::import)
 ```
 
-Another option is to use `purrr::map_df` to read each data file into a single data frame. Importantly, this function allows you to specify the `.id`, which will create a variable to identify each iteration of the function. As I mentioned earlier, the `fs::dir_ls` function will assign names to each path. Using `map_df` on the named list of paths will generate a column in the data frame output that assigns the path name to each iteration of `rio::import`. 
+Another option is to use `purrr::map_dfr()` to read each data file into a single data frame. Importantly, this function allows you to specify the `.id`, which will create a variable to identify each iteration of the function. As I mentioned earlier, the `fs::dir_ls()` function will assign names to each path. Using `map_df()` on the named vector of paths will generate a column in the data frame output that assigns the path name to each iteration of `rio::import()`. 
 
 ```{r, layout="l-body-outset"}
 
@@ -88,17 +92,17 @@ kable(head(fsq[,1:4]))
 
 ```
 
-While both options are valid, which one you choose will ultimately depend on what you intend to do with the output. If I wanted to keep the data frames separated by year so I could more easily process and analyze the data, `map` would might be the better approach. 
+While both options are valid, which one you choose will ultimately depend on what you intend to do with the output, and the structure of the data (e.g., it may not be possible to use `map_dfr()` if the data structure differs across datasets). If I wanted to keep the data frames separated by year so I could more easily process and analyze the data, `map()`  might be the better approach. 
 
-If I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators, I might choose to use `map_dfr` to create a single data frame. This option is demonstrated below in **My Final Solution**. 
+If I wanted to create a single data file that contains survey data from all years (1999-2016) that could then be shared with collaborators, I might choose to use `map_dfr()` to create a single data frame. This option is demonstrated below in **My Final Solution**. 
 
-Let's take a look at how `map` can be used to iterate data cleaning steps over a list of data frames.
+Let's take a look at how `map()` can be used to iterate data cleaning steps over a list of data frames.
 
 ## Data cleaning 
 
-Let's start with the list of data frames for the demographics surveys (`demos_list`). Each element of the list contains the demographics survey data for a specific year range (e.g. 1999-2000 or 2013-2014). If we want to apply the same data cleaning steps to each data frame, we can use `map` to iterate those data cleaning functions to each element of the list. 
+Let's start with the list of data frames for the demographics surveys (`demos_list`). Each element of the list contains the demographics survey data for a specific year range (e.g. 1999-2000 or 2013-2014). If we want to apply the same data cleaning steps to each data frame, we can use `map()` to iterate those data cleaning functions to each element of the list. 
 
-First, let's start by creating a variable in each data frame for the `year`. For this step, we can use `map2` to iterate through the file paths (`demo_paths`) and list of data frames (`demos_list`) in parallel. The year will be extracted from the file path and applied to the corresponding data frame. 
+First, let's start by creating a variable in each data frame for the `year`. For this step, we can use `map2()` to simultaneously iterate through two things: the file paths (`demo_paths`) and the list of data frames (`demos_list`). The year will be extracted from the file path and applied to the corresponding data frame. 
 
 This time, rather than using an existing function, we can create our own. When writing a function to use within the map functions, it must be wrapped within the curly brackets `~{ [some custom function] }`. To call each input, you would use `.x` (for the first input, `demo_paths`) and `.y` (for the second input, `demos_list`).
 
@@ -201,7 +205,7 @@ names(demos) <- c("year", "id","age","gender",
                   "race_ethnic","educ_adult","educ_child") 
 
 fsq <- dir_ls(rootpath, 
-                 regexp = "FSQ") %>% # listing questionnaire files
+              regexp = "FSQ") %>% # listing questionnaire files
   # batch importing questionnaire files
   map_dfr(rio::import, .id = "file") %>% 
                        # .id = "file" creates a variable with the file name
