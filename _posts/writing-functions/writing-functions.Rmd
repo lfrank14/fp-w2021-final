@@ -27,7 +27,7 @@ xaringanExtra::use_clipboard()
 
 # Load libraries and read in data
 
-For this tutorial, you will first need to load `tidyverse` for data wrangling and `kableExtra` for tables. Next, I am using `rio::import` to import the cleaned data file to my environment. Note, you may need to change the file path if your file structure is not the same as mine. Last, I am using `mutate` and `case_when` to label the levels of the food_secure variable.
+For this tutorial, you will first need to load `tidyverse` for data wrangling and `kableExtra` for tables. Next, I am using `rio::import()` to import the cleaned data file to my environment. Note, you may need to change the file path if your file structure is not the same as mine. Last, I am using `dplyr::mutate()` and `dplyr::case_when()` to label the levels of the food_secure variable.
 
 If you would like to copy the code, you can hover of the code, and a "copy code" box should appear.
 

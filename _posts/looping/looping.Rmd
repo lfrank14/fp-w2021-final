@@ -21,13 +21,7 @@ editor_options:
 ---
 
 
-```{r setup, include=FALSE}
-library(tidyverse)
-library(repurrrsive)
-library(rio)
-library(here)
-library(glue)
-```
+
 
 In this post, we will use the `{purrr}` package to loop through functions in a data frame. We will look at `purrr::map()` and `purrr:map_dbl()`, which can iterate functions over multiple elements of a vector or list. We will also explore `walk2` as an alternative to `map2`.
 
@@ -35,7 +29,7 @@ In this post, we will use the `{purrr}` package to loop through functions in a d
 
 ## Dataset
 
-For this post, we'll be using data from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm), which provides longitudinal data on health and nutrition in the United States. More information about the dataset is available <a href = "https://lfrank14.github.io/fp-w2021-final/about.html" target="_blank">here</a>.
+For this post, we'll be using data from the [*National Health and Nutrition Examination Survey* (NHANES)](https://www.cdc.gov/nchs/nhanes/index.htm), which provides longitudinal data on health and nutrition in the United States. More information about the dataset is available [here](../../about.html){target="_blank"}.
 
 ## Theoretical Background & Research Question
 
@@ -61,7 +55,19 @@ Zhang, M. (2003). Links between school absenteeism and child poverty. Pastoral C
 
 We'll be looking at the variable of *educ_adult* to represent the level of educational attainment in the general population, and comparing that to a new variable we'll create to represent the percentage of the total population experiencing food insecurity.
 
-```{r import data, include=FALSE}
+First, let's load the R packages we'll be using
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(repurrrsive)
+library(rio)
+library(here)
+library(glue)
+```
+
+Then we'll load our data
+
+```{r import data}
 fi <- import(here("data", "nhanes_1999-2016.csv"))
 ```
 
@@ -81,7 +87,7 @@ fi_factor <- fi %>%
          educ_adult != is.na(educ_adult))
 ```
 
-Now we'll use `group_by` and the `nest` function from the `{purrr}` package to create a nested data frame that groups our data by year and level of food insecurity. To learn more about using the `nest` function, take a look at <a href = "https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/" target="_blank">this post on parallel iteration</a>. The data frame now looks like this:
+Now we'll use `group_by()` from `{dplyr}` and the `nest()` function from the `{purrr}` package to create a nested data frame that groups our data by year and level of food insecurity. To learn more about using the `nest()` function, take a look at [this post on parallel iteration](../parallel-iteration/index.html){target="_blank"}. The data frame now looks like this:
 
 ```{r}
 fi_grouped <- fi_factor %>% 
@@ -105,13 +111,13 @@ head(fi_factor)
 
 ## Using `map` and `map_dbl` functions
 
-To measure the the relationship between educational attainment and the percentage of the population experiencing food insecurity at each time point, we're going to run a linear regression model for each food security category in each year. To do this, we're first going to use the `group_by` and `nest` functions to create lists of data nested within each value of *year* and *security*. 
+To measure the the relationship between educational attainment and the percentage of the population experiencing food insecurity at each time point, we're going to run a linear regression model for each food security category in each year. To do this, we're first going to use the `group_by()` and `nest()` functions to create lists of data nested within each value of *year* and *security*. 
 
-Now that the data are nested, we want to use the `lm` function to run a linear regression model regressing *percent_insecurity* on *educ_adult*. We're going to use the `map` function from the `{purrr}` package to iterate this function across each combination of *year* and *security*. 
+After the data are nested, we want to use the `lm()` function to run a linear regression model regressing *percent_insecurity* on *educ_adult* *for each year/security combination*. We're going to use the `map()` function from the `{purrr}` package to accomplish this, iterating the `lm()` function across each combination of *year* and *security* (note, each "cell" in the `data` column is the data frame for the corresponding row listing the year/security combination). 
 
-Now, to examine how the relationship changes over time, we want to compare the slopes across years for each food security category. To do this, we're going to need the slopes. We can extract the slopes using the `map_dbl` function. Why `map_dbl` instead of `map`? Because `map` will give us the output in a list format, whereas `map_dbl` will return a vector* that we can save as a column in our data frame. 
+To examine how the relationship changes over time, we want to compare the slopes across years for each food security category. To do this, we're going to need the slopes. We can extract the slopes using the `map_dbl()` function. Why `map_dbl()` instead of `map()`? Because `map()` will give us the output in a list format, whereas `map_dbl()` will return an atomic vector of type *double* that we can save as a column in our data frame. 
 
-*By using `map_dbl`, we're saving the data as type double. If we wanted to save the data as an integer vector instead, we could use `map_int`. Alternatively, if we wanted to save the data as a character vector, we could use `map_char`.
+By using `map_dbl()`, we're saving the data as type double. If we wanted to save the data as an integer vector instead, we could use `map_int()`. Alternatively, if we wanted to save the data as a character vector, we could use `map_char()`.
 
 We're going to want to use our _percent_insecurity_ variable later, so to move it from a nested list to the main data frame, we can `unnest` the _data_ list and then use `select` from `{dplyr}` to save the columns we're interested in. 
 
@@ -132,9 +138,9 @@ Unnested, our data frame now looks like this:
 head(fi_lm)
 ```
 
-## Creating plots using `pmap` and `list`
+## Creating plots using `pmap()` and `list()`
 
-To visualize the change in slope of how educational attainment predicts food insecurity across time, we can create a scatterplot for each food security category with an x-axis of *year* and a y-axis of *slope*. To create a plot for each food security category, we can use the `pmap` and `list` functions to create a new list in our nested data frame with a plot for each value of `security`. To learn more about using the `pmap` function, see <a href = "https://lfrank14.github.io/fp-w2021-final/posts/parallel-iteration/" target="_blank">this post</a>.) I'm using `{.x}` here in the title to customize each plot title to the food security category it corresponds to. I'm also including a custom function called `scientific_10` developed <a href = "https://stackoverflow.com/questions/10762287/how-can-i-format-axis-labels-with-exponents-with-ggplot2-and-scales" target="_blank">here</a> that will make the scientific notation in our y-axis easier to read.
+To visualize the change in slope of how educational attainment predicts food insecurity across time, we can create a scatterplot for each food security category with an x-axis of *year* and a y-axis of *slope*. To create a plot for each food security category, we can use the `pmap()` and `list()` functions to create a new list in our nested data frame with a plot for each value of `security`. To learn more about using the `pmap` function, see [this post](../parallel-iteration/index.html){target="_blank"}. I'm using `{.x}` here in the title to customize each plot title to the food security category it corresponds to. I'm also including a custom function called `scientific_10` developed [here](https://stackoverflow.com/questions/10762287/how-can-i-format-axis-labels-with-exponents-with-ggplot2-and-scales){target="_blank"} that will make the scientific notation in our y-axis easier to read.
 
 ```{r}
 scientific_10 <- function(x) {
@@ -166,7 +172,7 @@ fi_plots$plot[[2]]
 
 ## Exporting plots using `walk2` function
 
-Now we can export a plot for each food security category to a new folder. First we'll use the `here` function from the `{here}` package to create a new folder called *plots* and a folder within that called *slope_plots*. We'll then use the same package to create a pathway through which we can create files for each plot that incorporate the name of the food security category they fit in. Using the `walk2` function from the `{purrr}` package, we can save these plots and specify their dimensions. Why use `walk2` instead of `map2`? The `walk` family of functions are most useful for calling a function for its side effects (like saving files) rather than its return output (like displaying the plots) (see <a href = "https://r4ds.had.co.nz/iteration.html#walk" target="_blank">r4ds</a> for more details).
+Now we can export a plot for each food security category to a new folder. First we'll use the `here` function from the `{here}` package to create a new folder called *plots* and a folder within that called *slope_plots*. We'll then use the same package to create a pathway through which we can create files for each plot that incorporate the name of the food security category they fit in. Using the `walk2` function from the `{purrr}` package, we can save these plots and specify their dimensions. Why use `walk2` instead of `map2`? The `walk` family of functions are most useful for calling a function for its side effects (like saving files) rather than its return output (see [r4ds](https://r4ds.had.co.nz/iteration.html#walk){target="_blank"} for more details).
 
 ```{r}
 fs::dir_create(here::here("plots", "slope_plots"))
